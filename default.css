@@ -7,3 +7,8 @@ body {
   color: red;
   font-size: 32px !important;
 }
+
+.classtest {
+  color: hotpink;
+  font-weight: 500;
+}
