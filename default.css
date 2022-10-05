@@ -3,7 +3,7 @@
   box-sizing: border-box;
 }
 
-* {
+body {
   color: red;
-  font-size: 20px;
+  font-size: 32px;
 }
