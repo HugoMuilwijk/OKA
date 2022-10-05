@@ -5,5 +5,5 @@
 
 body {
   color: red;
-  font-size: 32px;
+  font-size: 32px !important;
 }
