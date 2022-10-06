@@ -9,6 +9,6 @@ body {
 }
 
 .classtest {
-  color: hotpink;
-  font-weight: 500;
+  color: hotpink !important;
+  font-weight: 500 !important;
 }
