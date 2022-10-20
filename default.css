@@ -1,16 +1,478 @@
-/* Reset box-sizing */
+@font-face {
+  font-family:"Lexend";
+  src: url(Lexend.woff2) format('woff2-variations');
+}
+
+@font-face {
+  font-family:"Numerics";
+  src: url(Numeric.woff2) format('woff2-variations');
+  unicode-range: U+0030-0039;
+}
+
+@font-face {
+  font-family:"Icons";
+  src: url(Icons.woff2) format('woff2-variations');
+}
+
+:root {
+  --sans-font: Lexend, sans-serif;
+  --mono-font: Numerics, ReadexPro, monospace;
+  --icon-font: Icons;
+
+  /* Default (light) theme */
+  --bg: #eeeeee;
+  --accent-bg: #f5f7ff;
+  --bg-content: #ffffff;
+  --text: #212121;
+  --text-light: #585858;
+  --border: #d8dae1;
+  --accent: #0d47a1;
+  --code: #d81b60;
+  --preformatted: #444;
+  --marked: #ffdd33;
+  --disabled: #efefef;
+
+  --primary: #00c300;
+  --secondary: #00aaff;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
+  font-weight: unset;
+}
+/* Needed to make box-sizing behave te same across browsers */
+/* Needed to make use of variable font thickness */
+
+textarea,
+select,
+input,
+progress {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+/* Reset default appearances */
+
+html {
+  font-size: 16px;
 }
 
 body {
-  color: red;
-  font-size: 32px !important;
+  font-family: var(--sans-font);
+  font-variation-settings: 'wght' 300;
+  color: var(--text);
+  background: var(--bg);
+  font-size: 1rem;
+  justify-content: center;
+  display: flex;
+  line-height: 1.5;
 }
 
-.classtest {
-  color: yellow !important;
-  font-weight: 500 !important;
+main {
+  background: var(--bg-content);
+  padding:2rem;
+  margin:4rem 0 4rem 0;
+  box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.5);
 }
 
-/* Extra text to check CDN updates */
+h1 {
+  color: var(--primary);
+  font-size: 2rem;
+  font-variation-settings: 'wght' 800;
+  line-height: 1.25;
+  margin-top:0;
+  margin-bottom:1rem;
+}
+
+h2 {
+  color: var(--primary);
+  font-size: 1.5rem;
+  font-variation-settings: 'wght' 700;
+  line-height: 1.5;
+  margin-top:0;
+  margin-bottom:1rem;
+}
+
+h3 {
+  color: var(--primary);
+  font-size: 1rem;
+  font-variation-settings: 'wght' 600;
+  line-height: 1.5;
+  margin-top:0;
+  margin-bottom:1rem;
+}
+
+.column img {
+  float:right;
+  width:50%;
+  margin:0 0 1rem 1rem;
+}
+
+table {
+  /* width:100%; */
+  min-width: 66%;
+  max-width: 100%;
+  position: relative;
+  border-collapse: separate;
+  border-spacing: 0px;
+  margin: 0 auto 1rem auto;
+  border: .25rem solid var(--bg-content);
+  outline: 1px solid var(--bg)
+  
+}
+
+th {
+  background: var(--bg-content);
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid var(--primary);
+  font-variation-settings: 'wght' 400;
+  height:2rem;
+  text-align: center;
+}
+/* top: 0; is needed for stickiness */
+
+/* th:first-child {
+  color: var(--primary);
+} */
+
+td {
+  font-family: var(--mono-font);
+  border-bottom: 1px solid #EEEEEE;
+  height: 2rem;
+}
+
+td.right {
+  text-align: right;
+}
+
+tr:last-child td{
+  border-bottom: none;
+}
+
+ol {
+  counter-reset: list;
+  list-style-type: none;
+  padding-left: 1.5rem;
+}
+
+ol li::before {
+  counter-increment: list;
+  content: counters(list, ".", decimal);
+  font-variation-settings: 'wght' 600;
+  color: var(--primary);
+  display:inline-block;
+  position:relative;
+  margin: 0 .5rem 0 -1.25rem;
+}
+
+ol ol {
+  padding-left: 1.25rem;
+  /* counter-reset: lists; */
+}
+
+/* ol ol li::before {
+  counter-increment: lists;
+  content: counters(list,".") " ";
+} */
+
+ul {
+  list-style: none;
+  padding-left: 1.5rem;
+}
+
+ul li::before {
+  content: '\F0765';
+  font-family: var(--icon-font);
+  color: var(--primary);
+  height: 0;
+  margin-left: -1.25rem;
+  font-size: .75rem;
+  line-height: 2.125;
+  display:block;
+  position:relative;
+}
+
+ul ul {
+  padding-left: 1.25rem;
+}
+
+ul ul li::before {
+  content: '\F0766';
+  /* F0EC2 */
+  font-family: var(--icon-font);
+  color: var(--primary);
+}
+
+p {
+  margin: 0 0 1.5rem 0;
+}
+
+a {
+  color: var(--primary);
+  font-variation-settings: 'wght' 400;
+  text-decoration-thickness: 2px;
+  text-underline-offset:.125em;
+}
+/* text-decoration-thickness has partial support */
+
+a::after {
+  content: '\F0054';
+  font-family: var(--icon-font);
+  position:relative;
+  display: inline-block;
+  top: .125rem;
+  
+}
+
+a[target="_blank"] {
+  color: var(--secondary);   
+}
+
+a[target="_blank"]::after {
+  content: '\F005C';
+  font-family: var(--icon-font);
+  position:relative;
+  display: inline-block;
+}
+
+a[href^="#"]::after {
+  content: '\F0045';
+}
+
+b,
+strong {
+  font-variation-settings: 'wght' 600;
+}
+
+i,
+em {
+  font-variation-settings: 'wght' 400;
+}
+
+u {
+  font-variation-settings: 'wght' 400;
+  text-decoration-thickness: 2px;
+  text-underline-offset:.125em;
+}
+
+s {
+  color:red;
+  font-variation-settings: 'wght' 400;
+  text-decoration-thickness: 2px;
+}
+
+sub {
+  color:green;
+}
+
+sup {
+  color:green;
+}
+
+.steps {
+  counter-reset: steps;
+  display: flex;
+  flex-direction: column;
+}
+
+.steps .steps {
+  margin: 0 2rem;
+  counter-reset: stepsz;
+}
+
+.steps article {
+  display: flex;
+  flex-direction: row;
+  border-top: 2px solid var(--border);
+  padding: 1rem 0 1rem 0;
+}
+
+.steps article::before {
+  counter-increment: steps;
+  content: counters(steps,".");
+  display: block;
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--primary);
+  font-variation-settings: 'wght' 600;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 1.5;
+  color: white;
+}
+
+.steps .steps article::before {
+  border:.25rem solid var(--primary);
+  color: var(--primary);
+  background: var(--bg-content);
+  line-height: 2;
+  font-size: 1.25rem;
+  counter-increment: stepsz;
+  content: counter(steps) "." counter(stepsz);
+}
+
+.steps div {
+  width: calc(50% - 4rem);
+  margin-left: 4rem;
+}
+
+.steps img {
+  width: 50%;
+  height: auto;
+  object-fit: contain;
+  object-position: 50% 0;
+}
+
+
+
+.tabs>section:first-child {
+  display: flex;
+  border-bottom: 1px solid var(--bg);
+}
+
+.tabs>section:first-child button {
+  padding: 1rem 2rem;
+  font: inherit;
+  /* flex: 1; */
+  align-content: flex-start;
+  border: none;
+  cursor: pointer;
+  /* transition: background 0.1s ease; */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  height: 4rem;
+  font-variation-settings: 'wght' 600;
+  background: var(--bg-content);
+}
+
+.tabs>section:first-child button:last-child {
+  border-right: 0;
+}
+
+
+.tabs>section:first-child button.tab-active {
+  color: var(--primary);
+  border-bottom: .125rem solid var(--primary);
+}
+
+
+.tabs>section:first-child:focus {
+  outline: none;
+}
+
+.tabs article {
+  padding: 1rem;
+  display: none;
+  border: none;
+  /* background: #f9f9f9; */
+  min-height: 260px;
+  transition: height 4s ease;
+}
+
+
+.tabs article:last-child {
+  border: none;
+}
+
+.tabs article>h3 {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.tabs article>h3:hover {
+  background: #d3e1ff;
+}
+
+.tabs article>p {
+  padding: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+.tabs article.tab-active {
+  display: block;
+}
+
+.tabs article.tab-active h3 {
+  padding-bottom: 0;
+  cursor: inherit;
+}
+
+.tabs article.tab-active h3:hover {
+  background: none;
+}
+
+.tabs article.tab-active p {
+  padding: 0;
+  height: auto;
+  opacity: 1;
+}
+
+.tabs article.accordion-active p p:first-child {
+  margin-top: 0;
+}
+
+.tabs article.accordion-active p p:last-child {
+  margin-bottom: 0;
+}
+
+@media only screen and (max-width: 768px) {
+
+  .column img {
+    width:100%;
+    margin:0 0 1rem 0;
+  }
+
+  .steps article {
+    flex-direction: column;
+  }
+
+  .steps div {
+    width: calc(100% - 4rem);
+  }
+  
+  .steps img {
+    width: 100%;
+  }
+  
+  .tabs>section:first-child {
+    display: none;
+  }
+
+  .tabs article {
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  .tabs article h3, .tabs article p {
+    padding: 1.25rem;
+  }
+ 
+  .tabs article h3 {
+    margin-bottom: 0;
+  }
+
+  .tabs article.tab-active p {
+    padding: 1.25rem;
+  }
+
+  .tabs article>h3:after {
+    content: '\F0419';
+    font-family: var(--icon-font);
+    position: absolute;
+    right: 1.25rem;
+    opacity: 1;
+    transition: opacity 0.1s ease;
+  }
+
+  .tabs article.tab-active h3:after {
+    content: '\F0377';
+  }
+
+}
