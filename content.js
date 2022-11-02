@@ -18,6 +18,19 @@ const viewport_height = document.documentElement.clientHeight;
 
 // Splits <a href> into 'internal' and 'external' links
 
+
+
+const scrollContainerGroup = document.querySelectorAll(".tabs>section:first-child");
+
+scrollContainerGroup.forEach(scrollContainer => {
+	scrollContainer.addEventListener("wheel", (scrollHor) => {
+		scrollHor.preventDefault();
+		scrollContainer.scrollLeft += scrollHor.deltaY;
+	});
+});
+
+
+
 const a = document.getElementsByTagName('a');
 
 // var r = new RegExp('^([a-z]+:|//)', 'i');
@@ -41,22 +54,27 @@ const td = document.getElementsByTagName('td');
 
 for(var i=0; i<td.length; i++) {
 	
-	const td_num = td[i].innerHTML;
-	const regex = new RegExp("^-?[0-9][0-9,\.]+$");
-	const found = td_num.match(regex);
-	// console.log(found);
-	if (found) {
-		console.log("test");
+	// const td_num = td[i].innerHTML;
+	// const found = td[i].innerHTML.match(new RegExp("^-?[0-9][0-9,\.]+$"));
+	if (td[i].innerHTML.match(new RegExp("^-?[0-9][0-9,\.\-]+$"))) {
 		td[i].classList.add('right');
-	} else {
-		
 	}
 };
 
+function createMenuButton(name) {
+    let button = document.createElement('button');
+    button.textContent = name;
+    return button;
+}
+
 const b = document.getElementsByClassName("pretabs");
 console.log(b);
+const section = document.createElement("section");
+
+
 
 for(var i=0; i<b.length; i++) {
+	b[i].prepend(section);
 	const htest = b[i].getElementsByTagName('h3');
 	for(const ftest of htest) {
 		console.log(ftest.innerHTML);
@@ -73,12 +91,6 @@ const remove = document.querySelectorAll('.remove_element');
 remove.forEach(remove_element => {
 	remove_element.remove();
 });
-
-// for(var i=0; i<x.length; i++) {
-// 	console.log(x[i]);
-// 	const fiets = x[i];
-// 	fiets.remove();
-// }
 
 const labels = document.querySelectorAll(".tabs section article h3");
 const tabs = document.querySelectorAll(".tabs section button");
@@ -97,6 +109,7 @@ function toggleShow() {
 		if (tab.dataset.tabGroup === group) {
 			if (tab.dataset.tabId === id) {
 				tab.classList.add("tab-active");
+				tab.scrollIntoView({behavior: "smooth", inline: "center"});
 			} else {
 				tab.classList.remove("tab-active");
 			}
@@ -109,6 +122,7 @@ function toggleShow() {
 		if (tabItem.dataset.tabGroup === group) {
 			if (tabItem.dataset.tabId === id) {
 				tabItem.classList.add("tab-active");
+				// tabItem.scrollIntoView();
 			} else {
 				tabItem.classList.remove("tab-active");
 			}
@@ -116,10 +130,10 @@ function toggleShow() {
 	});
 }
 
-labels.forEach(function(label) {
-	label.addEventListener("click", toggleShow);
-});
-
 tabs.forEach(function(tab) {
 	tab.addEventListener("click", toggleShow);
+});
+
+labels.forEach(function(label) {
+	label.addEventListener("click", toggleShow);
 });
