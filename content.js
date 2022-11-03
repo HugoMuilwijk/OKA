@@ -20,6 +20,13 @@ const viewport_height = document.documentElement.clientHeight;
 
 
 
+
+
+
+
+
+
+
 const scrollContainerGroup = document.querySelectorAll(".tabs>section:first-child");
 
 scrollContainerGroup.forEach(scrollContainer => {
@@ -92,14 +99,14 @@ remove.forEach(remove_element => {
 	remove_element.remove();
 });
 
-const labels = document.querySelectorAll(".tabs section article h3");
+const labels = document.querySelectorAll(".expands article h3, .tabs section article h3");
 const tabs = document.querySelectorAll(".tabs section button");
 
 console.log(tabs);
 
 function toggleShow() {
 	const target = this;
-	const item = target.classList.contains("fiets")
+	const item = target.classList.contains("tab-menu")
 		? target
 		: target.parentElement;
 	const group = item.dataset.tabGroup;
@@ -109,7 +116,7 @@ function toggleShow() {
 		if (tab.dataset.tabGroup === group) {
 			if (tab.dataset.tabId === id) {
 				tab.classList.add("tab-active");
-				tab.scrollIntoView({behavior: "smooth", inline: "center"});
+				tab.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
 			} else {
 				tab.classList.remove("tab-active");
 			}

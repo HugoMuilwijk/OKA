@@ -36,14 +36,16 @@
   --secondary: #00aaff;
   --secondary-alt: #0077cc;
 
-  --oka-background: #e3e3e3;
-  --oka-content: #ffffff;
-  --oka-border: #d3d3d3;
-  --oka-text: #232323;
-  --oka-text-light: #535353;
+  --oka-background: #e3e3e3;    /* grey-snow */
+  --oka-content: #ffffff;       /* white */
+  --oka-border: #e3e3e3;        /* grey-snow */
+  --oka-text: #232323;          /* grey-coal */
+  --oka-text-light: #535353;    /* grey-dim */
 
   --oka-marked: #deff00;        /* lime */
   --oka-disabled: #d3d3d3;      /* grey smoke */
+  --oka-warning: #ff9900;       /* orange */
+  --oka-error: #ff3333;         /* red */
 
   --oka-primary: #00c300;       /* green */
   --oka-primary-alt: #009900;   /* dark green */
@@ -179,6 +181,8 @@ img {
   border-radius: .5rem;
   border-spacing: 0px;
   border: .5rem solid var(--bg-content);
+  border-top: .25rem;
+  border-bottom: .25rem;
   margin: 0 auto 1rem auto;
   max-width: 100%;
   min-width: 66%;
@@ -202,8 +206,8 @@ th {
 } */
 
 td {
+  border-bottom: 2px solid var(--oka-border);
   font-family: var(--oka-mono-font);
-  border-bottom: 1px solid #EEEEEE;
   height: 2rem;
 }
 
@@ -215,6 +219,10 @@ tr:last-child td{
   border-bottom: none;
 }
 
+table>thead+tbody tr:nth-child(odd) {
+  background: var(--oka-grey-subtle);
+}
+
 ol {
   counter-reset: list;
   list-style-type: none;
@@ -222,18 +230,17 @@ ol {
 }
 
 ol li::before {
-  counter-increment: list;
+  color: var(--oka-primary);
   content: counters(list, ".", decimal);
+  counter-increment: list;
+  display: inline-block;
   font-variation-settings: 'wght' 600;
-  color: var(--primary);
-  display:inline-block;
-  position:relative;
   margin: 0 .5rem 0 -1.25rem;
+  position: relative;
 }
 
 ol ol {
   padding-left: 1.25rem;
-  /* counter-reset: lists; */
 }
 
 /* ol ol li::before {
@@ -248,8 +255,8 @@ ul {
 
 ul li::before {
   content: '\F0765';
-  font-family: var(--icon-font);
-  color: var(--primary);
+  font-family: var(--oka-icon-font);
+  color: var(--oka-primary);
   height: 0;
   margin-left: -1.25rem;
   font-size: .75rem;
@@ -264,9 +271,8 @@ ul ul {
 
 ul ul li::before {
   content: '\F0766';
-  /* F0EC2 */
-  font-family: var(--icon-font);
-  color: var(--primary);
+  font-family: var(--oka-icon-font);
+  color: var(--oka-primary);
 }
 
 p {
@@ -274,7 +280,7 @@ p {
 }
 
 a {
-  color: var(--primary);
+  color: var(--oka-primary);
   font-variation-settings: 'wght' 400;
   text-decoration-thickness: 2px;
   text-underline-offset:.125em;
@@ -283,7 +289,7 @@ a {
 
 a::after {
   content: '\F0054';
-  font-family: var(--icon-font);
+  font-family: var(--oka-icon-font);
   position:relative;
   display: inline-block;
   top: .125rem;
@@ -291,12 +297,12 @@ a::after {
 }
 
 a[target="_blank"] {
-  color: var(--secondary);   
+  color: var(--oka-secondary);   
 }
 
 a[target="_blank"]::after {
   content: '\F005C';
-  font-family: var(--icon-font);
+  font-family: var(--oka-icon-font);
   position:relative;
   display: inline-block;
 }
@@ -311,11 +317,11 @@ a[href^="mailto:"]::after {
 }
 
 a:hover {
-  color: var(--primary-alt);
+  color: var(--oka-primary-alt);
 }
 
 a[target="_blank"]:hover {
-  color: var(--secondary-alt);   
+  color: var(--oka-secondary-alt);   
 }
 
 b,
@@ -335,73 +341,71 @@ u {
 }
 
 s {
-  color:red;
+  color: var(--oka-error);
   font-variation-settings: 'wght' 400;
   text-decoration-thickness: 2px;
 }
 
-sub {
-  color:green;
-}
-
+sub,
 sup {
-  color:green;
+  color:  var(--oka-primary);
 }
 
 .steps {
-  counter-reset: steps;
+  counter-reset: step;
   display: flex;
   flex-direction: column;
 }
 
 .steps .steps {
+  counter-reset: stepsub;
   margin: 0 2rem;
-  counter-reset: stepsz;
 }
 
 .steps article {
+  border-top: 2px solid var(--oka-border);
   display: flex;
   flex-direction: row;
-  border-top: 2px solid var(--border);
   padding: 1rem 0 1rem 0;
 }
 
 .steps article::before {
-  counter-increment: steps;
-  content: counters(steps,".");
-  display: block;
-  position: absolute;
-  width: 3rem;
-  height: 3rem;
+  background: var(--oka-primary);
   border-radius: 50%;
-  background: var(--primary);
-  font-variation-settings: 'wght' 600;
-  font-size: 2rem;
-  text-align: center;
-  line-height: 1.5;
   color: white;
+  content: counters(step,".");
+  counter-increment: step;
+  display: block;
+  font-size: 2rem;
+  font-variation-settings: 'wght' 600;
+  height: 3rem;
+  line-height: 1.5;
+  position: absolute;
+  text-align: center;
+  width: 3rem;
 }
 
 .steps .steps article::before {
-  border:.25rem solid var(--primary);
-  color: var(--primary);
-  background: var(--bg-content);
-  line-height: 2;
+  background: var(--oka-content);
+  border:.25rem solid var(--oka-primary);
+  color: var(--oka-primary);
+  content: counter(step) "." counter(stepsub);
+  counter-increment: stepsub;
   font-size: 1.25rem;
-  counter-increment: stepsz;
-  content: counter(steps) "." counter(stepsz);
+  line-height: 2;
 }
 
 .steps div {
-  width: calc(50% - 4rem);
   margin-left: 4rem;
+  width: calc(50% - 4rem);
+  display:block;
 }
 
 .steps img {
-  width: 50%;
   height: auto;
   object-fit: contain;
   object-position: 50% 0;
+  width: 40%;
 }
 
 .tabs {
@@ -421,15 +425,12 @@ sup {
 
 .tabs>section:first-child {
   display: flex;
-  border-bottom: 2px solid var(--bg);
+  border-bottom: 2px solid var(--oka-background);
   overflow: hidden hidden;
 }
 
-
-
-
 .tabs>section:first-child button {
-  background: var(--bg-content);
+  background: var(--oka-content);
   border: none;
   cursor: pointer;
   font-variation-settings: 'wght' 600;
@@ -440,85 +441,177 @@ sup {
   white-space: nowrap;
 }
 
+.tabs>section:first-child button:first-child {
+  margin-left: 1rem;
+}
+
 .tabs>section:first-child button:last-child {
+  margin-right: 1rem;
   border-right: 0;
 }
 
-
 .tabs>section:first-child button.tab-active {
-  color: var(--primary);
-  border-bottom: 4px solid var(--primary);
+  color: var(--oka-primary);
+  border-bottom: 4px solid var(--oka-primary);
   padding-bottom: calc(.5rem - 4px);
 }
-
 
 .tabs>section:first-child:focus {
   outline: none;
 }
 
+.expands article,
 .tabs article {
-  padding: 1rem;
-  display: none;
-  border: none;
-  /* background: #f9f9f9; */
-  min-height: 8rem;
   /* transition: height 4s ease; */
+  border: none;
+  display: none;
+  min-height: 8rem;
+  padding: 1rem;
 }
 
-
+.expands article:last-child,
 .tabs article:last-child {
   border: none;
 }
 
+.expands article>h3,
 .tabs article>h3 {
+  cursor: pointer;
   margin: 0 0 1.5rem;
   padding: 0;
-  cursor: pointer;
   position: relative;
+}
+
+.tabs article>h3 {
   display: none;
 }
 
+.expands article>h3:hover,
 .tabs article>h3:hover {
-  background: #d3e1ff;
+  background: var(--oka-grey-smoke);
 }
 
+.expands article>div,
 .tabs article>div {
-  padding: 0;
-  height: 0;
-  display: block;
-  overflow: hidden;
+  animation-direction: reverse;
+  animation-duration: 300ms;
   /* opacity: 0; */
   /* transition: opacity 1s ease; */
   animation-name: oka-opacity;
-    animation-duration: 300ms;
-    animation-direction: reverse;
+  display: block;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
 }
+.expands article.tab-active,
 .tabs article.tab-active {
   display: block;
 }
 
+.expands article.tab-active h3,
 .tabs article.tab-active h3 {
-  padding-bottom: 0;
   cursor: inherit;
+  padding-bottom: 0;
 }
 
+.expands article.tab-active h3:hover,
 .tabs article.tab-active h3:hover {
   background: none;
 }
 
+.expands article.tab-active div,
 .tabs article.tab-active div {
-  padding: 0;
-  height: auto;
   /* opacity: 1; */
+  display: block;
+  height: auto;
+  padding: 0;
 }
 
+.expands article.tab-active p p:first-child,
 .tabs article.tab-active p p:first-child {
   margin-top: 0;
 }
 
+.expands article.tab-active p p:last-child,
 .tabs article.tab-active p p:last-child {
   margin-bottom: 0;
 }
+
+
+.tabs article.tab-active div section{
+  opacity: 1;
+  display: block;
+  height: 32rem;
+  padding: 0;
+  position: relative;
+  border: 10px solid black;
+}
+
+
+
+
+
+
+
+
+
+
+
+.expands article {
+  border-bottom: 2px solid var(--oka-border);
+  display: block;
+  min-height: 3rem;
+  /* max-height: 5rem; */
+  /* transition: max-height .1s ease-in; */
+  overflow: hidden;
+}
+
+.expands article>h3 {
+  display: block;
+  margin: 0;
+}
+
+.expands article h3,
+.expands article div {
+  padding: 1.25rem;
+}
+
+.expands article>div {
+  height: 0;
+  padding: 0;
+  display: none;
+  transition: opacity 1s ease;
+}
+
+.expands article>h3:after {
+  content: '\F0419';
+  font-family: var(--oka-icon-font);
+  opacity: 1;
+  position: absolute;
+  right: 1.25rem;
+  transition: opacity 0.1s ease;
+}
+
+.expands article.tab-active h3 {
+  margin: 0 0 1.5rem;
+}
+
+.expands article.tab-active h3:after {
+  content: '\F0377';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @keyframes oka-opacity {
   from {
@@ -558,33 +651,33 @@ sup {
   }
 
   .tabs article {
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 2px solid var(--oka-border);
     display: block;
-    min-height:3rem;
-    /* max-height:5rem;
-    transition: max-height .1s ease-in; */
-    overflow: hidden;
+    min-height: 3rem;
+    /* max-height: 5rem; */
+    /* transition: max-height .1s ease-in; */
+    /* overflow: hidden; */
   }
 
   .tabs article.tab-active {
     /* max-height: 128rem;
-   
     transition: max-height .1s ease-out;
     transition-delay: .2s; */
   }
 
   .tabs article>h3 {
     display: block;
-    margin:0;
+    margin: 0;
   }
 
-  .tabs article h3, .tabs article div {
+  .tabs article h3,
+  .tabs article div {
     padding: 1.25rem;
   }
 
   .tabs article>div {
-    padding: 0;
     height: 0;
+    padding: 0;
     transition: opacity 1s ease;
   }
  
@@ -598,10 +691,10 @@ sup {
 
   .tabs article>h3:after {
     content: '\F0419';
-    font-family: var(--icon-font);
+    font-family: var(--oka-icon-font);
+    opacity: 1;
     position: absolute;
     right: 1.25rem;
-    opacity: 1;
     transition: opacity 0.1s ease;
   }
 
