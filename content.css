@@ -101,82 +101,75 @@ progress {
 }
 /* Reset default appearances */
 
-html {
-  /* font-size: 16px; */
-}
-
-.container {
-  background: var(--oka-background);
-  color: var(--oka-text);
-  font-family: var(--oka-sans-font);
-  font-size: 1rem;
-  font-variation-settings: 'wght' 300;
-  line-height: 1.5;
-}
-
-.container main {
-  background: var(--oka-content);
-  box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.25);
-  margin: 4rem 0 4rem 0;
-  padding: 2rem;
-}
-
-.container h1,
-.container h2,
-.container h3 {
+.imbodycontentbackground h1,
+.imbodycontentbackground h2,
+.imbodycontentbackground h3,
+.rn_Container .container h1,
+.rn_Container .container h2,
+.rn_Container .container h3 {
   color: var(--oka-primary);
   margin-top: 0;
   margin-bottom: 1.5rem;
 }
 
-.container h1 {
+.imbodycontentbackground h1,
+.rn_Container .container h1 {
   font-size: 2rem;
   font-variation-settings: 'wght' 800;
   line-height: 1.25;
 }
 
-.container h2 {
+.imbodycontentbackground h2,
+.rn_Container .container h2 {
   font-size: 1.5rem;
   font-variation-settings: 'wght' 700;
   line-height: 1.5;
 }
 
-.container h3 {
+.imbodycontentbackground h3,
+.rn_Container .container h3 {
   font-size: 1rem;
   font-variation-settings: 'wght' 600;
   line-height: 1.5;
 }
 
-.container img {
+.imbodycontentbackground img,
+.rn_Container .container img {
   border-radius: .5rem;
   border: 2px solid var(--oka-border);
   box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.25);
   width: 100%;
 }
 
-.container .column {
+.imbodycontentbackground .column,
+.rn_Container .container .column {
   display: flex;
   gap: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
-.container .column article {
+.imbodycontentbackground .column article,
+.rn_Container .container .column article {
   flex: 1;
 }
 
-.container .column article * {
+.imbodycontentbackground .column article *,
+.rn_Container .container .column article * {
   margin-bottom: 1rem;  
 }
 
-.container .column article *:last-child {
+.imbodycontentbackground .column article *:last-child,
+.rn_Container .container .column article *:last-child {
   margin-bottom: 0;  
 }
 
-.container .column article table {
+.imbodycontentbackground .column article table,
+.rn_Container .container .column article table {
   width: 100%;  
 }
 
-.container table {
+.imbodycontentbackground table,
+.rn_Container .container table {
   border-collapse: separate;
   border-radius: .5rem;
   border-spacing: 0px;
@@ -190,7 +183,8 @@ html {
   position: relative;
 }
 
-.container table th {
+.imbodycontentbackground table th,
+.rn_Container .container table th {
   background: var(--oka-content);
   border-bottom: 2px solid var(--oka-primary);
   font-variation-settings: 'wght' 400;
@@ -205,31 +199,37 @@ html {
   color: var(--primary);
 } */
 
-.container table td {
+.imbodycontentbackground table td,
+.rn_Container .container table td {
   border-bottom: 2px solid var(--oka-border);
   font-family: var(--oka-mono-font);
   height: 2rem;
 }
 
-.container table td.right {
+.imbodycontentbackground table td.right,
+.rn_Container .container table td.right {
   text-align: right;
 }
 
-.container table tr:last-child td{
+.imbodycontentbackground table tr:last-child td,
+.rn_Container .container table tr:last-child td {
   border-bottom: none;
 }
 
-table>thead+tbody tr:nth-child(odd) {
+.imbodycontentbackground table>thead+tbody tr:nth-child(odd),
+.rn_Container .container table>thead+tbody tr:nth-child(odd) {
   background: var(--oka-grey-subtle);
 }
 
-.container ol {
+.imbodycontentbackground ol,
+.rn_Container .container ol {
   counter-reset: list;
   list-style-type: none;
   padding-left: 1.5rem;
 }
 
-.container ol li::before {
+.imbodycontentbackground ol li::before,
+.rn_Container .container ol li::before {
   color: var(--oka-primary);
   content: counters(list, ".", decimal);
   counter-increment: list;
@@ -239,7 +239,8 @@ table>thead+tbody tr:nth-child(odd) {
   position: relative;
 }
 
-.container ol ol {
+.imbodycontentbackground ol ol,
+.rn_Container .container ol ol {
   padding-left: 1.25rem;
 }
 
@@ -248,12 +249,14 @@ table>thead+tbody tr:nth-child(odd) {
   content: counters(list,".") " ";
 } */
 
-.container ul {
+.imbodycontentbackground ul,
+.rn_Container .container ul {
   list-style: none;
   padding-left: 1.5rem;
 }
 
-.container ul li::before {
+.imbodycontentbackground ul li::before,
+.rn_Container .container ul li::before {
   content: '\F0765';
   font-family: var(--oka-icon-font);
   color: var(--oka-primary);
@@ -265,21 +268,25 @@ table>thead+tbody tr:nth-child(odd) {
   position:relative;
 }
 
-.container ul ul {
+.imbodycontentbackground ul ul,
+.rn_Container .container ul ul {
   padding-left: 1.25rem;
 }
 
-.container ul ul li::before {
+.imbodycontentbackground ul ul li::before,
+.rn_Container .container ul ul li::before {
   content: '\F0766';
   font-family: var(--oka-icon-font);
   color: var(--oka-primary);
 }
 
-.container p {
+.imbodycontentbackground p,
+.rn_Container .container p {
   margin: 0 0 1.5rem 0;
 }
 
-.container a {
+.imbodycontentbackground a,
+.rn_Container .container a {
   color: var(--oka-primary);
   font-variation-settings: 'wght' 400;
   text-decoration-thickness: 2px;
@@ -287,7 +294,8 @@ table>thead+tbody tr:nth-child(odd) {
 }
 /* text-decoration-thickness has partial support */
 
-.container a::after {
+.imbodycontentbackground a::after,
+.rn_Container .container a::after {
   content: '\F0054';
   font-family: var(--oka-icon-font);
   position:relative;
@@ -296,80 +304,97 @@ table>thead+tbody tr:nth-child(odd) {
   left: .125rem;
 }
 
-.container a[target="_blank"] {
+.imbodycontentbackground a[target="_blank"],
+.rn_Container .container a[target="_blank"] {
   color: var(--oka-secondary);   
 }
 
-.container a[target="_blank"]::after {
+.imbodycontentbackground a[target="_blank"]::after,
+.rn_Container .container a[target="_blank"]::after {
   content: '\F005C';
   font-family: var(--oka-icon-font);
   position:relative;
   display: inline-block;
 }
 
-.container a[href^="#"]::after {
+.imbodycontentbackground a[href^="#"]::after,
+.rn_Container .container a[href^="#"]::after {
   content: '\F0140';
 }
-/* F0045 */
 
-.container a[href^="mailto:"]::after {
+.imbodycontentbackground a[href^="mailto:"]::after,
+.rn_Container .container a[href^="mailto:"]::after {
   content: '\F01F0';
 }
 
-.container a:hover {
+.imbodycontentbackground a:hover,
+.rn_Container .container a:hover {
   color: var(--oka-primary-alt);
 }
 
-.container a[target="_blank"]:hover {
+.imbodycontentbackground a[target="_blank"]:hover,
+.rn_Container .container a[target="_blank"]:hover {
   color: var(--oka-secondary-alt);   
 }
 
-.container b,
-.container strong {
+.imbodycontentbackground b,
+.imbodycontentbackground strong,
+.rn_Container .container b,
+.rn_Container .container strong {
   font-variation-settings: 'wght' 600;
 }
 
-.container i,
-.container em {
+.imbodycontentbackground i,
+.imbodycontentbackground em,
+.rn_Container .container i,
+.rn_Container .container em {
   font-variation-settings: 'wght' 400;
 }
 
-.container u {
+.imbodycontentbackground u,
+.rn_Container .container u {
   font-variation-settings: 'wght' 400;
   text-decoration-thickness: 2px;
   text-underline-offset:.125em;
 }
 
-.container s {
+.imbodycontentbackground s,
+.rn_Container .container s {
   color: var(--oka-error);
   font-variation-settings: 'wght' 400;
   text-decoration-thickness: 2px;
 }
 
-.container sub,
-.container sup {
+.imbodycontentbackground sub,
+.imbodycontentbackground sup,
+.rn_Container .container sub,
+.rn_Container .container sup {
   color:  var(--oka-primary);
 }
 
-.container .steps {
+.imbodycontentbackground .steps,
+.rn_Container .container .steps {
   counter-reset: step;
   display: flex;
   flex-direction: column;
 }
 
-.container .steps .steps {
+.imbodycontentbackground .steps .steps,
+.rn_Container .container .steps .steps {
   counter-reset: stepsub;
   margin: 0 2rem;
 }
 
-.container .steps article {
+.imbodycontentbackground .steps article,
+.rn_Container .container .steps article {
   border-top: 2px solid var(--oka-border);
   display: flex;
   flex-direction: row;
   padding: 1rem 0 1rem 0;
 }
 
-.container .steps article::before {
+.imbodycontentbackground .steps article::before,
+.rn_Container .container .steps article::before {
   background: var(--oka-primary);
   border-radius: 50%;
   color: white;
@@ -385,7 +410,8 @@ table>thead+tbody tr:nth-child(odd) {
   width: 3rem;
 }
 
-.container .steps .steps article::before {
+.imbodycontentbackground .steps .steps article::before,
+.rn_Container .container .steps .steps article::before {
   background: var(--oka-content);
   border:.25rem solid var(--oka-primary);
   color: var(--oka-primary);
@@ -395,25 +421,29 @@ table>thead+tbody tr:nth-child(odd) {
   line-height: 2;
 }
 
-.container .steps div {
+.imbodycontentbackground .steps div,
+.rn_Container .container .steps div {
   margin-left: 4rem;
   width: calc(50% - 4rem);
   display:block;
 }
 
-.container .steps img {
+.imbodycontentbackground .steps img,
+.rn_Container .container .steps img {
   height: auto;
   object-fit: contain;
   object-position: 50% 0;
   width: 40%;
 }
 
-.container .tabs {
+.imbodycontentbackground .tabs,
+.rn_Container .container .tabs {
   position: relative;
 }
 /* 'position: relative' is needed for the ::after pseudo element to position correctly */
 
-.container .tabs::before {
+.imbodycontentbackground .tabs::before,
+.rn_Container .container .tabs::before {
   background: linear-gradient(to right, white 0, transparent .5rem, transparent calc(100% - .5rem), white 100%);
   content: "";
   display: block;
@@ -423,13 +453,15 @@ table>thead+tbody tr:nth-child(odd) {
   width: 100%;
 }
 
-.container .tabs>section:first-child {
+.imbodycontentbackground .tabs>section:first-child,
+.rn_Container .container .tabs>section:first-child {
   display: flex;
   border-bottom: 2px solid var(--oka-background);
   overflow: hidden hidden;
 }
 
-.container .tabs>section:first-child button {
+.imbodycontentbackground .tabs>section:first-child button,
+.rn_Container .container .tabs>section:first-child button {
   background: var(--oka-content);
   border: none;
   cursor: pointer;
@@ -441,27 +473,33 @@ table>thead+tbody tr:nth-child(odd) {
   white-space: nowrap;
 }
 
-.container .tabs>section:first-child button:first-child {
+.imbodycontentbackground .tabs>section:first-child button:first-child,
+.rn_Container .container .tabs>section:first-child button:first-child {
   margin-left: 1rem;
 }
 
-.container .tabs>section:first-child button:last-child {
+.imbodycontentbackground .tabs>section:first-child button:last-child,
+.rn_Container .container .tabs>section:first-child button:last-child {
   margin-right: 1rem;
   border-right: 0;
 }
 
-.container .tabs>section:first-child button.tab-active {
+.imbodycontentbackground .tabs>section:first-child button.tab-active,
+.rn_Container .container .tabs>section:first-child button.tab-active {
   color: var(--oka-primary);
   border-bottom: 4px solid var(--oka-primary);
   padding-bottom: calc(.5rem - 4px);
 }
 
-.container .tabs>section:first-child:focus {
+.imbodycontentbackground .tabs>section:first-child:focus,
+.rn_Container .container .tabs>section:first-child:focus {
   outline: none;
 }
 
-.container .expands article,
-.container .tabs article {
+.imbodycontentbackground .expands article,
+.imbodycontentbackground .tabs article,
+.rn_Container .container .expands article,
+.rn_Container .container .tabs article {
   /* transition: height 4s ease; */
   border: none;
   display: none;
@@ -469,30 +507,39 @@ table>thead+tbody tr:nth-child(odd) {
   padding: 1rem;
 }
 
-.container .expands article:last-child,
-.container .tabs article:last-child {
+.imbodycontentbackground .expands article:last-child,
+.imbodycontentbackground .tabs article:last-child,
+.rn_Container .container .expands article:last-child,
+.rn_Container .container .tabs article:last-child {
   border: none;
 }
 
-.container .expands article>h3,
-.container .tabs article>h3 {
+.imbodycontentbackground .expands article>h3,
+.imbodycontentbackground .tabs article>h3,
+.rn_Container .container .expands article>h3,
+.rn_Container .container .tabs article>h3 {
   cursor: pointer;
   margin: 0 0 1.5rem;
   padding: 0;
   position: relative;
 }
 
-.container .tabs article>h3 {
+.imbodycontentbackground .tabs article>h3,
+.rn_Container .container .tabs article>h3 {
   display: none;
 }
 
-.container .expands article>h3:hover,
-.container .tabs article>h3:hover {
+.imbodycontentbackground .expands article>h3:hover,
+.imbodycontentbackground .tabs article>h3:hover,
+.rn_Container .container .expands article>h3:hover,
+.rn_Container .container .tabs article>h3:hover {
   background: var(--oka-grey-smoke);
 }
 
-.container .expands article>div,
-.container .tabs article>div {
+.imbodycontentbackground .expands article>div,
+.imbodycontentbackground .tabs article>div,
+.rn_Container .container .expands article>div,
+.rn_Container .container .tabs article>div {
   animation-direction: reverse;
   animation-duration: 300ms;
   /* opacity: 0; */
@@ -503,42 +550,54 @@ table>thead+tbody tr:nth-child(odd) {
   overflow: hidden;
   padding: 0;
 }
-.container .expands article.tab-active,
-.container .tabs article.tab-active {
+.imbodycontentbackground .expands article.tab-active,
+.imbodycontentbackground .tabs article.tab-active,
+.rn_Container .container .expands article.tab-active,
+.rn_Container .container .tabs article.tab-active {
   display: block;
 }
 
-.container .expands article.tab-active h3,
-.container .tabs article.tab-active h3 {
+.imbodycontentbackground .expands article.tab-active h3,
+.imbodycontentbackground .tabs article.tab-active h3,
+.rn_Container .container .expands article.tab-active h3,
+.rn_Container .container .tabs article.tab-active h3 {
   cursor: inherit;
   padding-bottom: 0;
 }
 
-.container .expands article.tab-active h3:hover,
-.container .tabs article.tab-active h3:hover {
+.imbodycontentbackground .expands article.tab-active h3:hover,
+.imbodycontentbackground .tabs article.tab-active h3:hover,
+.rn_Container .container .expands article.tab-active h3:hover,
+.rn_Container .container .tabs article.tab-active h3:hover {
   background: none;
 }
 
-.container .expands article.tab-active div,
-.container .tabs article.tab-active div {
+.imbodycontentbackground .expands article.tab-active div,
+.imbodycontentbackground .tabs article.tab-active div,
+.rn_Container .container .expands article.tab-active div,
+.rn_Container .container .tabs article.tab-active div {
   /* opacity: 1; */
   display: block;
   height: auto;
   padding: 0;
 }
 
-.container .expands article.tab-active p p:first-child,
-.container .tabs article.tab-active p p:first-child {
+.imbodycontentbackground .expands article.tab-active p p:first-child,
+.imbodycontentbackground .tabs article.tab-active p p:first-child,
+.rn_Container .container .expands article.tab-active p p:first-child,
+.rn_Container .container .tabs article.tab-active p p:first-child {
   margin-top: 0;
 }
 
-.container .expands article.tab-active p p:last-child,
-.container .tabs article.tab-active p p:last-child {
+.imbodycontentbackground .expands article.tab-active p p:last-child,
+.imbodycontentbackground .tabs article.tab-active p p:last-child,
+.rn_Container .container .expands article.tab-active p p:last-child,
+.rn_Container .container .tabs article.tab-active p p:last-child {
   margin-bottom: 0;
 }
 
-
-.container .tabs article.tab-active div section{
+.imbodycontentbackground .tabs article.tab-active div section,
+.rn_Container .container .tabs article.tab-active div section {
   opacity: 1;
   display: block;
   height: 32rem;
@@ -547,17 +606,8 @@ table>thead+tbody tr:nth-child(odd) {
   border: 10px solid black;
 }
 
-
-
-
-
-
-
-
-
-
-
-.container .expands article {
+.imbodycontentbackground .expands article,
+.rn_Container .container .expands article {
   border-bottom: 2px solid var(--oka-border);
   display: block;
   min-height: 3rem;
@@ -566,24 +616,29 @@ table>thead+tbody tr:nth-child(odd) {
   overflow: hidden;
 }
 
-.container .expands article>h3 {
+.imbodycontentbackground .expands article>h3,
+.rn_Container .container .expands article>h3 {
   display: block;
   margin: 0;
 }
 
-.container .expands article h3,
-.container .expands article div {
+.imbodycontentbackground .expands article h3,
+.imbodycontentbackground .expands article div,
+.rn_Container .container .expands article h3,
+.rn_Container .container .expands article div {
   padding: 1.25rem;
 }
 
-.container .expands article>div {
+.imbodycontentbackground .expands article>div,
+.rn_Container .container .expands article>div {
   height: 0;
   padding: 0;
   display: none;
   transition: opacity 1s ease;
 }
 
-.container .expands article>h3:after {
+.imbodycontentbackground .expands article>h3:after,
+.rn_Container .container .expands article>h3:after {
   content: '\F0419';
   font-family: var(--oka-icon-font);
   opacity: 1;
@@ -592,26 +647,15 @@ table>thead+tbody tr:nth-child(odd) {
   transition: opacity 0.1s ease;
 }
 
-.container .expands article.tab-active h3 {
+.imbodycontentbackground .expands article.tab-active h3,
+.rn_Container .container .expands article.tab-active h3 {
   margin: 0 0 1.5rem;
 }
 
-.container .expands article.tab-active h3:after {
+.imbodycontentbackground .expands article.tab-active h3:after,
+.rn_Container .container .expands article.tab-active h3:after {
   content: '\F0377';
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @keyframes oka-opacity {
   from {
@@ -630,27 +674,33 @@ table>thead+tbody tr:nth-child(odd) {
 
 @media only screen and (max-width: 768px) {
 
-  .container .column {
+  .imbodycontentbackground .column,
+  .rn_Container .container .column {
     flex-direction: column;
   }
   
-  .container .steps article {
+  .imbodycontentbackground .steps article,
+  .rn_Container .container .steps article {
     flex-direction: column;
   }
 
-  .container .steps div {
+  .imbodycontentbackground .steps div,
+  .rn_Container .container .steps div {
     width: calc(100% - 4rem);
   }
   
-  .container .steps img {
+  .imbodycontentbackground .steps img,
+  .rn_Container .container .steps img {
     width: 100%;
   }
   
-  .container .tabs>section:first-child {
+  .imbodycontentbackground .tabs>section:first-child,
+  .rn_Container .container .tabs>section:first-child {
     display: none;
   }
 
-  .container .tabs article {
+  .imbodycontentbackground .tabs article,
+  .rn_Container .container .tabs article {
     border-bottom: 2px solid var(--oka-border);
     display: block;
     min-height: 3rem;
@@ -659,37 +709,42 @@ table>thead+tbody tr:nth-child(odd) {
     /* overflow: hidden; */
   }
 
-  .container .tabs article.tab-active {
+  .rn_Container .container .tabs article.tab-active {
     /* max-height: 128rem;
     transition: max-height .1s ease-out;
     transition-delay: .2s; */
   }
 
-  .container .tabs article>h3 {
+  .imbodycontentbackground .tabs article>h3,
+  .rn_Container .container .tabs article>h3 {
     display: block;
     margin: 0;
   }
 
-  .container .tabs article h3,
-  .container .tabs article div {
+  .imbodycontentbackground .tabs article h3,
+  .imbodycontentbackground .tabs article div,
+  .rn_Container .container .tabs article h3,
+  .rn_Container .container .tabs article div {
     padding: 1.25rem;
   }
 
-  .container .tabs article>div {
+  .imbodycontentbackground .tabs article>div,
+  .rn_Container .container .tabs article>div {
     height: 0;
     padding: 0;
     transition: opacity 1s ease;
   }
  
-  .container .tabs article h3 {
+  .rn_Container .container .tabs article h3 {
     /* margin-bottom: 0; */
   }
 
-  /* .container .tabs article.tab-active p {
+  /* .rn_Container .container .tabs article.tab-active p {
     padding: 1.25rem;
   } */
 
-  .container .tabs article>h3:after {
+  .imbodycontentbackground .tabs article>h3:after,
+  .rn_Container .container .tabs article>h3:after {
     content: '\F0419';
     font-family: var(--oka-icon-font);
     opacity: 1;
@@ -698,11 +753,13 @@ table>thead+tbody tr:nth-child(odd) {
     transition: opacity 0.1s ease;
   }
 
-  .container .tabs article.tab-active h3 {
+  .imbodycontentbackground .tabs article.tab-active h3,
+  .rn_Container .container .tabs article.tab-active h3 {
     margin: 0 0 1.5rem;
   }
 
-  .container .tabs article.tab-active h3:after {
+  .imbodycontentbackground .tabs article.tab-active h3:after,
+  .rn_Container .container .tabs article.tab-active h3:after {
     content: '\F0377';
   }
 
