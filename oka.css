@@ -435,6 +435,7 @@ body.cke_editable h3,
   line-height: 1.5;
 }
 
+span.[id^=SPAN] img
 body.cke_editable img,
 .rn_Container .container img {
   border-radius: .5rem;
@@ -496,6 +497,7 @@ body.cke_editable table tr th,
 .rn_Container .container table tr th {
   background: var(--oka-content);
   border-bottom: 2px solid var(--oka-primary);
+  border-width: 0 0 2px 0;
   font-variation-settings: 'wght' 400;
   height: 2rem;
   position: sticky;
@@ -512,6 +514,7 @@ body.cke_editable table tr th,
 body.cke_editable table td,
 .rn_Container .container table td {
   border-bottom: 2px solid var(--oka-border);
+  border-width: 0 0 2px 0;
   font-family: var(--oka-mono-font);
   height: 2rem;
   padding: 0 .5rem;
