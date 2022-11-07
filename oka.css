@@ -435,7 +435,7 @@ body.cke_editable h3,
   line-height: 1.5;
 }
 
-span.[id^=SPAN] img
+span.[id^=SPAN] img,
 body.cke_editable img,
 .rn_Container .container img {
   border-radius: .5rem;
