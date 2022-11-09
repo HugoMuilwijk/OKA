@@ -40,7 +40,7 @@
   --oka-content: #ffffff;       /* white */
   --oka-border: #e3e3e3;        /* grey-snow */
   --oka-text: #232323;          /* grey-coal */
-  --oka-text-light: #535353;    /* grey-dim */
+  --oka-text-light: #939393;    /* grey-medium */
 
   --oka-marked: #deff00;        /* lime */
   --oka-disabled: #d3d3d3;      /* grey smoke */
@@ -101,6 +101,15 @@ progress {
 }
 /* Reset default appearances */
 
+body.cke_editable,
+[id^=SPAN] .leftHardAlignment,
+.rn_Container .container {
+  font-family: var(--oka-sans-font);
+  font-size: 1rem;
+  color: var(--oka-text);
+  font-variation-settings: 'wght' 300;
+  line-height: 1.5;
+}
 
 /*
 Below selectors are needed for standard elements
@@ -132,31 +141,20 @@ body.cke_editable              LIVE preview
 }
 
 .lightbox-container {
-  /* z-index: 9999; */
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   padding: 2rem;
-  /* width: 100vw; */
-  /* display: -webkit-flex;
-  display: -ms-flexbox; */
   display: flex;
   position: fixed;
   align-items: center;
   justify-content: center;
-  /* background-color: rgb(29, 29, 29); */
   background-color: rgba(51, 51, 51, 0.5); /*#333333*/
-  /* border: 10px solid hotpink; */
-  /* box-shadow: inset 0 0 .25rem black; */
-  /* backdrop-filter: blur(1rem); */
 }
 
 .lightbox-wrapper {
   position: relative;
-  
-  
-  
 }
 
 .lightbox-content {
@@ -166,7 +164,8 @@ body.cke_editable              LIVE preview
 }
 
 .lightbox-image {
-  max-height: 80vh;
+  max-height: calc(100vh - 8rem);
+  max-width: calc(100vw - 4rem);
   vertical-align: middle;
   
 }
@@ -178,10 +177,10 @@ body.cke_editable              LIVE preview
 */
 
 .lightbox-btn {
-  /* width: 2.2em; */
+  width: 2.2em;
   height: 2.2em;
   position: absolute;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   transition: all 3s;
   background-color: #000;
   background-position: center;
@@ -196,14 +195,14 @@ body.cke_editable              LIVE preview
 .lightbox-btn-close {
   top: -0.8em;
   right: -0.8em;
-  background-size: 40%;
+  /* background-size: 40%; */
   /* background-image: url('icons/icon-lightbox-close.svg'); */
 }
 
 .lightbox-btn-next,
 .lightbox-btn-previous {
   top: calc(50% - (2.2em / 2));
-  background-size: 25% 80%;
+  /* background-size: 25% 80%; */
   /* background-image: url('icons/icon-lightbox-arrow.svg'); */
 }
 
@@ -244,7 +243,7 @@ body.cke_editable              LIVE preview
 
 @keyframes createBox {
   from {
-    transform: scale(.9);
+    transform: scale(.95);
   }
 
   to {
@@ -258,7 +257,7 @@ body.cke_editable              LIVE preview
   }
 
   to {
-    transform: scale(.9);
+    transform: scale(.95);
   }
 }
 
@@ -275,7 +274,7 @@ body.cke_editable              LIVE preview
   text-align: center;
   position: relative;
   width: 66%;
-  margin: 1.5rem auto;
+  margin: 0 auto 1.5rem auto;
   height: auto;
   /* overflow: hidden; */
   z-index: 0;
@@ -286,7 +285,7 @@ body.cke_editable              LIVE preview
   /* margin-bottom:0; */
   bottom: .5rem;
   right: .5rem;
-  display: none;
+  display: inline-block;
   border: 2px solid var(--oka-grey-dim);
   background-color: transparent;
   color: var(--oka-grey-dim);
@@ -294,6 +293,9 @@ body.cke_editable              LIVE preview
   border-radius: .75rem;
   line-height: 1;
   padding: 0 .5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease-in;
 }
 
 .oka-code input {
@@ -315,6 +317,18 @@ body.cke_editable              LIVE preview
   position: absolute;
   transform: translateX(-50%);
   white-space: nowrap;
+  z-index: 10;
+}
+
+.oka-code label::after {
+  content: "";
+  width: calc(100% + 1.5rem);
+  height: 2.5rem;
+  margin: -2rem 0 0 -1.5rem;
+  display: block;
+  position: absolute;
+  /* background-color: red; */
+
 }
 
 .oka-code pre {
@@ -328,8 +342,9 @@ body.cke_editable              LIVE preview
   max-height: 2px;
   overflow: hidden;
   text-align: left;
-  transition: max-height .25s ease-in-out, background-color .25s ease-in-out, border-radius .125s ease-in;
+  transition: max-height .25s ease-in-out, background-color .25s ease-in-out, border-radius .125s ease-in, padding .25s ease-in-out;
   white-space: pre-wrap;
+  padding:0;
 }
 
 .oka-code pre:hover {
@@ -343,8 +358,10 @@ body.cke_editable              LIVE preview
 .oka-code code {
   color: var(--oka-white);
   counter-increment: code;
-  margin-left: .5rem;
+  margin-left: 1rem;
   white-space: pre-wrap;
+  opacity: 0;
+  transition: opacity .25s ease-in .25s;
 }
 
 .oka-code code::before {
@@ -362,33 +379,42 @@ body.cke_editable              LIVE preview
 }
 
 .oka-code code n {
-  color: var(--oka-primary-alt);
+  color: var(--oka-primary);
 }
 
 .oka-code code c {
-  color: var(--oka-primary);
+  color: var(--oka-primary-alt);
 }
 
 .oka-code code d {
   color: var(--oka-secondary);
 }
 
+body.cke_editable .oka-code label,
 .oka-code input:checked+label {
   background: var(--oka-error);
   box-shadow: 0 .125rem .25rem black;
 }
 
-.oka-code input:checked+label+pre {
+body.cke_editable .oka-code pre,
+.oka-code input:checked~pre {
   background-color:var(--oka-grey-dark);
   border-color: black;
   box-shadow: inset 0 0 .5rem black;
   max-height: 32rem;
   border-radius: .5rem;
+  padding: 1rem 0;
 }
 
-.oka-code input:checked+label+pre:hover+button,
-.oka-code input:checked+label+pre+button:hover {
-  display:inline-block;
+body.cke_editable .oka-code pre code,
+.oka-code input:checked~pre code {
+  opacity: 1;
+}
+
+
+.oka-code input:checked~button {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .oka-code input:checked+label+pre+button:hover {
@@ -399,28 +425,34 @@ body.cke_editable              LIVE preview
 }
 
 body.cke_editable h3,
+.rn_AnswerTitle h1,
 .rn_Container .container h1,
 .rn_Container .container h2,
+.rn_Container .container h2,
 .rn_Container .container h3 {
-  color: var(--oka-primary);
   margin-top: 0;
   margin-bottom: 1.5rem;
+  /* text-shadow: 0 0 var(--oka-primary-alt); */
 }
 
+.rn_AnswerTitle h1,
 .rn_Container .container h1 {
+  color: var(--oka-primary-alt);
   font-size: 2rem;
   font-variation-settings: 'wght' 800;
   line-height: 1.25;
 }
 
 .rn_Container .container h2 {
-  font-size: 1.5rem;
+  color: var(--oka-primary);
+  font-size: 1.25rem;
   font-variation-settings: 'wght' 700;
   line-height: 1.5;
 }
 
 body.cke_editable h3,
 .rn_Container .container h3 {
+  color: var(--oka-primary);
   font-size: 1rem;
   font-variation-settings: 'wght' 600;
   line-height: 1.5;
@@ -432,8 +464,15 @@ body.cke_editable img,
   border-radius: .5rem;
   border: 2px solid var(--oka-border);
   /* box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.25); */
-  width: 100%;
+
+
+  height: unset !important;
+  width: 100% !important;
   cursor: pointer;
+
+  font-size: .75rem;
+  text-indent: .25rem;
+  padding-right: .25rem;
 }
 
 body.cke_editable img:hover,
@@ -495,6 +534,7 @@ body.cke_editable table tr th,
   position: sticky;
   text-align: center;
   top: 0;
+  padding: 0 .5rem; 
 }
 /* top: 0; is needed for stickiness */
 
@@ -587,11 +627,11 @@ body.cke_editable ul ul li::before,
   color: var(--oka-primary);
 }
 
-body.cke_editable p,
+/* body.cke_editable p,
 [id^=SPAN] .leftHardAlignment p,
 .rn_Container .container p {
   margin: 0 0 1.5rem 0;
-}
+} */
 
 body.cke_editable a,
 [id^=SPAN] .leftHardAlignment a,
@@ -706,29 +746,25 @@ body.cke_editable sup,
 
 /* oka-steps */
 
-body.cke_editable .oka-steps,
-.rn_Container .container .oka-steps {
+.oka-steps {
   counter-reset: step;
   display: flex;
   flex-direction: column;
 }
 
-body.cke_editable .oka-steps .oka-steps,
-.rn_Container .container .oka-steps .oka-steps {
+.oka-steps .oka-steps {
   counter-reset: stepsub;
   margin: 0 2rem;
 }
 
-body.cke_editable .oka-steps article,
-.rn_Container .container .oka-steps article {
+.oka-steps article {
   border-top: 2px solid var(--oka-border);
   display: flex;
   flex-direction: row;
   padding: 1rem 0 1rem 0;
 }
 
-body.cke_editable .oka-steps article::before,
-.rn_Container .container .oka-steps article::before {
+.oka-steps article::before {
   background: var(--oka-primary);
   border-radius: 50%;
   color: white;
@@ -744,8 +780,7 @@ body.cke_editable .oka-steps article::before,
   width: 3rem;
 }
 
-body.cke_editable .oka-steps .oka-steps article::before,
-.rn_Container .container .oka-steps .oka-steps article::before {
+.oka-steps .oka-steps article::before {
   background: var(--oka-content);
   border:.25rem solid var(--oka-primary);
   color: var(--oka-primary);
@@ -755,29 +790,26 @@ body.cke_editable .oka-steps .oka-steps article::before,
   line-height: 2;
 }
 
-body.cke_editable .oka-steps div,
-.rn_Container .container .oka-steps div {
+.oka-steps div {
   margin-left: 4rem;
   width: calc(50% - 4rem);
-  display:block;
+  display: block;
 }
 
-body.cke_editable .oka-steps img,
-.rn_Container .container .oka-steps img {
+.container .oka-steps img {
   height: auto;
   object-fit: contain;
   object-position: 50% 0;
-  width: 50%;
+  width: 50% !important;
 }
+/* .container needed for this to work? */
 
-body.cke_editable .oka-tabs,
-.rn_Container .container .oka-tabs {
+.oka-tabs {
   position: relative;
 }
 /* 'position: relative' is needed for the ::after pseudo element to position correctly */
 
-body.cke_editable .oka-tabs::before,
-.rn_Container .container .oka-tabs::before {
+.oka-tabs::before {
   background: linear-gradient(to right, white 0, transparent 1rem, transparent calc(100% - 1rem), white 100%);
   content: "";
   display: block;
@@ -787,15 +819,13 @@ body.cke_editable .oka-tabs::before,
   width: 100%;
 }
 
-body.cke_editable .oka-tabs>section:first-child,
-.rn_Container .container .oka-tabs>section:first-child {
+.oka-tabs>section:first-child {
   display: flex;
   border-bottom: 2px solid var(--oka-background);
   overflow: hidden hidden;
 }
 
-body.cke_editable .oka-tabs>section:first-child button,
-.rn_Container .container .oka-tabs>section:first-child button {
+.oka-tabs>section:first-child button {
   background: var(--oka-content);
   border: none;
   cursor: pointer;
@@ -807,77 +837,68 @@ body.cke_editable .oka-tabs>section:first-child button,
   white-space: nowrap;
 }
 
-body.cke_editable .oka-tabs>section:first-child button:hover,
-.rn_Container .container .oka-tabs>section:first-child button:hover {
+.oka-tabs>section:first-child button:hover {
   color: var(--oka-secondary);
 }
 
-body.cke_editable .oka-tabs>section:first-child button:first-child,
-.rn_Container .container .oka-tabs>section:first-child button:first-child {
+.oka-tabs>section:first-child button:first-child {
   margin-left: 1rem;
 }
 
-body.cke_editable .oka-tabs>section:first-child button:last-child,
-.rn_Container .container .oka-tabs>section:first-child button:last-child {
+.oka-tabs>section:first-child button:last-child {
   margin-right: 1rem;
   border-right: 0;
 }
 
-body.cke_editable .oka-tabs>section:first-child button.oka-tab-active,
-.rn_Container .container .oka-tabs>section:first-child button.oka-tab-active {
+.oka-tabs>section:first-child button.oka-tab-active {
   color: var(--oka-primary);
   border-bottom: 4px solid var(--oka-primary);
   padding-bottom: calc(.5rem - 4px);
 }
 
-body.cke_editable .oka-tabs>section:first-child button.oka-tab-active:hover,
-.rn_Container .container .oka-tabs>section:first-child button.oka-tab-active:hover {
+.oka-tabs>section:first-child button.oka-tab-active:hover {
   color: var(--oka-primary);
   cursor: default;
 }
 
-body.cke_editable .oka-tabs>section:first-child:focus,
-.rn_Container .container .oka-tabs>section:first-child:focus {
+.oka-tabs>section:first-child:focus {
   outline: none;
 }
 
-body.cke_editable .oka-expands article,
-body.cke_editable .oka-tabs article,
-.rn_Container .container .oka-expands article,
-.rn_Container .container .oka-tabs article {
+.oka-expands article,
+.oka-tabs article {
   /* transition: height 4s ease; */
   border: none;
-  display: none;
+  /* display: none; */
   min-height: 8rem;
   padding: 1rem;
 }
 
-body.cke_editable .oka-expands article:last-child,
-body.cke_editable .oka-tabs article:last-child,
-.rn_Container .container .oka-expands article:last-child,
-.rn_Container .container .oka-tabs article:last-child {
+.oka-expands :not(.oka-tab-active) article,
+.oka-tabs :not(.oka-tab-active) article{
+  /* transition: height 4s ease; */
+  display: none;
+}
+
+.oka-expands article:last-child,
+.oka-tabs article:last-child {
   border: none;
 }
 
-body.cke_editable .oka-expands article>h3,
-body.cke_editable .oka-tabs article>h3,
-.rn_Container .container .oka-expands article>h3,
-.rn_Container .container .oka-tabs article>h3 {
+.oka-expands article>h3,
+.oka-tabs article>h3 {
   cursor: pointer;
   margin: 0 0 1.5rem;
   padding: 0;
   position: relative;
 }
 
-body.cke_editable .oka-tabs article>h3,
-.rn_Container .container .oka-tabs article>h3 {
+.oka-tabs article>h3 {
   display: none;
 }
 
-body.cke_editable .oka-expands article>div,
-body.cke_editable .oka-tabs article>div,
-.rn_Container .container .oka-expands article>div,
-.rn_Container .container .oka-tabs article>div {
+.oka-expands article>div,
+.oka-tabs article>div {
   animation-direction: reverse;
   animation-duration: 300ms;
   /* opacity: 0; */
@@ -888,25 +909,20 @@ body.cke_editable .oka-tabs article>div,
   overflow: hidden;
   padding: 0;
 }
-body.cke_editable .oka-expands article.oka-tab-active,
-body.cke_editable .oka-tabs article.oka-tab-active,
-.rn_Container .container .oka-expands article.oka-tab-active,
-.rn_Container .container .oka-tabs article.oka-tab-active {
+
+.oka-expands article.oka-tab-active,
+.oka-tabs article.oka-tab-active {
   display: block;
 }
 
-body.cke_editable .oka-expands article.oka-tab-active h3,
-body.cke_editable .oka-tabs article.oka-tab-active h3,
-.rn_Container .container .oka-expands article.oka-tab-active h3,
-.rn_Container .container .oka-tabs article.oka-tab-active h3 {
+.oka-expands article.oka-tab-active h3,
+.oka-tabs article.oka-tab-active h3 {
   cursor: inherit;
   padding-bottom: 0;
 }
 
-body.cke_editable .oka-expands article.oka-tab-active h3:hover,
-body.cke_editable .oka-tabs article.oka-tab-active h3:hover,
-.rn_Container .container .oka-expands article.oka-tab-active h3:hover,
-.rn_Container .container .oka-tabs article.oka-tab-active h3:hover {
+.oka-expands article.oka-tab-active h3:hover,
+.oka-tabs article.oka-tab-active h3:hover {
   background: none;
 }
 
@@ -937,8 +953,8 @@ body.cke_editable .oka-tabs article.oka-tab-active p p:last-child,
 body.cke_editable .oka-tabs article.oka-tab-active div section,
 .rn_Container .container .oka-tabs article.oka-tab-active div section {
   opacity: 1;
-  display: block;
-  height: 32rem;
+  /* display: block; */
+  /* height: 32rem; */
   padding: 0;
   position: relative;
   border: 10px solid black;
@@ -1028,40 +1044,81 @@ body.cke_editable .oka-expands article.oka-tab-active h3:after,
   }
 }
 
+@media (hover: none) {
+  .remove-scroll {
+    -webkit-margin-end: unset;
+  }
+
+  .rn_Container .container table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .rn_Container .container table::before {
+    background: linear-gradient(to right, blue 0, transparent .5rem, transparent calc(100% - .5rem), blue 100%);
+    content: "";
+    display: block;
+    height: 100%;
+    pointer-events: none;
+    position: sticky;
+    width: 100%;
+    
+    
+  
+    top:0;
+    
+
+  }
+
+  .rn_Container .container table tbody{
+    width: 100%;
+    display: table;
+  }
+
+  .rn_Container .container table thead+tbody{
+    display: table-row-group;
+  }
+}
+
+
 @media only screen and (max-width: 768px) {
 
 
+
+
+  .oka-code {
+    width: 100%;
+  }
+
   body.cke_editable table,
-.rn_Container .container table {
-  width: 100%;
-}
-  body.cke_editable .oka-column,
-  .rn_Container .container .oka-column {
+  [id^=SPAN] .leftHardAlignment table,
+  .rn_Container .container table {
+    width: 100%;
+  }
+
+  .oka-column {
     flex-direction: column;
   }
   
-  body.cke_editable .oka-steps article,
-  .rn_Container .container .oka-steps article {
+  .oka-steps article {
     flex-direction: column;
   }
 
-  body.cke_editable .oka-steps div,
-  .rn_Container .container .oka-steps div {
+  .oka-steps div {
     width: calc(100% - 4rem);
   }
   
-  body.cke_editable .oka-steps img,
-  .rn_Container .container .oka-steps img {
-    width: 100%;
+  .container .oka-steps img {
+    width: 100% !important;
   }
   
-  body.cke_editable .oka-tabs>section:first-child,
-  .rn_Container .container .oka-tabs>section:first-child {
+  .oka-tabs>section:first-child {
     display: none;
   }
 
-  body.cke_editable .oka-tabs article,
-  .rn_Container .container .oka-tabs article {
+
+  .oka-tabs article {
     border-bottom: 2px solid var(--oka-border);
     display: block;
     min-height: 3rem;
@@ -1070,22 +1127,21 @@ body.cke_editable .oka-expands article.oka-tab-active h3:after,
     /* overflow: hidden; */
   }
 
-  .rn_Container .container .oka-tabs article.oka-tab-active {
-    /* max-height: 128rem;
+  /* .rn_Container .container .oka-tabs article.oka-tab-active {
+    max-height: 128rem;
     transition: max-height .1s ease-out;
-    transition-delay: .2s; */
-  }
+    transition-delay: .2s;
+  } */
 
   body.cke_editable .oka-tabs article>h3,
+  [id^=SPAN] .leftHardAlignment .oka-tabs article>h3,
   .rn_Container .container .oka-tabs article>h3 {
     display: block;
     margin: 0;
   }
 
-  body.cke_editable .oka-tabs article h3,
-  body.cke_editable .oka-tabs article div,
-  .rn_Container .container .oka-tabs article h3,
-  .rn_Container .container .oka-tabs article div {
+  .oka-tabs article h3,
+  .oka-tabs article div {
     padding: 1.25rem;
   }
 
@@ -1096,9 +1152,9 @@ body.cke_editable .oka-expands article.oka-tab-active h3:after,
     transition: opacity 1s ease;
   }
  
-  .rn_Container .container .oka-tabs article h3 {
-    /* margin-bottom: 0; */
-  }
+  /* .rn_Container .container .oka-tabs article h3 {
+    margin-bottom: 0;
+  } */
 
   /* .rn_Container .container .oka-tabs article.oka-tab-active p {
     padding: 1.25rem;
@@ -1106,11 +1162,13 @@ body.cke_editable .oka-expands article.oka-tab-active h3:after,
 
   body.cke_editable .oka-tabs article>h3:after,
   .rn_Container .container .oka-tabs article>h3:after {
-    content: '\F0419';
+    content: '\F0140';
     font-family: var(--oka-icon-font);
     opacity: 1;
     position: absolute;
-    right: 1.25rem;
+    font-size: 1.5rem;
+    line-height: .75;
+    right: 1rem;
     transition: opacity 0.1s ease;
   }
 
@@ -1121,7 +1179,7 @@ body.cke_editable .oka-expands article.oka-tab-active h3:after,
 
   body.cke_editable .oka-tabs article.oka-tab-active h3:after,
   .rn_Container .container .oka-tabs article.oka-tab-active h3:after {
-    content: '\F0377';
+    content: '\F0143';
   }
 
 }
