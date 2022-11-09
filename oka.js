@@ -18,20 +18,20 @@ const viewport_height = document.documentElement.clientHeight;
 
 // Splits <a href> into 'internal' and 'external' links
 
-const a = document.getElementsByTagName('a');
+// const a = document.getElementsByTagName('a');
 
-for(var i=0; i<a.length; i++) {
-    const a_href = a[i].getAttribute('href');
-	// check if contains base_url or ends with ID number
-	// check Oracle output of url for best regex
-    if (a_href.startsWith('#')||a_href.includes(base_url)) {
-		a[i].removeAttribute('target');
-		a[i].removeAttribute('rel');
-    } else {
-		a[i].target = "_blank";
-		a[i].rel = "nofollow"
-    }
-}
+// for(var i=0; i<a.length; i++) {
+//     const a_href = a[i].getAttribute('href');
+// 	// check if contains base_url or ends with ID number
+// 	// check Oracle output of url for best regex
+//     if (a_href.startsWith('#')||a_href.includes(base_url)) {
+// 		a[i].removeAttribute('target');
+// 		a[i].removeAttribute('rel');
+//     } else {
+// 		a[i].target = "_blank";
+// 		a[i].rel = "nofollow"
+//     }
+// }
 
 // Aligns numeric content to the right and forces mono font
 
