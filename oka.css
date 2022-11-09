@@ -463,16 +463,11 @@ body.cke_editable img,
 .rn_Container .container img {
   border-radius: .5rem;
   border: 2px solid var(--oka-border);
-  /* box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.25); */
-
-
   height: unset !important;
-  width: 100% !important;
+  width: 100%;
   cursor: pointer;
-
   font-size: .75rem;
   text-indent: .25rem;
-  padding-right: .25rem;
 }
 
 body.cke_editable img:hover,
@@ -501,6 +496,10 @@ body.cke_editable img:hover,
 .oka-column article>*:last-child,
 .oka-column article>*:last-child {
   margin-bottom: 0;  
+}
+
+.oka-column article img {
+  width: 100% !important;
 }
 
 .oka-column article table,
@@ -865,19 +864,19 @@ body.cke_editable sup,
   outline: none;
 }
 
-.oka-expands article,
-.oka-tabs article {
+.oka-expands>article,
+.oka-tabs>section>article {
   /* transition: height 4s ease; */
   border: none;
-  /* display: none; */
+  display: none;
   min-height: 8rem;
   padding: 1rem;
 }
 
-.oka-expands :not(.oka-tab-active) article,
-.oka-tabs :not(.oka-tab-active) article{
+.oka-expands>article.oka-tab-active,
+.oka-tabs>section>article.oka-tab-active {
   /* transition: height 4s ease; */
-  display: none;
+  display: block;
 }
 
 .oka-expands article:last-child,
@@ -904,7 +903,7 @@ body.cke_editable sup,
   /* opacity: 0; */
   /* transition: opacity 1s ease; */
   animation-name: oka-opacity;
-  display: block;
+  /* display: block; */
   height: 0;
   overflow: hidden;
   padding: 0;
@@ -968,6 +967,12 @@ body.cke_editable .oka-expands article,
   /* max-height: 5rem; */
   /* transition: max-height .1s ease-in; */
   overflow: hidden;
+}
+
+body.cke_editable .oka-expands .oka-steps article,
+.rn_Container .container .oka-expands .oka-steps article {
+  display: flex;
+
 }
 
 body.cke_editable .oka-expands article>h3,

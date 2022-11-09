@@ -18,31 +18,7 @@ const viewport_height = document.documentElement.clientHeight;
 
 // Splits <a href> into 'internal' and 'external' links
 
-
-
-
-
-
-
-
-
-
-const scrollContainerGroup = document.querySelectorAll(".oka-tabs>section:first-child");
-
-scrollContainerGroup.forEach(scrollContainer => {
-	scrollContainer.addEventListener("wheel", (scrollHor) => {
-		scrollHor.preventDefault();
-		scrollContainer.scrollLeft += scrollHor.deltaY;
-	});
-});
-
-
-
 const a = document.getElementsByTagName('a');
-
-// var r = new RegExp('^([a-z]+:|//)', 'i');
-
-// var q = new RegExp('(?!oka\.test$)', 'i');
 
 for(var i=0; i<a.length; i++) {
     const a_href = a[i].getAttribute('href');
@@ -57,31 +33,33 @@ for(var i=0; i<a.length; i++) {
     }
 }
 
+// Aligns numeric content to the right and forces mono font
+
 const td = document.getElementsByTagName('td');
 
 for(var i=0; i<td.length; i++) {
-	
-	// const td_num = td[i].innerHTML;
-	// const found = td[i].innerHTML.match(new RegExp("^-?[0-9][0-9,\.]+$"));
+	// add euro symbol
 	if (td[i].innerHTML.match(new RegExp("^-?[0-9][0-9,\.\-]+$"))) {
 		td[i].classList.add('right');
 	}
 };
 
+// Copies all the code in the element to the clipboard
+
 var buttonCopy = document.querySelectorAll(".oka-code button")
 for (i = 0; i < buttonCopy.length; i++) {
   buttonCopy[i].addEventListener('click', async function() {
     var copyCode = this.previousElementSibling.innerText;
-    console.log(copyCode);
     try {
       await navigator.clipboard.writeText(copyCode);
-      console.log('HTML code gekopieerd naar klembord');
-	  alert('HTML code gekopieerd naar klembord')
+	  alert('HTML code copied to clipboard')
     } catch (error) {
-      console.error('Kopie mislukt: ', error);
+      console.error('Copy failed: ', error);
     } 
   });
 }
+
+// tabs and expands code
 
 function createMenuButton(name) {
     let button = document.createElement('button');
@@ -89,18 +67,43 @@ function createMenuButton(name) {
     return button;
 }
 
-const b = document.getElementsByClassName("pretabs");
-console.log(b);
-const section = document.createElement("section");
+const pretabs = document.getElementsByClassName("oka-tabs");
 
-
-
-for(var i=0; i<b.length; i++) {
-	b[i].prepend(section);
-	const htest = b[i].getElementsByTagName('h3');
+for (var i=0; i<pretabs.length; i++) {
+    const sectiont = document.createElement("section");
+    const section = document.createElement("section");
+    section.className = 'oka-tabs-menu';
+	pretabs[i].prepend(sectiont);
+	pretabs[i].prepend(section);
+	const htest = pretabs[i].querySelectorAll(".oka-tabs>article")
+    var j=0;
 	for(const ftest of htest) {
+        const htester = ftest.firstElementChild;
+        console.log(htester.innerHTML);
+
+
+        ftest.setAttribute ('data-tab-group', i);
+        ftest.setAttribute ('data-tab-id', j);
+        
+
+        const menuButton = section.appendChild(createMenuButton(htester.innerHTML));
+        menuButton.setAttribute ('data-tab-group', i);
+        menuButton.setAttribute ('data-tab-id', j);
+        menuButton.className = 'oka-tabs-button';
+
+        if (j==0) {
+        menuButton.classList.add("oka-tab-active");
+        ftest.classList.add("oka-tab-active");
+        }
+		// console.log(ftest);
 		console.log(ftest.innerHTML);
-		ftest.className = 'remove_element';
+		// ftest.className = 'remove_element';
+
+
+        sectiont.append(ftest);
+
+
+        j++;
 	};
 
 	// console.log(htest);
@@ -108,11 +111,11 @@ for(var i=0; i<b.length; i++) {
 
 }
 
-const remove = document.querySelectorAll('.remove_element');
+// const remove = document.querySelectorAll('.remove_element');
 
-remove.forEach(remove_element => {
-	remove_element.remove();
-});
+// remove.forEach(remove_element => {
+// 	remove_element.remove();
+// });
 
 const labels = document.querySelectorAll(".oka-expands article h3, .oka-tabs section article h3");
 const tabs = document.querySelectorAll(".oka-tabs section button");
@@ -121,7 +124,7 @@ console.log(tabs);
 
 function toggleShow() {
 	const target = this;
-	const item = target.classList.contains("oka-tab-menu")
+	const item = target.classList.contains("oka-tabs-button")
 		? target
 		: target.parentElement;
 	const group = item.dataset.tabGroup;
@@ -145,6 +148,7 @@ function toggleShow() {
 			if (tabItem.dataset.tabId === id) {
 				tabItem.classList.add("oka-tab-active");
 				// tabItem.scrollIntoView();
+                tabItem.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
 			} else {
 				tabItem.classList.remove("oka-tab-active");
 			}
@@ -162,7 +166,14 @@ labels.forEach(function(label) {
 
 
 
+const scrollContainerGroup = document.querySelectorAll(".oka-tabs>section:first-child");
 
+scrollContainerGroup.forEach(scrollContainer => {
+	scrollContainer.addEventListener("wheel", (scrollHor) => {
+		scrollHor.preventDefault();
+		scrollContainer.scrollLeft += scrollHor.deltaY;
+	});
+});
 
 
 
