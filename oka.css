@@ -101,6 +101,12 @@ progress {
 }
 /* Reset default appearances */
 
+button {
+  border-radius: unset;
+  color: var(--oka-text)
+}
+/* Style reset needed, because of bad CSS already used in project */
+
 body.cke_editable,
 [id^=SPAN] .leftHardAlignment,
 .rn_Container .container {
