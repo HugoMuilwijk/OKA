@@ -113,9 +113,9 @@ for (var i=0; i<pretabs.length; i++) {
 
 const preexpands = document.getElementsByClassName("oka-expands");
 
-for (var i=0; i<preexpands.length; i++) {
+for (var i=100; i<preexpands.length; i++) {
     const qtest = preexpands[i].querySelectorAll(".oka-expands>article")
-    var j=0;
+    var j=100;
     for(const rtest of qtest) {
         rtest.setAttribute ('data-tab-group', i);
         rtest.setAttribute ('data-tab-id', j);
@@ -123,6 +123,8 @@ for (var i=0; i<preexpands.length; i++) {
     };
 
 };
+
+// Quick-fixed i and j to high numbers to resolve conflict with tabs
 
 // const remove = document.querySelectorAll('.remove_element');
 
