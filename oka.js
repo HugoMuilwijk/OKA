@@ -109,7 +109,20 @@ for (var i=0; i<pretabs.length; i++) {
 	// console.log(htest);
 	// htest.partentNode.removeChild(htest);
 
-}
+};
+
+const preexpands = document.getElementsByClassName("oka-expands");
+
+for (var i=0; i<preexpands.length; i++) {
+    const qtest = preexpands[i].querySelectorAll(".oka-expands>article")
+    var j=0;
+    for(const rtest of qtest) {
+        rtest.setAttribute ('data-tab-group', i);
+        rtest.setAttribute ('data-tab-id', j);
+        j++;
+    };
+
+};
 
 // const remove = document.querySelectorAll('.remove_element');
 
