@@ -236,9 +236,19 @@ html {
 /* ================================================== */
 /* ================ OVERRULE BAD CSS ================ */
 
+#rn_Summary {
+  padding: unset;
+  font-weight: unset;
+}
+
 h1,
 h2,
 h3 {
+  font-family: unset;
+  font-weight: unset;
+}
+
+.rn_AnswerDetail.rn_AnswerHeader h1 {
   font-family: unset;
   font-weight: unset;
 }
