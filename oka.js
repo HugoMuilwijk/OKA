@@ -1,46 +1,84 @@
+/* ================================================== */
+/* =================== BASE VALUES ================== */
+
 const base_url = window.location.hostname;
-const rn_structure = '.rn_Container';
-const viewport_height = document.documentElement.clientHeight;
-// on viewport update, update this value
+const scope_limit = document.querySelector('[id^=SPAN] .leftHardAlignment, .container .flexbox-answer-details');
+var viewport_height = document.documentElement.clientHeight;
 
-// const scrollLink = document.querySelector("a#scroll-to-element"),
-//       targetElement = document.querySelector("#target-element");
-// 	  console.log(targetElement.offsetHeight);
+function throttle (callback, limit) {
+    var wait = false;
+    return function () {
+        if (!wait) {
+            callback.apply(null, arguments);
+            wait = true;
+            setTimeout(function () {
+                wait = false;
+            }, limit);
+        }
+    }
+}
 
-// scrollLink.addEventListener("click", function(e) {
-//   e.preventDefault();
-//   if (targetElement.offsetHeight > viewport_height) {
-// 	window.scroll({ top: targetElement.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
-//   } else {
-// 	window.scroll({ top: targetElement.offsetTop-(viewport_height/2)+(targetElement.offsetHeight/2), left: 0, behavior: 'smooth' });
-//   };  
-// })
+window.addEventListener('resize', throttle(function(event) {
+    viewport_height = document.documentElement.clientHeight;
+    console.log(viewport_height);
+}, 1000));
+
+/* ================================================== */
+/* ================ DARK MODE SWITCH ================ */
+
+function toggleTheme() {
+    document.documentElement.classList.toggle('dark');
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.shiftKey && e.code === 'KeyM') {
+        e.preventDefault();
+        toggleTheme()
+    }
+});
+
+/* ================================================== */
+/* ===================== A HREF ===================== */
 
 // Splits <a href> into 'internal' and 'external' links
 
-// const a = document.getElementsByTagName('a');
+const a = scope_limit.getElementsByTagName('a');
 
-// for(var i=0; i<a.length; i++) {
-//     const a_href = a[i].getAttribute('href');
-// 	// check if contains base_url or ends with ID number
-// 	// check Oracle output of url for best regex
-//     if (a_href.startsWith('#')||a_href.includes(base_url)) {
-// 		a[i].removeAttribute('target');
-// 		a[i].removeAttribute('rel');
-//     } else {
-// 		a[i].target = "_blank";
-// 		a[i].rel = "nofollow"
-//     }
-// }
+for(var i=0; i<a.length; i++) {
+    const a_href = a[i].getAttribute('href');
+	// check if contains base_url or ends with ID number
+    // include !https:// option
+    if (a_href.startsWith('#')||a_href.includes(base_url)) {
+		// a[i].removeAttribute('target');
+		// a[i].removeAttribute('rel');
+    } else {
+		// a[i].target = "_blank";
+		// a[i].rel = "nofollow"
+    }
+}
 
-// Aligns numeric content to the right and forces mono font
+document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        if(!!document.querySelector(this.getAttribute('href'))){
+            console.log('ja');
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth', block: "center"
+            });
+        }
+    });
+});
+
+/* ================================================== */
+/* ====================== TABLE ===================== */
+
+// Forces mono font on cells with only numbers
 
 const td = document.getElementsByTagName('td');
 
 for(var i=0; i<td.length; i++) {
-	// add euro symbol
 	if (td[i].innerHTML.match(new RegExp("^-?[0-9][0-9,\.\-]+$"))) {
-		td[i].classList.add('right');
+		td[i].classList.add('numeric');
 	}
 };
 
@@ -48,15 +86,19 @@ for(var i=0; i<td.length; i++) {
 
 var buttonCopy = document.querySelectorAll(".oka-code button")
 for (i = 0; i < buttonCopy.length; i++) {
-  buttonCopy[i].addEventListener('click', async function() {
-    var copyCode = this.previousElementSibling.innerText;
-    try {
-      await navigator.clipboard.writeText(copyCode);
-	  alert('HTML code copied to clipboard')
-    } catch (error) {
-      console.error('Copy failed: ', error);
-    } 
-  });
+    buttonCopy[i].addEventListener('click', async function() {
+        var copyCode = this.previousElementSibling.innerText;
+        try {
+            await navigator.clipboard.writeText(copyCode);
+            if (navigator.language == 'nl') {
+                alert('HTML code gekopieerd naar klembord')
+            } else {
+                alert('HTML code copied to clipboard')
+            };
+        } catch (error) {
+            console.error('Copy failed: ', error);
+        }
+    });
 }
 
 // tabs and expands code
@@ -79,12 +121,12 @@ for (var i=0; i<pretabs.length; i++) {
     var j=0;
 	for(const ftest of htest) {
         const htester = ftest.firstElementChild;
-        console.log(htester.innerHTML);
+        // console.log(htester.innerHTML);
 
 
         ftest.setAttribute ('data-tab-group', i);
         ftest.setAttribute ('data-tab-id', j);
-        
+
 
         const menuButton = section.appendChild(createMenuButton(htester.innerHTML));
         menuButton.setAttribute ('data-tab-group', i);
@@ -95,9 +137,7 @@ for (var i=0; i<pretabs.length; i++) {
         menuButton.classList.add("oka-tab-active");
         ftest.classList.add("oka-tab-active");
         }
-		// console.log(ftest);
-		console.log(ftest.innerHTML);
-		// ftest.className = 'remove_element';
+
 
 
         sectiont.append(ftest);
@@ -106,8 +146,7 @@ for (var i=0; i<pretabs.length; i++) {
         j++;
 	};
 
-	// console.log(htest);
-	// htest.partentNode.removeChild(htest);
+
 
 };
 
@@ -126,84 +165,139 @@ for (var i=0; i<preexpands.length; i++) {
 
 // Quick-fixed i and j to high numbers to resolve conflict with tabs
 
-// const remove = document.querySelectorAll('.remove_element');
+const labels = document.querySelectorAll(".oka-expands article h3");
 
-// remove.forEach(remove_element => {
-// 	remove_element.remove();
-// });
 
-const labels = document.querySelectorAll(".oka-expands article h3, .oka-tabs section article h3");
+// const labels = document.querySelectorAll(".oka-expands article h3");
 const tabs = document.querySelectorAll(".oka-tabs section button");
 
-console.log(tabs);
+
+const tabslabels = document.querySelectorAll(".oka-tabs section article h3");
+
+// console.log(tabs);
 
 function toggleShow() {
 	const target = this;
-	const item = target.classList.contains("oka-tabs-button")
-		? target
-		: target.parentElement;
+	const item = target.parentElement;
 	const group = item.dataset.tabGroup;
 	const id = item.dataset.tabId;
-
-	tabs.forEach(function(tab) {
-		if (tab.dataset.tabGroup === group) {
-			if (tab.dataset.tabId === id) {
-				tab.classList.add("oka-tab-active");
-				tab.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
-			} else {
-				tab.classList.remove("oka-tab-active");
-			}
-		}
-	});
 
 	labels.forEach(function(label) {
 		const tabItem = label.parentElement;
 
 		if (tabItem.dataset.tabGroup === group) {
 			if (tabItem.dataset.tabId === id) {
-				tabItem.classList.add("oka-tab-active");
-				// tabItem.scrollIntoView();
-                tabItem.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+                if (tabItem.classList == "oka-tab-active") {
+                    tabItem.classList.remove("oka-tab-active");
+                } else {
+                    tabItem.classList.add("oka-tab-active");
+                    window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
+                }
+                // window.scroll({ top: tabItemscroll.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
 			} else {
-				tabItem.classList.remove("oka-tab-active");
+				// tabItem.classList.remove("oka-tab-active");
 			}
 		}
 	});
 }
 
-tabs.forEach(function(tab) {
-	tab.addEventListener("click", toggleShow);
-});
+function toggleShowTab() {
+	const target = this;
+	const item = target.classList.contains("oka-tabs-button")
+	    ? target
+		: target.parentElement;
+	const group = item.dataset.tabGroup;
+	const id = item.dataset.tabId;
+
+    labels.forEach(function(label) {
+		const tabItem = label.parentElement;
+
+		if (tabItem.dataset.tabGroup === group) {
+			if (tabItem.dataset.tabId === id) {
+                if (tabItem.classList == "oka-tab-active") {
+                    tabItem.classList.remove("oka-tab-active");
+                } else {
+                    tabItem.classList.add("oka-tab-active");
+                    window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
+                }
+                // window.scroll({ top: tabItemscroll.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
+			} else {
+				// tabItem.classList.remove("oka-tab-active");
+			}
+		}
+	});
+
+	tabslabels.forEach(function(label) {
+		const tabItem = label.parentElement;
+
+		if (tabItem.dataset.tabGroup === group) {
+			if (tabItem.dataset.tabId === id) {
+               
+                    tabItem.classList.add("oka-tab-active");
+                    window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
+                
+                // window.scroll({ top: tabItemscroll.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
+			} else {
+				tabItem.classList.remove("oka-tab-active");
+			}
+		}
+	});
+
+    tabs.forEach(function(tab) {
+		if (tab.dataset.tabGroup === group) {
+			if (tab.dataset.tabId === id) {
+				tab.classList.add("oka-tab-active");
+                const tabMenu = tab.parentElement;
+                const tabWidth = tab.clientWidth;
+                const tabPos = tab.offsetLeft;
+                // console.log(tabMenu.scrollWidth);
+                // console.log(tabMenu.clientWidth);
+                // console.log(tabPos);
+                // console.log(tabWidth);
+                // console.log(tabMenu.parentElement.offsetTop-(viewport_height/8));
+                tabMenu.scroll({ left: tabPos+tabWidth/2-tabMenu.clientWidth/2, behavior: 'smooth' });
+                window.scroll({ top: tabMenu.parentElement.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
+			} else {
+				tab.classList.remove("oka-tab-active");
+			}
+		}
+	});
+}
 
 labels.forEach(function(label) {
-	label.addEventListener("click", toggleShow);
+	label.addEventListener("click", toggleShowTab);
+    console.log('label each')
 });
 
+tabs.forEach(function(tab) {
+	tab.addEventListener("click", toggleShowTab);
+    console.log('tab each')
+});
 
+tabslabels.forEach(function(tablabel) {
+	tablabel.addEventListener("click", toggleShowTab);
+    console.log('tab each')
+});
 
 const scrollContainerGroup = document.querySelectorAll(".oka-tabs>section:first-child");
 
 scrollContainerGroup.forEach(scrollContainer => {
-	scrollContainer.addEventListener("wheel", (scrollHor) => {
-		scrollHor.preventDefault();
-		scrollContainer.scrollLeft += scrollHor.deltaY;
-	});
+    if (scrollContainer.scrollWidth > scrollContainer.clientWidth) {
+        scrollContainer.addEventListener("wheel", (scrollHor) => {
+            scrollHor.preventDefault();
+            scrollContainer.scrollLeft += scrollHor.deltaY;
+        });
+    }
 });
 
-
-
-/* =====================================================================
- * Lightbox.js
- * Version: 0.0.6
- * Author: Victor Diego <victordieggo@gmail.com>
- * License: MIT
- * ================================================================== */
+/* ================================================== */
+/* ==================== LIGHTBOX ==================== */
 
 (function () {
 
     'use strict';
 
-    var animation, body, btnClose, btnNav, currentItem, container, content, wrapper, trigger, currentTrigger;
+    var animation, body, btnClose, btnNav, currentItem, container, content, contentTitle, wrapper, trigger, currentTrigger;
 
     body = document.body;
 
@@ -217,7 +311,7 @@ scrollContainerGroup.forEach(scrollContainer => {
     };
 
     function toggleScroll() {
-      body.classList.toggle('remove-scroll');
+        document.documentElement.classList.toggle('remove-scroll');
     }
 
     function sortContent(content) {
@@ -228,13 +322,15 @@ scrollContainerGroup.forEach(scrollContainer => {
             image.className = 'lightbox-image';
             image.src = src;
             image.alt = content.getAttribute('alt');
+            console.log(image.alt);
+            console.log('tekst');
             // imageAlt = document.createElement('div');
             // imageAlt.innerHTML = image.alt;
             const p = document.createElement('p');
-            p.innerText = 'This is JavaScript DOM after() method demo';
+            p.innerText = image.alt;
             // image.parentElement =+ 'test';
-            image.after(p);
-            console.log(p);
+            image.prepend(p);
+            // console.log(p);
 
             
             return image;
@@ -278,7 +374,8 @@ scrollContainerGroup.forEach(scrollContainer => {
         var itens = {
                 next: element.parentElement.nextElementSibling,
                 previous: element.parentElement.previousElementSibling,
-                up: element.parentElement.parentElement.previousElementSibling
+                up: element.parentElement.parentElement.previousElementSibling,
+                down: element.parentElement.parentElement.nextElementSibling
             },
             key;
         for (key in itens) {
@@ -295,16 +392,21 @@ scrollContainerGroup.forEach(scrollContainer => {
         currentItem = element;
         element.classList.add('current-lightbox-item');
 
-        btnClose = document.createElement('button');
-        btnClose.className = 'lightbox-btn lightbox-btn-close';
+        contentTitle = document.createElement('div');
+        contentTitle.className = 'lightbox-title';
+        // contentTitle.appendChild(sortContent(content));
 
         content = document.createElement('div');
         content.className = 'lightbox-content';
         content.appendChild(sortContent(element));
 
+        btnClose = document.createElement('button');
+        btnClose.className = 'lightbox-btn lightbox-btn-close';
+
         wrapper = content.cloneNode(false);
         wrapper.className = 'lightbox-wrapper';
         wrapper.style.animation = [animation.scaleIn, animation.fadeIn];
+        wrapper.appendChild(contentTitle);
         wrapper.appendChild(content);
         wrapper.appendChild(btnClose);
 
@@ -317,7 +419,7 @@ scrollContainerGroup.forEach(scrollContainer => {
         if (element.getAttribute('data-lightbox') === 'gallery') {
             container.classList.add('lightbox-gallery');
             var key;
-            btnNav = {next: '', previous: '', up: ''};
+            btnNav = {next: '', previous: '', up: '', down: ''};
             for (key in btnNav) {
                 if (btnNav.hasOwnProperty(key)) {
                     btnNav[key] = btnClose.cloneNode(false);
@@ -393,6 +495,9 @@ scrollContainerGroup.forEach(scrollContainer => {
                     }
                     if ((target === btnNav.up && type === 'click') || key === 38) {
                         galleryNavigation('up');
+                    }
+                    if ((target === btnNav.down && type === 'click') || key === 40) {
+                        galleryNavigation('down');
                     }
                 }
             }
