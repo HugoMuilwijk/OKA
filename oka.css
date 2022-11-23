@@ -134,13 +134,13 @@ progress {
 
 html>::-webkit-scrollbar {
   outline:1px solid var(--oka-border);
-  width: 2rem;
+  width: 1.5rem;
 }
 
 html>::-webkit-scrollbar-button:single-button:vertical {
   background-position: 50% 50%;
   background-size: cover;
-  height: 2rem;
+  height: 1.5rem;
   outline: 1px solid var(--oka-border);
 }
 
@@ -268,6 +268,13 @@ button:focus {
   width: unset;
 }
 
+.rn_SchemaAttributeValue,
+.rn_SchemaAttributeValue p {
+    font-family: unset !important;
+    font-size: unset !important;
+    color: unset !important;
+}
+
 /* ================================================== */
 /* ==================== BASE CSS ==================== */
 
@@ -280,18 +287,49 @@ Below selectors are needed for standard elements
 
 html {
   background: var(--oka-background);
-  -webkit-margin-start: 2rem;
+  /* -webkit-margin-start: 1.5rem; */
   overflow: hidden auto;
-  /* scroll-behavior: smooth; */
 }
 /* Needed for the scrollbar fix to work and center content */
+
+.rn_Container {
+  -webkit-margin-start: 1.5rem;
+}
 
 .container {
   padding: 0;
   min-width: 540px;
 }
 
-[id^=SPAN] .leftHardAlignment,
+[id^=SPAN] .leftHardAlignment {
+  background: var(--oka-content);
+  border: 1px solid var(--oka-border);
+  box-shadow: var(--oka-shadow);
+  color: var(--oka-text);
+  flex-direction: column;
+  font-family: var(--oka-font-sans);
+  font-size: 1rem;
+  font-variation-settings: 'wght' 300;
+  line-height: 1.5;
+  margin: .25rem 1rem 0 0;
+  padding: 2rem;
+}
+
+.container .flexbox-answer-details {
+  background: var(--oka-content);
+  /* border: 1px solid var(--oka-border); */
+  /* box-shadow: var(--oka-shadow); */
+  color: var(--oka-text);
+  flex-direction: column;
+  font-family: var(--oka-font-sans);
+  font-size: 1rem;
+  font-variation-settings: 'wght' 300;
+  line-height: 1.5;
+  /* margin: 4rem auto; */
+  padding: 2rem 1rem;
+}
+
+/* [id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details {
   background: var(--oka-content);
   border: 1px solid var(--oka-border);
@@ -303,9 +341,8 @@ html {
   font-variation-settings: 'wght' 300;
   line-height: 1.5;
   margin: 4rem auto;
-  /* overflow: hidden auto; */
   padding: 2rem;
-}
+} */
 
 /* ================================================== */
 /* ===================== IMAGES ===================== */
@@ -316,10 +353,11 @@ html {
   border: 2px solid var(--oka-border);
   cursor: pointer;
   font-size: .75rem;
-  height: unset; /* !important? */
+  height: unset !important;
   text-indent: .25rem;
-  width: 100%;
+  width: 100% !important;
 }
+/* images need !important on width and height to overrule inline styling */
 
 [id^=SPAN] .leftHardAlignment img:hover,
 .container .flexbox-answer-details img:hover {
@@ -1147,8 +1185,9 @@ html {
 
 [id^=SPAN] .leftHardAlignment .oka-column article img,
 .container .flexbox-answer-details .oka-column article img {
-  width: 100%;
+  width: 100% !important;
 }
+/* images need !important on width and height to overrule inline styling */
 
 [id^=SPAN] .leftHardAlignment .oka-column article p,
 .container .flexbox-answer-details .oka-column article p {
@@ -1202,6 +1241,8 @@ html {
 .container .flexbox-answer-details .oka-card>article>img {
   /* margin-left: -1px; */
   /* margin-top: -1rem; */
+  width: unset !important;
+  height: unset !important;
   border-radius: 0;
   border: 0;
   max-height: 15rem;
@@ -1212,6 +1253,7 @@ html {
   outline: 0;
   padding: 0;
 }
+/* images need !important on width and height to overrule inline styling */
 
 [id^=SPAN] .leftHardAlignment .oka-card>article>img:hover,
 .container .flexbox-answer-details .oka-card>article>img:hover {
@@ -1340,18 +1382,20 @@ html {
 
 [id^=SPAN] .leftHardAlignment .oka-steps img,
 .container .flexbox-answer-details .oka-steps img {
-  height: auto;
+  height: auto !important;
   max-height: 128rem;
   object-fit: cover;
   object-position: 50% 50%;
   order: 99;
-  width: calc(50% - .75rem);
+  width: calc(50% - .75rem) !important;
 }
+/* images need !important on width and height to overrule inline styling */
 
 [id^=SPAN] .leftHardAlignment .oka-steps .oka-steps img,
 .container .flexbox-answer-details .oka-steps .oka-steps img {
-  width: calc(50% + .25rem);
+  width: calc(50% + .25rem) !important;
 }
+/* images need !important on width and height to overrule inline styling */
 
 /* .container .oka-steps img.oka-small {
   height: auto;
@@ -1744,8 +1788,9 @@ html {
   .container .flexbox-answer-details .oka-steps img,
   .container .flexbox-answer-details .oka-steps .oka-steps img {
     margin-top: 1rem;
-    width: 100%;
+    width: 100% !important;
   }
+  /* images need !important on width and height to overrule inline styling */
 
   [id^=SPAN] .leftHardAlignment .oka-tabs>section:first-child,
   .container .flexbox-answer-details .oka-tabs>section:first-child {
