@@ -251,6 +251,11 @@ a {
   text-decoration: unset;
 }
 
+b,
+strong {
+  font-weight: unset;
+}
+
 button {
   border-radius: unset;
   color: unset;
@@ -269,10 +274,16 @@ button:focus {
 }
 
 .rn_SchemaAttributeValue,
-.rn_SchemaAttributeValue p {
+.rn_SchemaAttributeValue p,
+.rn_SchemaAttributeValue span {
     font-family: unset !important;
     font-size: unset !important;
     color: unset !important;
+}
+
+.rn_SchemaAttributeValue ul {
+  margin: unset;
+  padding: unset;
 }
 
 /* ================================================== */
@@ -480,7 +491,7 @@ html {
 [id^=SPAN] .leftHardAlignment ol li::marker,
 .container .flexbox-answer-details ol li::marker {
   color: var(--oka-primary);
-  content: counters(list, ".", decimal)' ';
+  content: counters(list, ".", decimal)'\00a0\00a0';
   font-variation-settings: 'wght' 600;
 }
 
@@ -509,7 +520,7 @@ html {
 [id^=SPAN] .leftHardAlignment ul li::marker,
 .container .flexbox-answer-details ul li::marker {
   color: var(--oka-primary);
-  content: '\F0765\ ';
+  content: '\F0765\00a0\00a0';
   font-family: var(--oka-font-icon);
   font-size: .75rem;
 }
@@ -521,7 +532,7 @@ html {
 
 [id^=SPAN] .leftHardAlignment ul ul li::marker,
 .container .flexbox-answer-details ul ul li::marker {
-  content: '\F0766\ ';
+  content: '\F0766\00a0\00a0';
 }
 
 /* ===================== TABLE ====================== */
@@ -738,7 +749,7 @@ html {
 
 .remove-scroll {
   overflow: hidden;
-  -webkit-margin-end: 2rem;
+  -webkit-margin-end: 1.5rem;
 }
 /* -webkit-margin-end added to prevent page 'jumping' on webkit browsers */
 
@@ -1715,10 +1726,6 @@ html {
 }
 
 @media only screen and (max-width: 992px) {
-  html {
-    -webkit-margin-start: 1.5rem;
-  }
-
   .remove-scroll {
     -webkit-margin-end: 1.5rem;
   }
@@ -1797,8 +1804,8 @@ html {
     display: none;
   }
 
-  [id^=SPAN] .leftHardAlignment .oka-tabs article,
-  .container .flexbox-answer-details .oka-tabs article {
+  [id^=SPAN] .leftHardAlignment .oka-tabs>section>article,
+  .container .flexbox-answer-details .oka-tabs>section>article {
     border-bottom: 2px solid var(--oka-border);
     display: block;
     min-height: 3rem;
@@ -1835,8 +1842,15 @@ html {
   .container .flexbox-answer-details .oka-tabs article>div {
     height: 0;
     padding: 0;
-    transition: opacity 1s ease;
+    animation-direction: reverse;
+    animation-duration: 300ms;
+    animation-name: oka-opacity;
   }
+
+
+
+
+
 
   [id^=SPAN] .leftHardAlignment .oka-tabs article>h3:after,
   .container .flexbox-answer-details .oka-tabs article>h3:after {
