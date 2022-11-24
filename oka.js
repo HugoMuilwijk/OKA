@@ -105,6 +105,8 @@ for (i = 0; i < buttonCopy.length; i++) {
 
 function createMenuButton(name) {
     let button = document.createElement('button');
+    button.type = 'button';
+    //add type button
     button.textContent = name;
     return button;
 }
@@ -244,7 +246,6 @@ function toggleShowTab() {
 	});
 
     tabs.forEach(function(tab) {
-        tab.preventDefault();
 		if (tab.dataset.tabGroup === group) {
 			if (tab.dataset.tabId === id) {
 				tab.classList.add("oka-tab-active");
