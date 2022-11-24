@@ -605,6 +605,23 @@ html {
   background: var(--oka-content-alt);
 }
 
+[id^=SPAN] .leftHardAlignment table.no-style,
+[id^=SPAN] .leftHardAlignment table.no-style tr th,
+[id^=SPAN] .leftHardAlignment table.no-style td,
+.container .flexbox-answer-details table.no-style,
+.container .flexbox-answer-details table.no-style tr th,
+.container .flexbox-answer-details table.no-style td {
+  border-color: var(--oka-content);
+  position: relative;
+}
+
+[id^=SPAN] .leftHardAlignment table.no-stripe>thead+tbody tr:nth-child(odd),
+[id^=SPAN] .leftHardAlignment table.no-style>thead+tbody tr:nth-child(odd),
+.container .flexbox-answer-details table.no-stripe>thead+tbody tr:nth-child(odd),
+.container .flexbox-answer-details table.no-style>thead+tbody tr:nth-child(odd) {
+  background: var(--oka-content);
+}
+
 /* ====================== LINK ====================== */
 
 [id^=SPAN] .leftHardAlignment a,
@@ -735,7 +752,7 @@ html {
 .container .flexbox-answer-details kbd + kbd::before {
   content: '+ ';
   display: inline-block;
-  transform: translateX(-1rem);
+  transform: translateX(-1.05rem);
   width: 0;
 }
 
@@ -952,6 +969,11 @@ html {
   z-index: 0;
 }
 
+[id^=SPAN] .leftHardAlignment section .oka-code,
+.container .flexbox-answer-details section .oka-code {
+  width: 100%;
+}
+
 [id^=SPAN] .leftHardAlignment .oka-code button,
 .container .flexbox-answer-details .oka-code button {
   background-color: transparent;
@@ -1068,6 +1090,8 @@ html {
   border-radius: .5rem;
   border: 2px solid var(--oka-error);
   color: var(--oka-text);
+  display: inline-block;
+  line-height: 1;
   padding: .125rem .25rem;
   user-select: all;
 }

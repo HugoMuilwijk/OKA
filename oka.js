@@ -169,7 +169,7 @@ const labels = document.querySelectorAll(".oka-expands article h3");
 
 
 // const labels = document.querySelectorAll(".oka-expands article h3");
-const tabs = document.querySelectorAll(".oka-tabs section button");
+const tabs = document.querySelectorAll(".oka-tabs>section:first-child>button");
 
 
 const tabslabels = document.querySelectorAll(".oka-tabs section article h3");
@@ -244,6 +244,7 @@ function toggleShowTab() {
 	});
 
     tabs.forEach(function(tab) {
+        tab.preventDefault();
 		if (tab.dataset.tabGroup === group) {
 			if (tab.dataset.tabId === id) {
 				tab.classList.add("oka-tab-active");
