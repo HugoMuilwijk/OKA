@@ -311,9 +311,16 @@ button:focus {
     font-size: unset !important;
 }
 
-:is([id^=SPAN] .leftHardAlignment,
+/* :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 :is(.rn_SchemaAttributeValue ol,.rn_SchemaAttributeValue ul) {
+  margin: unset;
+  padding: unset;
+} */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(ol,ul) {
   margin: unset;
   padding: unset;
 }
@@ -517,8 +524,8 @@ section dl {
 ol {
   counter-reset: list;
   list-style: inside;
-  padding-left: 1.25rem;
-  text-indent: -1.25rem;
+  padding-left: 1rem;
+  text-indent: -1rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -585,20 +592,20 @@ ol li {
 .container .flexbox-answer-details)
 ol li::marker {
   color: var(--oka-primary);
-  content: counters(list, '.', decimal)'\00a0\00a0';
+  content: counters(list, '.', decimal)'\2009\2009';
   font-variation-settings: 'wght' 600;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details) ol ol {
-  padding-left: 2rem;
-  text-indent: -2rem;
+  padding-left: 1.8rem;
+  text-indent: -1.8rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details) ol ol ol {
-  padding-left: 2.75rem;
-  text-indent: -2.75rem;
+  padding-left: 2.6rem;
+  text-indent: -2.6rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
