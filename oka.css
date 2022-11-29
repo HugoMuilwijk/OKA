@@ -1643,10 +1643,18 @@ section .oka-column {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-.oka-steps>article>:is(div,span) :is(h3,p,ul,table) {
+.oka-steps>article>:is(div,span) :is(h3,p,ul) {
   width: 100%;
   margin: 0;
 }
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span) table {
+  width: 100% !important;
+  margin: 0;
+}
+/* tables need !important on width to overrule inline styling */
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
@@ -2064,7 +2072,7 @@ section .oka-column {
   html>::-webkit-scrollbar-button:single-button:vertical {
     height:1.5rem;
   }
-  
+
   :is([id^=SPAN] .leftHardAlignment,
   .container .flexbox-answer-details)
   :is(h1,h2) {
