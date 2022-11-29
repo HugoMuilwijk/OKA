@@ -235,41 +235,53 @@ html {
 /* ================================================== */
 /* ================ OVERRULE BAD CSS ================ */
 
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 #rn_Summary {
   font-weight: unset;
   padding: unset;
 }
 
-h1,
-h2,
-h3 {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(h1,h2,h3) {
   font-family: unset;
   font-weight: unset;
 }
 
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 h3 {
   color: unset !important;
 }
 
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 .rn_AnswerDetail.rn_AnswerHeader h1 {
   font-family: unset;
   font-weight: unset;
 }
 
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 ol {
   list-style-type: decimal;
 }
 
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 a {
   text-decoration: unset;
 }
 
-b,
-dt,
-strong {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(b,dt,strong) {
   font-weight: unset;
 }
 
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 button {
   border-radius: unset;
   color: unset;
@@ -279,24 +291,29 @@ button {
   transition: unset;
 }
 
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 button:focus {
   outline: unset;
 }
 
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 .container {
   width: unset;
 }
 
-.rn_SchemaAttributeValue,
-.rn_SchemaAttributeValue p,
-.rn_SchemaAttributeValue span {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(.rn_SchemaAttributeValue,.rn_SchemaAttributeValue p,.rn_SchemaAttributeValue span ) {
     color: unset !important;
     font-family: unset !important;
     font-size: unset !important;
 }
 
-.rn_SchemaAttributeValue ol,
-.rn_SchemaAttributeValue ul {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(.rn_SchemaAttributeValue ol,.rn_SchemaAttributeValue ul) {
   margin: unset;
   padding: unset;
 }
@@ -383,7 +400,6 @@ html {
   margin-bottom: 2rem;
   margin-top: 0;
 }
-
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details) h1 {
@@ -2048,9 +2064,10 @@ section .oka-column {
   html>::-webkit-scrollbar-button:single-button:vertical {
     height:1.5rem;
   }
-
+  
   :is([id^=SPAN] .leftHardAlignment,
-  .container .flexbox-answer-details) h2 {
+  .container .flexbox-answer-details)
+  :is(h1,h2) {
     width: 100%;
   }
 
