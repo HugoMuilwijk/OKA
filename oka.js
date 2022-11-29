@@ -105,7 +105,8 @@ function createMenuButton(name) {
     let button = document.createElement('button');
     button.type = 'button';
     //add type button
-    button.textContent = name;
+    cleanText = name.replace(/<\/?[^>]+(>|$)/g, "");
+    button.textContent = cleanText;
     return button;
 }
 
