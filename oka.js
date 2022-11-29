@@ -24,18 +24,16 @@ window.addEventListener('resize', throttle(function(event) {
 }, 1000));
 
 /* ================================================== */
-/* ================ DARK MODE SWITCH ================ */
+/* ============= CLEAN UP HTML COMMENTS ============= */
 
-function toggleTheme() {
-    document.documentElement.classList.toggle('dark');
-}
 
-document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && e.shiftKey && e.code === 'KeyM') {
-        e.preventDefault();
-        toggleTheme()
-    }
-});
+
+/* ================================================== */
+/* ================= DISABLE A HREF ================= */
+
+disable_href = function() {
+    return false;
+};
 
 /* ================================================== */
 /* ===================== A HREF ===================== */
@@ -49,11 +47,11 @@ for(var i=0; i<a.length; i++) {
 	// check if contains base_url or ends with ID number
     // include !https:// option
     if (a_href.startsWith('#')||a_href.includes(base_url)) {
-		// a[i].removeAttribute('target');
-		// a[i].removeAttribute('rel');
+		a[i].removeAttribute('target');
+		a[i].removeAttribute('rel');
     } else {
-		// a[i].target = "_blank";
-		// a[i].rel = "nofollow"
+		a[i].target = "_blank";
+		a[i].rel = "nofollow"
     }
 }
 
@@ -167,14 +165,14 @@ for (var i=0; i<preexpands.length; i++) {
 
 // Quick-fixed i and j to high numbers to resolve conflict with tabs
 
-const labels = document.querySelectorAll(".oka-expands article h3");
+const labels = document.querySelectorAll(".oka-expands>article>h3");
 
 
 // const labels = document.querySelectorAll(".oka-expands article h3");
 const tabs = document.querySelectorAll(".oka-tabs>section:first-child>button");
 
 
-const tabslabels = document.querySelectorAll(".oka-tabs section article h3");
+const tabslabels = document.querySelectorAll(".oka-tabs>section:nth-child(2)>article>h3");
 
 // console.log(tabs);
 
@@ -193,7 +191,7 @@ function toggleShow() {
                     tabItem.classList.remove("oka-tab-active");
                 } else {
                     tabItem.classList.add("oka-tab-active");
-                    window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
+                    // window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
                 }
                 // window.scroll({ top: tabItemscroll.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
 			} else {
@@ -220,7 +218,7 @@ function toggleShowTab() {
                     tabItem.classList.remove("oka-tab-active");
                 } else {
                     tabItem.classList.add("oka-tab-active");
-                    window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
+                    // window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
                 }
                 // window.scroll({ top: tabItemscroll.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
 			} else {
@@ -236,7 +234,7 @@ function toggleShowTab() {
 			if (tabItem.dataset.tabId === id) {
                
                     tabItem.classList.add("oka-tab-active");
-                    window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
+                    // window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
                 
                 // window.scroll({ top: tabItemscroll.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
 			} else {
@@ -258,7 +256,7 @@ function toggleShowTab() {
                 // console.log(tabWidth);
                 // console.log(tabMenu.parentElement.offsetTop-(viewport_height/8));
                 tabMenu.scroll({ left: tabPos+tabWidth/2-tabMenu.clientWidth/2, behavior: 'smooth' });
-                window.scroll({ top: tabMenu.parentElement.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
+                // window.scroll({ top: tabMenu.parentElement.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
 			} else {
 				tab.classList.remove("oka-tab-active");
 			}

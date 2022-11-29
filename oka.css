@@ -52,15 +52,18 @@ red-dark: #e52e2e;
   --oka-border: #d3d3d3;        /* grey-snow */
   --oka-content: #ffffff;       /* white */
   --oka-content-alt: #f3f3f3;   /* grey-subtle */
-  --oka-pre: #f3f3f3;           /* grey-snow */
 
-  --oka-text: #232323;          /* grey-coal */
+  --oka-pre: #F9F9F9;           /* between white and grey-subtle */
+
+  --oka-text: #333333;          /* grey-coal */
   --oka-text-alt: #939393;      /* grey-medium */
 
   --oka-marked: #deff00;        /* lime */
   --oka-disabled: #d3d3d3;      /* grey-smoke */
   --oka-warning: #ff9900;       /* orange */
+  --oka-warning-alt: #ee7700;   /* orange-dark */
   --oka-error: #ff3333;         /* red */
+  --oka-white: #ffffff;         /* white */
 
   --oka-primary: #00c300;       /* green */
   --oka-primary-alt: #009900;   /* green-dark */
@@ -90,18 +93,23 @@ red-dark: #e52e2e;
   --oka-content: #232323;       /* grey-coal */
   --oka-content-alt: #333333;   /* grey-dark */
 
-  --oka-pre: #333333;           /* grey-dark */
+  --oka-pre: #1B1B1B;           /* between grey-coal and grey-asphalt */
 
-  --oka-text: #b3b3b3;          /* grey-silver */
-  --oka-text-alt: #939393;      /* grey-medium */
+  --oka-text: #d3d3d3;          /* grey-silver */
+  --oka-text-alt: #737373;      /* grey-medium */
 
   --oka-error: #e52e2e;         /* red-dark */
   --oka-warning: #ee7700;       /* orange-dark */
+  --oka-warning-alt: #ff9900;   /* orange */
 
   --oka-primary: #009900;       /* green-dark */
   --oka-primary-alt: #00c300;   /* green */
 
   --oka-shadow: 0 0 .5rem rgba(0, 0, 0, .75);
+}
+
+:root.dark img {
+  filter: brightness(.95);
 }
 
 /* ================================================== */
@@ -117,15 +125,6 @@ red-dark: #e52e2e;
 /* Needed to make use of variable font thickness */
 
 /* Limit to frontend? */
-
-textarea,
-select,
-input,
-progress {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
 
 /* ================================================== */
 /* ============= FANCY WEBKIT SCROLLBAR ============= */
@@ -237,8 +236,8 @@ html {
 /* ================ OVERRULE BAD CSS ================ */
 
 #rn_Summary {
-  padding: unset;
   font-weight: unset;
+  padding: unset;
 }
 
 h1,
@@ -246,6 +245,10 @@ h2,
 h3 {
   font-family: unset;
   font-weight: unset;
+}
+
+h3 {
+  color: unset !important;
 }
 
 .rn_AnswerDetail.rn_AnswerHeader h1 {
@@ -262,6 +265,7 @@ a {
 }
 
 b,
+dt,
 strong {
   font-weight: unset;
 }
@@ -271,8 +275,8 @@ button {
   color: unset;
   font-size: unset;
   line-height: normal;
-  transition: unset;
   margin: unset;
+  transition: unset;
 }
 
 button:focus {
@@ -286,11 +290,12 @@ button:focus {
 .rn_SchemaAttributeValue,
 .rn_SchemaAttributeValue p,
 .rn_SchemaAttributeValue span {
+    color: unset !important;
     font-family: unset !important;
     font-size: unset !important;
-    color: unset !important;
 }
 
+.rn_SchemaAttributeValue ol,
 .rn_SchemaAttributeValue ul {
   margin: unset;
   padding: unset;
@@ -304,6 +309,8 @@ Below selectors are needed for standard elements
 
 [id^=SPAN] .leftHardAlignment       SAVED preview
 .container .flexbox-answer-details  FRONT-END
+
+.rn_Container .rn_AnswerView        ALTERNATE FRONT-END?
 */
 
 html {
@@ -322,54 +329,34 @@ html {
   min-width: 540px;
 }
 
-[id^=SPAN] .leftHardAlignment {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) {
   background: var(--oka-content);
-  border: 1px solid var(--oka-border);
-  box-shadow: var(--oka-shadow);
   color: var(--oka-text);
   flex-direction: column;
   font-family: var(--oka-font-sans);
   font-size: 1rem;
   font-variation-settings: 'wght' 300;
   line-height: 1.5;
+  padding: 2rem 1rem;
+}
+
+[id^=SPAN] .leftHardAlignment {
+  border: 1px solid var(--oka-border);
+  box-shadow: var(--oka-shadow);
   margin: .25rem 1rem 0 0;
   padding: 2rem;
 }
 
-.container .flexbox-answer-details {
-  background: var(--oka-content);
-  /* border: 1px solid var(--oka-border); */
-  /* box-shadow: var(--oka-shadow); */
-  color: var(--oka-text);
-  flex-direction: column;
-  font-family: var(--oka-font-sans);
-  font-size: 1rem;
-  font-variation-settings: 'wght' 300;
+/* .container .flexbox-answer-details {
   line-height: 1.5;
-  /* margin: 4rem auto; */
-  padding: 2rem 1rem;
-}
-
-/* [id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details {
-  background: var(--oka-content);
-  border: 1px solid var(--oka-border);
-  box-shadow: var(--oka-shadow);
-  color: var(--oka-text);
-  flex-direction: column;
-  font-family: var(--oka-font-sans);
-  font-size: 1rem;
-  font-variation-settings: 'wght' 300;
-  line-height: 1.5;
-  margin: 4rem auto;
-  padding: 2rem;
 } */
 
 /* ================================================== */
 /* ===================== IMAGES ===================== */
 
-[id^=SPAN] .leftHardAlignment img,
-.container .flexbox-answer-details img {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) img {
   border-radius: .5rem;
   border: 2px solid var(--oka-border);
   cursor: pointer;
@@ -380,8 +367,8 @@ html {
 }
 /* images need !important on width and height to overrule inline styling */
 
-[id^=SPAN] .leftHardAlignment img:hover,
-.container .flexbox-answer-details img:hover {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) img:hover {
   outline: 4px solid var(--oka-secondary);
   outline-offset: -4px;
 }
@@ -391,42 +378,38 @@ html {
 
 /* ==================== HEADERS ===================== */
 
-.rn_AnswerTitle h1,
-[id^=SPAN] .leftHardAlignment h1,
-[id^=SPAN] .leftHardAlignment h2,
-[id^=SPAN] .leftHardAlignment h3,
-.container .flexbox-answer-details h1,
-.container .flexbox-answer-details h2,
-.container .flexbox-answer-details h3 {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) :is(h1,h2,h3) {
   margin-bottom: 2rem;
   margin-top: 0;
 }
 
-.rn_AnswerTitle h1,
-[id^=SPAN] .leftHardAlignment h1,
-.container .flexbox-answer-details h1 {
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) h1 {
   color: var(--oka-primary);
   font-size: 2rem;
   font-variation-settings: 'wght' 1000;
   line-height: 1.25;
+  margin: 0 auto 2rem auto;
   text-align: center;
+  width: calc(100% / 1.25);
 }
 
-[id^=SPAN] .leftHardAlignment h2,
-.container .flexbox-answer-details h2 {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) h2 {
   color: var(--oka-primary);
   font-size: 1.25rem;
   font-variation-settings: 'wght' 800;
   line-height: 1.5;
-  margin: 0 auto 1.5rem auto;
+  margin: 0 auto 2rem auto;
   text-align: center;
-  width: calc(100% / 1.5);
   transform: translateY(-.5rem);
+  width: calc(100% / 1.5);
 }
 
-[id^=SPAN] .leftHardAlignment h3,
-.container .flexbox-answer-details h3 {
-  color: var(--oka-primary);
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) h3 {
   font-size: 1rem;
   font-variation-settings: 'wght' 600;
   line-height: 1.25;
@@ -434,125 +417,224 @@ html {
 
 /* =================== PARAGRAPH ==================== */
 
-[id^=SPAN] .leftHardAlignment p,
-.container .flexbox-answer-details p {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) p {
+  cursor: text;
   padding-bottom: 2rem;
+}
+
+/* ================= DEFINITION LIST ================ */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl {
+  width: 66%;
+  margin: 0 auto;
+  display: inline-block;
+  position: relative;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl::before {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 100%;
+  border-right: 2px solid var(--oka-border);
+  margin-left: calc(100% / 3);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl>dt {
+  padding-right: .5rem;
+  clear: both;
+  color: var(--oka-primary);
+  display: block;
+  float: left;
+  font-variation-settings: 'wght' 600;
+  width: calc(100% / 3);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl>dt~dt {
+  padding-top: .5rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl>dd {
+  color: var(--oka-text);
+  display: block;
+  width: calc(100% / 1.5);
+  float: right;
+  padding-left: 1.2rem;
+  text-indent: -.7rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl>dd::before {
+  content: '- ';
+  color: var(--oka-text-alt);
+  font-variation-settings: 'wght' 400;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl>dt~dt+dd {
+  padding-top: .5rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section dl {
+  width: 100%;
 }
 
 /* ================== ORDERED LIST ================== */
 
-[id^=SPAN] .leftHardAlignment ol,
-.container .flexbox-answer-details ol {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol {
   counter-reset: list;
   list-style: inside;
-  list-style-type: decimal;
 }
 
-[id^=SPAN] .leftHardAlignment ol[start="2"],
-.container .flexbox-answer-details ol[start="2"] {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="2"] {
   counter-reset: list 1;
 }
 
-[id^=SPAN] .leftHardAlignment ol[start="3"],
-.container .flexbox-answer-details ol[start="3"] {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="3"] {
   counter-reset: list 2;
 }
 
-[id^=SPAN] .leftHardAlignment ol[start="4"],
-.container .flexbox-answer-details ol[start="4"] {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="4"] {
   counter-reset: list 3;
 }
 
-[id^=SPAN] .leftHardAlignment ol[start="5"],
-.container .flexbox-answer-details ol[start="5"] {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="5"] {
   counter-reset: list 4;
 }
 
-[id^=SPAN] .leftHardAlignment ol[start="6"],
-.container .flexbox-answer-details ol[start="6"] {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="6"] {
   counter-reset: list 5;
 }
 
-[id^=SPAN] .leftHardAlignment ol[start="7"],
-.container .flexbox-answer-details ol[start="7"] {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="7"] {
   counter-reset: list 6;
 }
 
-[id^=SPAN] .leftHardAlignment ol[start="8"],
-.container .flexbox-answer-details ol[start="8"] {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="8"] {
   counter-reset: list 7;
 }
 
-[id^=SPAN] .leftHardAlignment ol[start="9"],
-.container .flexbox-answer-details ol[start="9"] {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="9"] {
   counter-reset: list 8;
 }
 
-[id^=SPAN] .leftHardAlignment ol[start="10"],
-.container .flexbox-answer-details ol[start="10"] {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="10"] {
   counter-reset: list 9;
 }
 
-[id^=SPAN] .leftHardAlignment ol li,
-.container .flexbox-answer-details ol li {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol li {
   counter-increment: list;
 }
 
-[id^=SPAN] .leftHardAlignment ol li::marker,
-.container .flexbox-answer-details ol li::marker {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol li::marker {
   color: var(--oka-primary);
-  content: counters(list, ".", decimal)'\00a0\00a0';
+  content: counters(list, '.', decimal)'\00a0\00a0';
   font-variation-settings: 'wght' 600;
 }
 
-[id^=SPAN] .leftHardAlignment ol.phone-menu li::marker,
-.container .flexbox-answer-details ol.phone-menu li::marker {
-  content: "#" counters(list, " > #", decimal)' ';
-}
-
-[id^=SPAN] .leftHardAlignment ol ol,
-.container .flexbox-answer-details ol ol {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) ol ol {
   padding-left: 1rem;
 }
 
-[id^=SPAN] .leftHardAlignment ol li:nth-child(n+10) ol,
-.container .flexbox-answer-details ol li:nth-child(n+10) ol {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol li:nth-child(n+10) ol {
   padding-left: 1.5rem;
 }
 
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol.dial-menu li::marker {
+  content: '#' counters(list, '\00a0\203a\00a0#', decimal) '\00a0';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol.dial-menu ol {
+  padding-left: 0;
+}
+
+
+
 /* ================= UNORDERED LIST ================= */
 
-[id^=SPAN] .leftHardAlignment ul,
-.container .flexbox-answer-details ul {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul {
   list-style: inside;
 }
 
-[id^=SPAN] .leftHardAlignment ul li::marker,
-.container .flexbox-answer-details ul li::marker {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul li::marker {
   color: var(--oka-primary);
   content: '\F0765\00a0\00a0';
   font-family: var(--oka-font-icon);
   font-size: .75rem;
 }
 
-[id^=SPAN] .leftHardAlignment ul ul,
-.container .flexbox-answer-details ul ul {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul ul {
   padding-left: 1rem;
 }
 
-[id^=SPAN] .leftHardAlignment ul ul li::marker,
-.container .flexbox-answer-details ul ul li::marker {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul ul li::marker {
   content: '\F0766\00a0\00a0';
 }
 
 /* ===================== TABLE ====================== */
 
-[id^=SPAN] .leftHardAlignment table,
-.container .flexbox-answer-details table {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table {
   border-collapse: separate;
   border-radius: .5rem;
   border-spacing: 0px;
   border: 2px solid var(--oka-border);
+  cursor: text;
   margin: 0 auto 1rem auto;
   max-width: 100%;
   min-width: 66%;
@@ -560,8 +642,9 @@ html {
   position: relative;
 }
 
-[id^=SPAN] .leftHardAlignment table tr th,
-.container .flexbox-answer-details table tr th {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table tr th {
   background: var(--oka-content);
   border-bottom: 2px solid var(--oka-primary);
   border-width: 0 0 2px 0;
@@ -576,8 +659,9 @@ html {
 }
 /* top: 0; is needed for stickiness */
 
-[id^=SPAN] .leftHardAlignment table td,
-.container .flexbox-answer-details table td {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table td {
   border-bottom: 2px solid var(--oka-border);
   border-width: 0 0 2px 0;
   height: 2rem;
@@ -585,179 +669,202 @@ html {
   line-height: 2;
 }
 
-[id^=SPAN] .leftHardAlignment table td.numeric,
-.container .flexbox-answer-details table td.numeric {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table td.numeric {
   font-family: var(--oka-font-mono);
 }
 
-[id^=SPAN] .leftHardAlignment table td.right,
-.container .flexbox-answer-details table td.right {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table td.right {
   text-align: right;
 }
 
-[id^=SPAN] .leftHardAlignment table tr:last-child td,
-.container .flexbox-answer-details table tr:last-child td {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table tr:last-child td {
   border-bottom: none;
 }
 
-[id^=SPAN] .leftHardAlignment table>thead+tbody tr:nth-child(odd),
-.container .flexbox-answer-details table>thead+tbody tr:nth-child(odd) {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(table>tbody:first-child tr:nth-child(even),
+table>thead+tbody tr:nth-child(odd)) {
   background: var(--oka-content-alt);
 }
 
-[id^=SPAN] .leftHardAlignment table.no-style,
-[id^=SPAN] .leftHardAlignment table.no-style tr th,
-[id^=SPAN] .leftHardAlignment table.no-style td,
-.container .flexbox-answer-details table.no-style,
-.container .flexbox-answer-details table.no-style tr th,
-.container .flexbox-answer-details table.no-style td {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(table.no-style,table.no-style tr th,table.no-style td) {
   border-color: var(--oka-content);
-  position: relative;
 }
 
-[id^=SPAN] .leftHardAlignment table.no-stripe>thead+tbody tr:nth-child(odd),
-[id^=SPAN] .leftHardAlignment table.no-style>thead+tbody tr:nth-child(odd),
-.container .flexbox-answer-details table.no-stripe>thead+tbody tr:nth-child(odd),
-.container .flexbox-answer-details table.no-style>thead+tbody tr:nth-child(odd) {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table:is(.no-stripe,.no-style)>tbody tr:nth-child(odd) {
   background: var(--oka-content);
 }
 
 /* ====================== LINK ====================== */
 
-[id^=SPAN] .leftHardAlignment a,
-.container .flexbox-answer-details a {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a {
+  border-block: .25rem solid transparent;
   color: var(--oka-primary);
   font-variation-settings: 'wght' 400;
+  line-height: 1.25;
 }
-/* text-decoration-thickness has partial support */
 
-[id^=SPAN] .leftHardAlignment a::before,
-.container .flexbox-answer-details a::before {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a::before {
   content: '';
+  display: inline-block;
   font-family: var(--oka-font-icon);
   position: relative;
-  display: inline-block;
-  top: 1px;
   right: .125rem;
-}
-
-[id^=SPAN] .leftHardAlignment a::after,
-.container .flexbox-answer-details a::after {
-  content: '\F0054';
-  font-family: var(--oka-font-icon);
-  position: relative;
-  display: inline-block;
   top: 1px;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a::after {
+  content: '\F0054';
+  display: inline-block;
+  font-family: var(--oka-font-icon);
   left: .125rem;
+  position: relative;
+  top: 1px;
 }
 
-[id^=SPAN] .leftHardAlignment a[target="_blank"],
-.container .flexbox-answer-details a[target="_blank"] {
-  color: var(--oka-secondary);   
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[target="_blank"] {
+  color: var(--oka-secondary);
 }
 
-[id^=SPAN] .leftHardAlignment a[target="_blank"]::after,
-.container .flexbox-answer-details a[target="_blank"]::after {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[target="_blank"]::after {
   content: '\F005C';
 }
 
-[id^=SPAN] .leftHardAlignment a[href^="#"]::after,
-.container .flexbox-answer-details a[href^="#"]::after {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href^="#"]::after {
   content: '\F0E79'; 
 }
 
-[id^=SPAN] .leftHardAlignment a[href^="mailto:"]::before,
-.container .flexbox-answer-details a[href^="mailto:"]::before {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href^="mailto:"]::before {
   content: '\F01F0';
 }
 
-[id^=SPAN] .leftHardAlignment a[href^="mailto:"]::after,
-.container .flexbox-answer-details a[href^="mailto:"]::after {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href^="tel:"]::before {
+  content: '\F0DF0';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href$=".pdf"]::before {
+  content: '\F09EE';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href^="mailto:"]::after,
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href^="tel:"]::after,
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href$=".pdf"]::after {
   content: '';
 }
 
-[id^=SPAN] .leftHardAlignment a[href^="tel:"]::before,
-.container .flexbox-answer-details a[href^="tel:"]::before {
-  content: '\F03F2';
-}
-
-[id^=SPAN] .leftHardAlignment a[href^="tel:"]::after,
-.container .flexbox-answer-details a[href^="tel:"]::after {
-  content: '';
-}
-
-[id^=SPAN] .leftHardAlignment a:hover,
-.container .flexbox-answer-details a:hover {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a:hover {
   color: var(--oka-primary-alt);
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset:.125em;
 }
 
-[id^=SPAN] .leftHardAlignment a[target="_blank"]:hover,
-.container .flexbox-answer-details a[target="_blank"]:hover {
-  color: var(--oka-secondary-alt);   
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[target="_blank"]:hover {
+  color: var(--oka-secondary-alt);
 }
 
 /* ================== FONT STYLING ================== */
 
-[id^=SPAN] .leftHardAlignment b,
-[id^=SPAN] .leftHardAlignment strong,
-.container .flexbox-answer-details b,
-.container .flexbox-answer-details strong {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(b,strong) {
   font-variation-settings: 'wght' 600;
 }
 
-[id^=SPAN] .leftHardAlignment i,
-[id^=SPAN] .leftHardAlignment em,
-.container .flexbox-answer-details i,
-.container .flexbox-answer-details em {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(i,em) {
   font-variation-settings: 'wght' 400;
 }
 
-[id^=SPAN] .leftHardAlignment u,
-.container .flexbox-answer-details u {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+u {
   font-variation-settings: 'wght' 400;
   text-decoration-thickness: 2px;
   text-underline-offset: .125Rem;
 }
 
-
-[id^=SPAN] .leftHardAlignment s,
-.container .flexbox-answer-details s {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+s {
   color: var(--oka-error);
   font-variation-settings: 'wght' 400;
   text-decoration-thickness: 2px;
 }
 
-[id^=SPAN] .leftHardAlignment kbd,
-.container .flexbox-answer-details kbd {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+kbd {
   display: inline-block;
-  color: var(--oka-primary);
+  color: var(--oka-primary-alt);
   font-family: var(--oka-font-mono);
-  padding: 0 .125rem;
-  background: var(--oka-content);
+  padding: .125rem .25rem;
+  background: var(--oka-pre);
   border: 2px solid var(--oka-primary);
   border-bottom-width: 4px;
   font-variation-settings: 'wght' 500;
   line-height: 1;
 }
 
-[id^=SPAN] .leftHardAlignment kbd + kbd,
-.container .flexbox-answer-details kbd + kbd {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+kbd+kbd {
   margin-left: 1rem;
 }
 
-[id^=SPAN] .leftHardAlignment kbd + kbd::before,
-.container .flexbox-answer-details kbd + kbd::before {
-  content: '+ ';
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+kbd+kbd::before {
+  color: var(--oka-text-alt);
+  content: '+\00a0';
   display: inline-block;
-  transform: translateX(-1.05rem);
+  transform: translateX(-1.15rem);
   width: 0;
 }
 
-[id^=SPAN] .leftHardAlignment hr,
-.container .flexbox-answer-details hr {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+hr {
   color: var(--oka-primary);
   border-top: 2px solid;
   opacity: 1;
@@ -800,6 +907,7 @@ html {
   position: fixed;
   right: 0;
   top: 0;
+  height: 100vh;
 }
 
 .lightbox-wrapper {
@@ -959,8 +1067,9 @@ html {
 /* ================================================== */
 /* ==================== OKA CODE ==================== */
 
-[id^=SPAN] .leftHardAlignment .oka-code,
-.container .flexbox-answer-details .oka-code {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code {
   height: auto;
   margin: 0 auto 2rem auto;
   position: relative;
@@ -969,14 +1078,153 @@ html {
   z-index: 0;
 }
 
-[id^=SPAN] .leftHardAlignment section .oka-code,
-.container .flexbox-answer-details section .oka-code {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section .oka-code {
   width: 100%;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-code button,
-.container .flexbox-answer-details .oka-code button {
-  background-color: transparent;
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input {
+  display: none;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>label {
+  background: var(--oka-error);
+  border-radius: 1.5rem;
+  color: var(--oka-white);
+  cursor: pointer;
+  display: inline-block;
+  font-variation-settings: 'wght' 400;
+  height: 1.5rem;
+  line-height: 1.5;
+  margin: calc(-.75rem + 1px) auto 0 auto;
+  padding: 0 .75rem;
+  position: absolute;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 10;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>label::before {
+  content: '\F0174\ ';
+  font-family: var(--oka-font-icon);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>label::after {
+  content: "";
+  display: block;
+  height: 2.5rem;
+  margin: -2rem 0 0 -1.5rem;
+  position: absolute;
+  width: calc(100% + 1.5rem);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>pre {
+  background-color: var(--oka-pre);
+  border-radius: 2px;
+  border: 2px solid var(--oka-error);
+  box-shadow: inset 0 0 .5rem var(--oka-error);
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+  text-align: left;
+  transition: max-height .25s ease-in-out, box-shadow .25s ease-in-out, border-radius .125s ease-in, padding .25s ease-in-out;
+  white-space: pre-wrap;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>pre:hover {
+  overflow-y: auto;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>pre::before {
+  counter-reset: code;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>pre>code {
+  background: none;
+  border: none;
+  color: var(--oka-text);
+  counter-increment: code;
+  margin-left: 1rem;
+  opacity: 0;
+  padding: 0;
+  transition: opacity .25s ease-in .25s;
+  user-select: text;
+  white-space: pre;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>pre>code::before {
+  color:var(--oka-text-alt);
+  content: counter(code) ". ";
+  display: inline-block;
+  margin-left: auto;
+  padding-left: auto;
+  text-align: right;
+  width: 2rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+code {
+  background-color: var(--oka-pre);
+  border-radius: .5rem;
+  border: 2px solid var(--oka-error);
+  color: var(--oka-text);
+  display: inline-block;
+  line-height: 1;
+  padding: .125rem .25rem;
+  text-indent: 0;
+  user-select: all;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+code>e {
+  color: var(--oka-text-alt);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+code>n {
+  color: var(--oka-primary);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+code>c {
+  color: var(--oka-primary-alt);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+code>d {
+  color: var(--oka-secondary);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>button {
+  background-color: var(--oka-pre);
   border-radius: .75rem;
   border: 2px solid var(--oka-error);
   bottom: .5rem;
@@ -993,136 +1241,15 @@ html {
   transition: opacity .25s ease-in;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-code input,
-.container .flexbox-answer-details .oka-code input {
-  display: none;
-}
-
-[id^=SPAN] .leftHardAlignment .oka-code label,
-.container .flexbox-answer-details .oka-code label {
-  background: var(--oka-error);
-  border-radius: 1.5rem;
-  color: var(--oka-content);
-  cursor: pointer;
-  display: inline-block;
-  font-variation-settings: 'wght' 400;
-  height: 1.5rem;
-  line-height: 1.5;
-  margin: calc(-.75rem + 1px) auto 0 auto;
-  padding: 0 .75rem;
-  position: absolute;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  z-index: 10;
-  text-transform: uppercase;
-}
-
-[id^=SPAN] .leftHardAlignment .oka-code label::before,
-.container .flexbox-answer-details .oka-code label::before {
-  content: '\F0174\ ';
-  font-family: var(--oka-font-icon);
-}
-
-[id^=SPAN] .leftHardAlignment .oka-code label::after,
-.container .flexbox-answer-details .oka-code label::after {
-  content: "";
-  width: calc(100% + 1.5rem);
-  height: 2.5rem;
-  margin: -2rem 0 0 -1.5rem;
-  display: block;
-  position: absolute;
-}
-
-[id^=SPAN] .leftHardAlignment .oka-code pre,
-.container .flexbox-answer-details .oka-code pre {
-  background-color: var(--oka-pre);
-  /* border-color: var(--oka-error); */
-  border-radius: 2px;
-  border: 2px solid var(--oka-error);
-  box-shadow: inset 0 0 .5rem var(--oka-error);
-  margin: 0;
-  max-height: 0;
-  overflow: hidden;
-  padding:0;
-  text-align: left;
-  transition: max-height .25s ease-in-out, box-shadow .25s ease-in-out, border-radius .125s ease-in, padding .25s ease-in-out;
-  white-space: pre-wrap;
-}
-
-[id^=SPAN] .leftHardAlignment .oka-code pre:hover,
-.container .flexbox-answer-details .oka-code pre:hover {
-  overflow-y: auto;
-}
-
-[id^=SPAN] .leftHardAlignment .oka-code pre::before,
-.container .flexbox-answer-details .oka-code pre::before {
-  counter-reset: code;
-}
-
-[id^=SPAN] .leftHardAlignment .oka-code code,
-.container .flexbox-answer-details .oka-code code {
-  background: none;
-  border: none;
-  color: var(--oka-text);
-  counter-increment: code;
-  margin-left: 1rem;
-  opacity: 0;
-  padding: 0;
-  transition: opacity .25s ease-in .25s;
-  user-select: text;
-  white-space: pre;
-}
-
-[id^=SPAN] .leftHardAlignment .oka-code code::before,
-.container .flexbox-answer-details .oka-code code::before {
-  color:var(--oka-text-alt);
-  content: counter(code) ". ";
-  display: inline-block;
-  margin-left: auto;
-  padding-left: auto;
-  text-align: right;
-  width: 2rem;
-}
-
-[id^=SPAN] .leftHardAlignment code,
-.container .flexbox-answer-details code {
-  background-color: var(--oka-pre);
-  border-radius: .5rem;
-  border: 2px solid var(--oka-error);
-  color: var(--oka-text);
-  display: inline-block;
-  line-height: 1;
-  padding: .125rem .25rem;
-  user-select: all;
-}
-
-[id^=SPAN] .leftHardAlignment code e,
-.container .flexbox-answer-details code e {
-  color: var(--oka-text-alt);
-}
-
-[id^=SPAN] .leftHardAlignment code n,
-.container .flexbox-answer-details code n {
-  color: var(--oka-primary);
-}
-
-[id^=SPAN] .leftHardAlignment code c,
-.container .flexbox-answer-details code c {
-  color: var(--oka-primary-alt);
-}
-
-[id^=SPAN] .leftHardAlignment code d,
-.container .flexbox-answer-details code d {
-  color: var(--oka-secondary);
-}
-
-[id^=SPAN] .leftHardAlignment .oka-code input:checked+label,
-.container .flexbox-answer-details .oka-code input:checked+label {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input:checked+label {
   background: var(--oka-error);
 }
 
-[id^=SPAN] .leftHardAlignment .oka-code input:checked~pre,
-.container .flexbox-answer-details .oka-code input:checked~pre {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input:checked~pre {
   border-radius: .5rem;
   border: 2px solid var(--oka-error);
   box-shadow: inset var(--oka-shadow);
@@ -1130,50 +1257,56 @@ html {
   padding: 1rem 0;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-code input:checked~pre code,
-.container .flexbox-answer-details .oka-code input:checked~pre code {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input:checked~pre>code {
   opacity: 1;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-code input:checked~button,
-.container .flexbox-answer-details .oka-code input:checked~button {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input:checked~button {
   opacity: 1;
   pointer-events: all;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-code input:checked+label+pre+button:hover,
-.container .flexbox-answer-details .oka-code input:checked+label+pre+button:hover {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input:checked~button:hover {
   background-color: var(--oka-error);
-  color: var(--oka-content);
+  color: var(--oka-white);
 }
 
 /* ================================================== */
 /* ==================== OKA ALERT =================== */
 
-[id^=SPAN] .leftHardAlignment .oka-alert,
-.container .flexbox-answer-details .oka-alert {
-  margin: 0 auto 2rem auto;
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-alert {
+  margin: 0 auto;
   width: calc(100% / 1.5);
 }
 
-[id^=SPAN] .leftHardAlignment .oka-alert article,
-.container .flexbox-answer-details .oka-alert article {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-alert>article {
   border: 2px solid var(--oka-warning);
-  border-bottom-width: 1rem;
+  /* border-bottom-width: 1rem; */
+  background: var(--oka-background);
   border-radius: .5rem;
-  border-top-width: 1rem;
+  border-top-width: .25rem;
   box-shadow: var(--oka-shadow);
   color: var(--oka-warning);
+  margin-bottom: 2rem;
   min-height: 4rem;
   padding: 1rem;
   text-align: center;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-alert article::before,
+/* [id^=SPAN] .leftHardAlignment .oka-alert article::before,
 [id^=SPAN] .leftHardAlignment .oka-alert article::after,
 .container .flexbox-answer-details .oka-alert article::before,
 .container .flexbox-answer-details .oka-alert article::after {
-  
   background: repeating-linear-gradient(45deg, var(--oka-content) 0 .25rem, var(--oka-warning) .25rem 1.25rem, var(--oka-content) 1.25rem 1.5rem);
   background-position: 50%;
   background-size: calc(100% + 2rem + 4px) .5rem;
@@ -1182,73 +1315,110 @@ html {
   height: .5rem;
   margin: -1.5rem 0 0 2px;
   width: calc(100%);
-}
+} */
 
-[id^=SPAN] .leftHardAlignment .oka-alert article::after,
+/* [id^=SPAN] .leftHardAlignment .oka-alert article::after,
 .container .flexbox-answer-details .oka-alert article::after {
   margin: 0 0 -1.5rem 2px;
-}
+} */
 
-[id^=SPAN] .leftHardAlignment .oka-alert article h2,
-.container .flexbox-answer-details .oka-alert article h2 {
-  color: var(--oka-warning);
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-alert>article>h2 {
+  color: var(--oka-warning-alt);
   font-size: 1.5rem;
   font-variation-settings: 'wght' 600;
   margin-bottom: .5rem;
   margin-top: .5rem;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-alert article p,
-.container .flexbox-answer-details .oka-alert article p {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-alert>article>p {
   padding-bottom: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-alert>article>p>a {
+  color: var(--oka-warning-alt);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-alert>article>p>a:hover {
+  color: var(--oka-warning);
 }
 
 /* ================================================== */
 /* =================== OKA COLUMN =================== */
 
-[id^=SPAN] .leftHardAlignment .oka-column,
-.container .flexbox-answer-details .oka-column {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column {
   display: flex;
   gap: 2rem;
   margin-bottom: 2rem;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-column article,
-.container .flexbox-answer-details .oka-column article {
-  flex: 1;
-}
-
-[id^=SPAN] .leftHardAlignment .oka-column article>*,
-.container .flexbox-answer-details .oka-column article>* {
-  margin-bottom: 1rem;
-}
-
-[id^=SPAN] .leftHardAlignment .oka-column article>*:last-child,
-.container .flexbox-answer-details .oka-column article>*:last-child {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section .oka-column {
   margin-bottom: 0;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-column article img,
-.container .flexbox-answer-details .oka-column article img {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article {
+  flex: 1;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article>* {
+  margin-bottom: 1rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article>*:last-child {
+  margin-bottom: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article>img {
   width: 100% !important;
 }
 /* images need !important on width and height to overrule inline styling */
 
-[id^=SPAN] .leftHardAlignment .oka-column article p,
-.container .flexbox-answer-details .oka-column article p {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article>img.small {
+  margin-left: 25%;
+  width: 50% !important;
+}
+/* images need !important on width and height to overrule inline styling */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article>p {
   padding-bottom: 0;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-column article table,
-.container .flexbox-answer-details .oka-column article table {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article>table {
   width: 100%;
 }
 
 /* ================================================== */
 /* ==================== OKA CARD ==================== */
 
-[id^=SPAN] .leftHardAlignment .oka-card,
-.container .flexbox-answer-details .oka-card {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card {
   /* align-items: flex-start; */
   background: var(--oka-background);
   border-radius: .5rem;
@@ -1262,8 +1432,9 @@ html {
   padding: 2rem;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-card article,
-.container .flexbox-answer-details .oka-card article {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article {
   background: var(--oka-content);
   border-radius: .5rem;
   border: 1px solid var(--oka-border);
@@ -1276,14 +1447,16 @@ html {
   padding-bottom: 1rem;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-card>article>*,
-.container .flexbox-answer-details .oka-card>article>* {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>* {
   order: 4;
   padding: 1rem 1rem 0 1rem;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-card>article>img,
-.container .flexbox-answer-details .oka-card>article>img {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>img {
   /* margin-left: -1px; */
   /* margin-top: -1rem; */
   width: unset !important;
@@ -1300,15 +1473,17 @@ html {
 }
 /* images need !important on width and height to overrule inline styling */
 
-[id^=SPAN] .leftHardAlignment .oka-card>article>img:hover,
-.container .flexbox-answer-details .oka-card>article>img:hover {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>img:hover {
   /* height:15rem; */
   box-shadow: none;
   cursor: default;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-card>article>h3::before,
-.container .flexbox-answer-details .oka-card>article>h3::before {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>h3::before {
   background: linear-gradient(to top, rgba(0,0,0,.25) , transparent);
   content: '';
   display: block;
@@ -1318,8 +1493,9 @@ html {
   width: calc(100% + 2rem);
 }
 
-[id^=SPAN] .leftHardAlignment .oka-card>article>h3,
-.container .flexbox-answer-details .oka-card>article>h3 {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>h3 {
   color: var(--oka-text) !important;
   margin: 0;
   order: 2;
@@ -1327,8 +1503,9 @@ html {
 }
 /* !important needed because of smartstart CSS */
 
-[id^=SPAN] .leftHardAlignment .oka-card>article>.button,
-.container .flexbox-answer-details .oka-card>article>.button {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>.button-link {
   background: var(--oka-content);
   border-radius: 5rem;
   border: 2px solid var(--oka-primary);
@@ -1337,36 +1514,41 @@ html {
   font-size: 1rem;
   font-variation-settings: 'wght' 400;
   height: 2.5rem;
+  line-height: 2.25;
   margin: 1rem 1rem 0 1rem;
   order: 99;
   padding: 0 .5rem;
-  line-height: 2.25;
   text-align: center;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-card>article>.button:hover,
-.container .flexbox-answer-details .oka-card>article>.button:hover {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>.button-link:hover {
   background: var(--oka-primary);
-  color: var(--oka-content);
+  color: var(--oka-white);
   text-decoration: none;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-card>article>button[target="_blank"],
-.container .flexbox-answer-details .oka-card>article>button[target="_blank"] {
-  color: var(--oka-secondary);
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>.button-link[target="_blank"] {
   border: 2px solid var(--oka-secondary);
+  color: var(--oka-secondary);
 }
 
-[id^=SPAN] .leftHardAlignment .oka-card>article>button[target="_blank"]:hover,
-.container .flexbox-answer-details .oka-card>article>button[target="_blank"]:hover {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>.button-link[target="_blank"]:hover {
   background: var(--oka-secondary);
+  color: var(--oka-white);
 }
 
 /* ================================================== */
 /* =================== OKA STEPS ==================== */
 
-[id^=SPAN] .leftHardAlignment .oka-steps,
-.container .flexbox-answer-details .oka-steps {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps {
   border-bottom: 2px solid var(--oka-border);
   counter-reset: step;
   display: flex;
@@ -1374,18 +1556,20 @@ html {
   margin-bottom: 2rem;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-steps article,
-.container .flexbox-answer-details .oka-steps article {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article {
+  /* justify-content: flex-end; */
   align-items: flex-start;
   border-top: 2px solid var(--oka-border);
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-end;
   padding: 1rem 0 1rem 0;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-steps article::before,
-.container .flexbox-answer-details .oka-steps article::before {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article::before {
   background: var(--oka-primary);
   border-radius: 1.5rem;
   color: var(--oka-content);
@@ -1401,17 +1585,19 @@ html {
   width: 3rem;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-steps .oka-steps,
-.container .flexbox-answer-details .oka-steps .oka-steps {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps .oka-steps {
   border-bottom: none;
   counter-reset: stepsub;
   margin: 0 0 0 2rem;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-steps .oka-steps article::before,
-.container .flexbox-answer-details .oka-steps .oka-steps article::before {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps .oka-steps>article::before {
   background: var(--oka-content);
-  border:.25rem solid var(--oka-primary);
+  border: .25rem solid var(--oka-primary);
   color: var(--oka-primary);
   content: counter(step) "." counter(stepsub);
   counter-increment: stepsub;
@@ -1419,50 +1605,101 @@ html {
   line-height: 2;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-steps div,
-.container .flexbox-answer-details .oka-steps div {
-  flex: 1;
-  padding: 0 1.5rem 0 1rem;
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span) {
+  /* flex: 1; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0;
+  width: calc(50% - 1rem);
 }
 
-[id^=SPAN] .leftHardAlignment .oka-steps img,
-.container .flexbox-answer-details .oka-steps img {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span):first-child {
+  flex: 2;
+  justify-content: flex-start;
+  padding: 0 2rem 0 1rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span) :is(h3,p,ul,table) {
+  width: 100%;
+  margin: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>img {
   height: auto !important;
   max-height: 128rem;
   object-fit: cover;
   object-position: 50% 50%;
   order: 99;
-  width: calc(50% - .75rem) !important;
+  width: calc(50% - 1rem) !important;
 }
 /* images need !important on width and height to overrule inline styling */
 
-[id^=SPAN] .leftHardAlignment .oka-steps .oka-steps img,
-.container .flexbox-answer-details .oka-steps .oka-steps img {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps .oka-steps>article>img {
   width: calc(50% + .25rem) !important;
 }
 /* images need !important on width and height to overrule inline styling */
 
-/* .container .oka-steps img.oka-small {
-  height: auto;
-  object-fit: contain;
-  object-position: 50% 0;
-  width: 25%;
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span)>img {
+  height: auto !important;
+  display: inline-block;
+  margin:0;
+  max-height: 128rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  order: 99;
+  width: 100% !important;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span)>img.small {
+  width: calc(50% - .5rem) !important;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>section {
+  width: 100%;
+  order: 100;
+  margin: 1rem 0 0 4rem;
+}
+
+/* :is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article section section{
+  width: calc(100% - 1rem);
+  margin: 1rem 0 0 2rem;
 } */
-/* .container needed for this to work? */
 
 /* ================================================== */
 /* =============== OKA EXPANDS / TABS =============== */
 
-[id^=SPAN] .leftHardAlignment .oka-tabs,
-.container .flexbox-answer-details .oka-tabs {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs {
   border-bottom: 2px solid var(--oka-border);
   margin-bottom: 2rem;
   position: relative;
 }
 /* 'position: relative' is needed for the ::after pseudo element to position correctly */
 
-[id^=SPAN] .leftHardAlignment .oka-tabs::before,
-.container .flexbox-answer-details .oka-tabs::before {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs::before {
   background: linear-gradient(to right, var(--oka-content) 0, transparent 1rem, transparent calc(100% - 1rem), var(--oka-content) 100%);
   content: "";
   display: block;
@@ -1472,15 +1709,17 @@ html {
   width: 100%;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-tabs>section:first-child,
-.container .flexbox-answer-details .oka-tabs>section:first-child {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child {
   border-bottom: 2px solid var(--oka-border);
   display: flex;
   overflow: hidden hidden;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-tabs>section:first-child button,
-.container .flexbox-answer-details .oka-tabs>section:first-child button {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child>button {
   /* font: inherit; */
   background: var(--oka-content);
   border: none;
@@ -1492,49 +1731,58 @@ html {
   white-space: nowrap;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-tabs>section:first-child button:hover,
-.container .flexbox-answer-details .oka-tabs>section:first-child button:hover {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child>button:hover {
   color: var(--oka-secondary);
 }
 
-[id^=SPAN] .leftHardAlignment .oka-tabs>section:first-child button:first-child,
-.container .flexbox-answer-details .oka-tabs>section:first-child button:first-child {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child>button:first-child {
   margin-left: 1rem;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-tabs>section:first-child button:last-child,
-.container .flexbox-answer-details .oka-tabs>section:first-child button:last-child {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child>button:last-child {
   margin-right: 1rem;
   border-right: 0;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-tabs>section:first-child button.oka-tab-active,
-.container .flexbox-answer-details .oka-tabs>section:first-child button.oka-tab-active {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child>button.oka-tab-active {
   color: var(--oka-primary);
   border-bottom: 4px solid var(--oka-primary);
   padding-bottom: calc(.5rem - 4px);
 }
 
-[id^=SPAN] .leftHardAlignment .oka-tabs>section:first-child button.oka-tab-active:hover,
-.container .flexbox-answer-details .oka-tabs>section:first-child button.oka-tab-active:hover {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child>button.oka-tab-active:hover {
   color: var(--oka-primary);
   /* cursor: default; */
 }
 
-[id^=SPAN] .leftHardAlignment .oka-tabs>section:first-child:focus,
-.container .flexbox-answer-details .oka-tabs>section:first-child:focus {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child:focus {
   outline: none;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands,
-.container .flexbox-answer-details .oka-expands {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands {
   margin-bottom: 2rem;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands>article,
-[id^=SPAN] .leftHardAlignment .oka-tabs>section>article,
-.container .flexbox-answer-details .oka-expands>article,
-.container .flexbox-answer-details .oka-tabs>section>article {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article,
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section>article {
   /* transition: height 4s ease; */
   border: none;
   display: none;
@@ -1542,45 +1790,72 @@ html {
   padding: 1rem;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands>article.oka-tab-active,
-[id^=SPAN] .leftHardAlignment .oka-tabs>section>article.oka-tab-active,
-.container .flexbox-answer-details .oka-expands>article.oka-tab-active,
-.container .flexbox-answer-details .oka-tabs>section>article.oka-tab-active {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(.oka-expands>article.oka-tab-active,.oka-tabs>section>article.oka-tab-active) {
   /* transition: height 4s ease; */
   display: block;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article:first-child,
-.container .flexbox-answer-details .oka-expands article:first-child {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) .oka-expands>article:hover {
+  border-color: var(--oka-secondary) !important;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) .oka-expands>article:first-child {
   border-top: 2px solid var(--oka-border);
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article:last-child,
-[id^=SPAN] .leftHardAlignment .oka-tabs article:last-child,
-.container .flexbox-answer-details .oka-expands article:last-child,
-.container .flexbox-answer-details .oka-tabs article:last-child {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) section .oka-expands>article:first-child {
+  border-top: 2px solid var(--oka-border);
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+  border-left: 2px solid var(--oka-border);
+  border-right: 2px solid var(--oka-border);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) section .oka-expands>article {
+  border-left: 2px solid var(--oka-border);
+  border-right: 2px solid var(--oka-border);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) section .oka-expands>article:last-child {
+  /* border-top: 2px solid var(--oka-border); */
+  border-bottom-left-radius: .5rem;
+  border-bottom-right-radius: .5rem;
+  border-left: 2px solid var(--oka-border);
+  border-right: 2px solid var(--oka-border);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) .oka-tabs>section>article:last-child {
   border: none;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article>h3,
-[id^=SPAN] .leftHardAlignment .oka-tabs article>h3,
-.container .flexbox-answer-details .oka-expands article>h3,
-.container .flexbox-answer-details .oka-tabs article>h3 {
+[id^=SPAN] .leftHardAlignment .oka-expands>article>h3,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article>h3,
+.container .flexbox-answer-details .oka-expands>article>h3,
+.container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article>h3 {
   cursor: pointer;
   margin: 0 0 1.5rem;
   padding: 0;
   position: relative;
+  text-align: left;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-tabs article>h3,
-.container .flexbox-answer-details .oka-tabs article>h3 {
+[id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article>h3,
+.container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article>h3 {
   display: none;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article>div,
-[id^=SPAN] .leftHardAlignment .oka-tabs article>div,
-.container .flexbox-answer-details .oka-expands article>div,
-.container .flexbox-answer-details .oka-tabs article>div {
+[id^=SPAN] .leftHardAlignment .oka-expands>article>div,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article>div,
+.container .flexbox-answer-details .oka-expands>article>div,
+.container .flexbox-answer-details .oka-tabs>section>article>div {
   /* display: block; */
   /* opacity: 0; */
   /* transition: opacity 1s ease; */
@@ -1592,42 +1867,42 @@ html {
   padding: 0;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article.oka-tab-active,
-[id^=SPAN] .leftHardAlignment .oka-tabs article.oka-tab-active,
-.container .flexbox-answer-details .oka-expands article.oka-tab-active,
-.container .flexbox-answer-details .oka-tabs article.oka-tab-active {
+[id^=SPAN] .leftHardAlignment .oka-expands>article.oka-tab-active,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article.oka-tab-active,
+.container .flexbox-answer-details .oka-expands>article.oka-tab-active,
+.container .flexbox-answer-details .oka-tabs>section>article.oka-tab-active {
   display: block;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article.oka-tab-active h3,
-[id^=SPAN] .leftHardAlignment .oka-tabs article.oka-tab-active h3,
-.container .flexbox-answer-details .oka-expands article.oka-tab-active h3,
-.container .flexbox-answer-details .oka-tabs article.oka-tab-active h3 {
+[id^=SPAN] .leftHardAlignment .oka-expands>article.oka-tab-active h3,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article.oka-tab-active h3,
+.container .flexbox-answer-details .oka-expands>article.oka-tab-active h3,
+.container .flexbox-answer-details .oka-tabs>section>article.oka-tab-active h3 {
   /* cursor: inherit; */
   padding-bottom: 0;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article.oka-tab-active h3:hover,
-[id^=SPAN] .leftHardAlignment .oka-tabs article.oka-tab-active h3:hover,
-.container .flexbox-answer-details .oka-expands article.oka-tab-active h3:hover,
-.container .flexbox-answer-details .oka-tabs article.oka-tab-active h3:hover {
+[id^=SPAN] .leftHardAlignment .oka-expands>article.oka-tab-active h3:hover,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article.oka-tab-active h3:hover,
+.container .flexbox-answer-details .oka-expands>article.oka-tab-active h3:hover,
+.container .flexbox-answer-details .oka-tabs>section>article.oka-tab-active h3:hover {
   background: none;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article.oka-tab-active div,
-[id^=SPAN] .leftHardAlignment .oka-tabs article.oka-tab-active div,
-.container .flexbox-answer-details .oka-expands article.oka-tab-active div,
-.container .flexbox-answer-details .oka-tabs article.oka-tab-active div {
+[id^=SPAN] .leftHardAlignment .oka-expands>article.oka-tab-active>div,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article.oka-tab-active>div,
+.container .flexbox-answer-details .oka-expands>article.oka-tab-active>div,
+.container .flexbox-answer-details .oka-tabs>section>article.oka-tab-active>div {
   /* opacity: 1; */
   display: block;
   height: auto;
   padding: 0;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article.oka-tab-active p p:first-child,
-[id^=SPAN] .leftHardAlignment .oka-tabs article.oka-tab-active p p:first-child,
-.container .flexbox-answer-details .oka-expands article.oka-tab-active p p:first-child,
-.container .flexbox-answer-details .oka-tabs article.oka-tab-active p p:first-child {
+[id^=SPAN] .leftHardAlignment .oka-expands>article.oka-tab-active p p:first-child,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article.oka-tab-active p p:first-child,
+.container .flexbox-answer-details .oka-expands>article.oka-tab-active p p:first-child,
+.container .flexbox-answer-details .oka-tabs>section>article.oka-tab-active p p:first-child {
   margin-top: 0;
 }
 
@@ -1648,8 +1923,8 @@ html {
   position: relative;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article,
-.container .flexbox-answer-details .oka-expands article {
+[id^=SPAN] .leftHardAlignment .oka-expands>article,
+.container .flexbox-answer-details .oka-expands>article {
   /* max-height: 5rem; */
   /* transition: max-height .1s ease-in; */
   border-bottom: 2px solid var(--oka-border);
@@ -1663,8 +1938,8 @@ html {
   display: flex;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article>h3,
-.container .flexbox-answer-details .oka-expands article>h3 {
+[id^=SPAN] .leftHardAlignment .oka-expands>article>h3,
+.container .flexbox-answer-details .oka-expands>article>h3 {
   display: block;
   margin: -1rem -1rem;
   height: 3rem;
@@ -1692,16 +1967,16 @@ html {
   transition: opacity 1s ease;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article>h3:after,
-.container .flexbox-answer-details .oka-expands article>h3:after {
-  content: '\F0140';
+[id^=SPAN] .leftHardAlignment .oka-expands>article>h3:after,
+.container .flexbox-answer-details .oka-expands>article>h3:after {
+  content: '\F0B26';
   font-family: var(--oka-font-icon);
   opacity: 1;
   position: absolute;
   font-size: 1.5rem;
   line-height: .75;
   right: 1rem;
-  transition: opacity 10s ease;
+  transition: transform .25s ease-in-out;
 }
 
 [id^=SPAN] .leftHardAlignment .oka-expands article.oka-tab-active h3,
@@ -1718,7 +1993,9 @@ html {
 
 [id^=SPAN] .leftHardAlignment .oka-expands article.oka-tab-active h3:after,
 .container .flexbox-answer-details .oka-expands article.oka-tab-active h3:after {
-  content: '\F0143';
+  /* content: '\F0143'; */
+  transform: rotate(180deg);
+  
 }
 
 @keyframes oka-opacity {
@@ -1772,6 +2049,11 @@ html {
     height:1.5rem;
   }
 
+  :is([id^=SPAN] .leftHardAlignment,
+  .container .flexbox-answer-details) h2 {
+    width: 100%;
+  }
+
   [id^=SPAN] .leftHardAlignment .oka-alert,
   .container .flexbox-answer-details .oka-alert {
     width: 100%;
@@ -1817,11 +2099,23 @@ html {
     flex-direction: column;
   }
 
+  :is([id^=SPAN] .leftHardAlignment,
+  .container .flexbox-answer-details)
+  .oka-steps>article>section {
+    margin: 1rem 0 0 0;
+  }
+
   [id^=SPAN] .leftHardAlignment .oka-steps div,
   .container .flexbox-answer-details .oka-steps div {
     width: calc(100% - 3rem);
     margin:-3rem 0 0 3rem;
     padding: 0 0 0 1rem;
+  }
+
+  :is([id^=SPAN] .leftHardAlignment,
+  .container .flexbox-answer-details)
+  .oka-steps>article>:is(div,span) {
+    width: 100%;
   }
 
   [id^=SPAN] .leftHardAlignment .oka-steps img,
@@ -1833,6 +2127,16 @@ html {
   }
   /* images need !important on width and height to overrule inline styling */
 
+  [id^=SPAN] .leftHardAlignment .oka-tabs,
+  .container .flexbox-answer-details .oka-tabs {
+    border-bottom: none;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs::before,
+  .container .flexbox-answer-details .oka-tabs::before {
+    display: none;
+  }
+
   [id^=SPAN] .leftHardAlignment .oka-tabs>section:first-child,
   .container .flexbox-answer-details .oka-tabs>section:first-child {
     display: none;
@@ -1840,23 +2144,24 @@ html {
 
   [id^=SPAN] .leftHardAlignment .oka-tabs>section>article,
   .container .flexbox-answer-details .oka-tabs>section>article {
-    border-bottom: 2px solid var(--oka-border);
+    border-top: 2px solid var(--oka-border);
     display: block;
     min-height: 3rem;
   }
 
-  [id^=SPAN] .leftHardAlignment .oka-tabs article:first-child,
-  .container .flexbox-answer-details .oka-tabs article:first-child {
+  [id^=SPAN] .leftHardAlignment .oka-tabs>article:first-child,
+  .container .flexbox-answer-details .oka-tabs>article:first-child {
     border-top: 2px solid var(--oka-border);
   }
 
   [id^=SPAN] .leftHardAlignment .oka-tabs article:last-child,
   .container .flexbox-answer-details .oka-tabs article:last-child {
-    border-bottom: none;
+    border-top: 2px solid var(--oka-border);
+    border-bottom: 2px solid var(--oka-border);
   }
 
-  [id^=SPAN] .leftHardAlignment .oka-tabs article>h3,
-  .container .flexbox-answer-details .oka-tabs article>h3 {
+  [id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article>h3,
+  .container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article>h3 {
     display: block;
     margin: 0;
   }
@@ -1886,8 +2191,8 @@ html {
 
 
 
-  [id^=SPAN] .leftHardAlignment .oka-tabs article>h3:after,
-  .container .flexbox-answer-details .oka-tabs article>h3:after {
+  [id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article>h3::after,
+  .container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article>h3::after {
     content: '\F09D7';
     font-family: var(--oka-font-icon);
     opacity: 1;
@@ -1898,13 +2203,13 @@ html {
     transition: opacity 0.1s ease;
   }
 
-  [id^=SPAN] .leftHardAlignment .oka-tabs article.oka-tab-active h3,
-  .container .flexbox-answer-details .oka-tabs article.oka-tab-active h3 {
+  [id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3,
+  .container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3 {
     margin: 0 0 1.5rem;
   }
 
-  [id^=SPAN] .leftHardAlignment .oka-tabs article.oka-tab-active h3:after,
-  .container .flexbox-answer-details .oka-tabs article.oka-tab-active h3:after {
+  [id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3:after,
+  .container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3:after {
     content: '\F09DD';
   }
 
