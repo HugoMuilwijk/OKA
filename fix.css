@@ -1,142 +1,186 @@
 @media (min-width: 1400px) {
-    .container {
-      max-width: 1320px;
-      width: unset;
-    }
-  }
-  
-  .site-main {
-    min-height: unset;
-  }
-  
-  .page-header {
-    box-shadow: var(--oka-shadow);
-  }
-  
-  .page-title {
-    display: none;
-  }
-  
   .container {
-    padding: 0;
+    max-width: 1320px;
+    width: unset;
   }
-  
-  #wrapper {
-    background-color: var(--oka-background);
-  }
-  
-  .rn_AnswerField_Wi_Titel_H1,
-  .rn_AnswerField_Wi_Tekst_H1 .rn_SchemaAttribute,
-  .rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2 .rn_SchemaAttribute,
-  .rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2 .rn_SchemaAttribute,
-  .rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2 .rn_SchemaAttribute,
-  .rn_AnswerField[class^='rn_AnswerField_Wi_Paragrafen_H2'] .rn_SchemaAttribute {
+}
+
+.site-main {
+  min-height: unset;
+}
+
+.page-header {
+  box-shadow: var(--oka-shadow);
+}
+
+.page-title {
   display: none;
-  }
-  
-  
-  .rn_AnswerField_Wi_Tekst_H1 .rn_SchemaAttributeValue {
-  font-size: 1.5rem;
-  color: grey;
-  }
-  
-  .rn_AnswerView .rn_AnswerInfo .rn_AnswerField {
-  border-top: 2px solid var(--oka-text-alt);
-  display: block;
-  margin: 0 auto 2rem auto;
-  position: relative;
-  text-align: center;
-  width: calc(100% / 1.5);
-  }
-  
-  .rn_AnswerView .rn_AnswerInfo .rn_AnswerField .rn_AnswerDivAlignment {
+}
+
+.container {
+  padding: 0;
+}
+
+#wrapper {
+  background-color: var(--oka-background);
+}
+
+.rn_AnswerField_Wi_Titel_H1,
+.rn_AnswerField_Wi_Tekst_H1 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2-1 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2-2 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2-3 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2-4 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2-5 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2-6 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2-7 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2-8 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2-9 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2-10 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-1 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-2 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-3 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-4 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-5 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-6 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-7 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-8 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-9 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-10 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2-1 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2-2 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2-3 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2-4 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2-5 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2-6 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2-7 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2-8 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2-9 .rn_SchemaAttribute,
+.rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2-10 .rn_SchemaAttribute {
+display: none;
+}
+
+.rn_AnswerStatus {
+  padding: 0;
+}
+
+.rn_AnswerField_Wi_Tekst_H1 .rn_SchemaAttributeValue {
+font-size: 1.5rem;
+color: grey;
+width: calc(100% / 1.5);
+margin: 0 auto 2rem auto;
+}
+
+.rn_AnswerView .rn_AnswerInfo .rn_AnswerField {
+border-top: 2px solid var(--oka-text-alt);
+display: block;
+margin: 0 auto 2rem auto;
+position: relative;
+text-align: center;
+width: calc(100% / 1.5);
+}
+
+.rn_AnswerView .rn_AnswerInfo .rn_AnswerField .rn_AnswerDivAlignment {
+background-color: var(--oka-content);
+color: var(--oka-text-alt);
+font-variation-settings: 'wght' 400;
+margin-left: 50%;
+padding: 0 .5rem;
+position: absolute;
+transform: translate(-50%, -55%);
+}
+
+#content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2 .rn_SchemaAttributeValue,
+#content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-1 .rn_SchemaAttributeValue,
+#content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-2 .rn_SchemaAttributeValue,
+#content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-3 .rn_SchemaAttributeValue,
+#content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-4 .rn_SchemaAttributeValue,
+#content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-5 .rn_SchemaAttributeValue,
+#content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-6 .rn_SchemaAttributeValue,
+#content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-7 .rn_SchemaAttributeValue,
+#content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-8 .rn_SchemaAttributeValue,
+#content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-9 .rn_SchemaAttributeValue,
+#content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2-10 .rn_SchemaAttributeValue {
+color: var(--oka-primary) !important;
+font-size: 1.25rem !important;
+font-variation-settings: 'wght' 800;
+line-height: 1.5;
+margin: 0 auto 2rem auto;
+text-align: center;
+width: calc(100% / 1.5);
+}
+
+
+
+
+
+
+
+
+
+
+
+.answer-details {
+  margin: 4rem 0;
   background-color: var(--oka-content);
-  color: var(--oka-text-alt);
-  font-variation-settings: 'wght' 400;
+  border: 1px solid var(--oka-border);
+  box-shadow: var(--oka-shadow);
+}
+
+.flexbox-answer-details {
+  padding:1rem;
+}
+
+.answer-view-abofavo {
+  display: flex;
+  /* flex-direction: row-reverse; */
+  justify-content: center;
+  margin: 0 -1rem;
+}
+
+.rn_SubscriptionButton {
+  margin-top: 0;
+}
+
+.rn_RecommendContentButton {
+  margin: 0;
+}
+
+.answer-view-abofavo button,
+#share-answer {
+  background-color: var(--oka-content);
+  border-radius: 10rem;
+  border: 2px solid var(--oka-primary);
+  color: var(--oka-primary);
+  height: 2.5rem;
+  margin: 0 .5rem;
+}
+
+.container #share-answer {
   margin-left: 50%;
-  padding: 0 .5rem;
-  position: absolute;
-  transform: translate(-50%, -55%);
-  }
-  
-  #content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2 .rn_SchemaAttributeValue {
-  color: var(--oka-primary) !important;
-  font-size: 1.25rem !important;
-  font-variation-settings: 'wght' 800;
-  line-height: 1.5;
-  margin: 0 auto;
-  text-align: center;
-  width: calc(100% / 1.5);
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  .answer-details {
-    margin: 4rem 0;
-    background-color: var(--oka-content);
-    border: 1px solid var(--oka-border);
-    box-shadow: var(--oka-shadow);
-  }
-  
-  .flexbox-answer-details {
-    padding:1rem;
-  }
-  
-  .answer-view-abofavo {
-    display: flex;
-    /* flex-direction: row-reverse; */
-    justify-content: center;
-    margin: 0 -1rem;
-  }
-  
-  .rn_SubscriptionButton {
-    margin-top: 0;
-  }
-  
-  .rn_RecommendContentButton {
-    margin: 0;
-  }
-  
-  .answer-view-abofavo button,
-  #share-answer {
-    background-color: var(--oka-content);
-    border-radius: 10rem;
-    border: 2px solid var(--oka-primary);
-    color: var(--oka-primary);
-    height: 2.5rem;
-    margin: 0 .5rem;
-  }
-  
-  .container #share-answer {
-    margin-left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .answer-view-abofavo button:hover,
-  #share-answer:hover {
-    background-color: var(--oka-primary);
-    color: var(--oka-content);
-  }
-  
-  .answer-view-abofavo~hr {
-    border-top:1px solid var(--oka-border) !important;
-    width: calc(100% + 2rem) !important;
-    margin-left: -1rem;
-  }
-  
-  .answer-abofavo {
-    height: auto;
-    display:flex;
-  }
-  
-  .answer-view-abofavo br {
-    display: none;
-  }
+  transform: translateX(-50%);
+}
+
+.answer-view-abofavo button:hover,
+#share-answer:hover {
+  background-color: var(--oka-primary);
+  color: var(--oka-content);
+}
+
+.answer-view-abofavo~hr {
+  border-top:1px solid var(--oka-border) !important;
+  width: calc(100% + 2rem) !important;
+  margin-left: -1rem;
+}
+
+.answer-abofavo {
+  height: auto;
+  display:flex;
+}
+
+.answer-view-abofavo br {
+  display: none;
+}

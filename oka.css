@@ -459,7 +459,7 @@ dl {
   width: calc(100% / 1.5);
 }
 
-:is([id^=SPAN] .leftHardAlignment,
+/* :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 dl::before {
   border-right: 2px solid var(--oka-border);
@@ -468,7 +468,7 @@ dl::before {
   height: 100%;
   margin-left: calc(100% / 3);
   position: absolute;
-}
+} */
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
@@ -479,14 +479,16 @@ dl>dt {
   float: left;
   font-variation-settings: 'wght' 600;
   padding-right: .5rem;
-  width: calc(100% / 3);
+  min-width: calc(100% / 3);
+  max-width: calc(100% / 1.5);
+  /* width: 16rem; */
 }
 
-:is([id^=SPAN] .leftHardAlignment,
+/* :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 dl>dt~dt {
   padding-top: .5rem;
-}
+} */
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
@@ -494,9 +496,11 @@ dl>dd {
   color: var(--oka-text);
   display: block;
   width: calc(100% / 1.5);
-  float: right;
+  /* max-width: 100%; */
+  float: left;
   padding-left: 1.2rem;
   text-indent: -.7rem;
+  margin-bottom: .5rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -509,9 +513,15 @@ dl>dd::before {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
+dl>dd:last-child {
+  margin-bottom: 0;
+}
+
+/* :is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 dl>dt~dt+dd {
   padding-top: .5rem;
-}
+} */
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
@@ -641,7 +651,7 @@ ul>li ol {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-ul ol>li {
+ul ol li {
   counter-increment: lister;
 }
 
@@ -650,6 +660,8 @@ ul ol>li {
 ul>li>ol li::marker {
   content: counter(lister)'\2009\2009';
 }
+
+
 
 /* ================= UNORDERED LIST ================= */
 
@@ -1469,6 +1481,11 @@ section .oka-column {
 .container .flexbox-answer-details)
 .oka-column>article {
   flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1480,7 +1497,7 @@ section .oka-column {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-column>article>* {
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1499,8 +1516,8 @@ section .oka-column {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-column>article>img.small {
-  margin-left: 25%;
-  width: 50% !important;
+  /* margin-left: 25%; */
+  width: calc(50% - .5rem) !important;
 }
 /* images need !important on width and height to overrule inline styling */
 
@@ -1577,7 +1594,7 @@ section .oka-column {
   border: 0;
   max-height: 15rem;
   min-height: 10rem;
-  min-width: 22rem;
+  min-width: calc(100% + 2rem);
   object-fit: cover;
   order: 1;
   outline: 0;
@@ -1669,6 +1686,18 @@ section .oka-column {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
+section .oka-steps {
+  border-bottom: none;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section .oka-steps {
+  margin-bottom: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 .oka-steps>article {
   /* justify-content: flex-end; */
   align-items: flex-start;
@@ -1676,6 +1705,12 @@ section .oka-column {
   display: flex;
   flex-flow: row wrap;
   padding: 1rem 0 1rem 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section .oka-steps>article:first-child {
+  border-top: none;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1701,6 +1736,11 @@ section .oka-column {
 .oka-steps .oka-steps {
   border-bottom: none;
   counter-reset: stepsub;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>.oka-steps {
   margin: 0 0 0 2rem;
 }
 
@@ -1722,7 +1762,7 @@ section .oka-column {
   /* flex: 1; */
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
   gap: 1rem;
   padding: 0;
   width: calc(50% - 1rem);
@@ -1824,7 +1864,7 @@ section .oka-column {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-tabs {
-  border-bottom: 2px solid var(--oka-border);
+  /* border-bottom: 2px solid var(--oka-border); */
   margin-bottom: 2rem;
   position: relative;
 }
@@ -1844,8 +1884,22 @@ section .oka-column {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-.oka-tabs>section:first-child {
+.oka-tabs>section:nth-child(2) {
+  border-top: 2px solid var(--oka-border);
   border-bottom: 2px solid var(--oka-border);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section .oka-tabs>section:nth-child(2) {
+  border: 2px solid var(--oka-border);
+  border-radius: .5rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child {
+  /* border-bottom: 2px solid var(--oka-border); */
   display: flex;
   overflow: hidden hidden;
 }
@@ -1868,6 +1922,8 @@ section .oka-column {
 .container .flexbox-answer-details)
 .oka-tabs>section:first-child>button:hover {
   color: var(--oka-secondary);
+  border-bottom: 4px solid var(--oka-secondary);
+  padding-bottom: calc(.5rem - 4px);
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2021,16 +2077,20 @@ section .oka-expands>article:last-child {
 }
 
 [id^=SPAN] .leftHardAlignment .oka-expands>article>div,
+[id^=SPAN] .leftHardAlignment .oka-expands>article>section,
 [id^=SPAN] .leftHardAlignment .oka-tabs>section>article>div,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article>section,
 .container .flexbox-answer-details .oka-expands>article>div,
-.container .flexbox-answer-details .oka-tabs>section>article>div {
+.container .flexbox-answer-details .oka-expands>article>section,
+.container .flexbox-answer-details .oka-tabs>section>article>div,
+.container .flexbox-answer-details .oka-tabs>section>article>section {
   /* display: block; */
   /* opacity: 0; */
   /* transition: opacity 1s ease; */
   animation-direction: reverse;
   animation-duration: 300ms;
   animation-name: oka-opacity;
-  height: 0;
+  /* height: 0; */
   overflow: hidden;
   padding: 0;
 }
@@ -2272,7 +2332,11 @@ section .oka-expands>article:last-child {
     white-space: unset;
   }
 
-
+  :is([id^=SPAN] .leftHardAlignment,
+  .container .flexbox-answer-details)
+  dl {
+    width: 100%;
+  }
 
 
   [id^=SPAN] .leftHardAlignment hr,
@@ -2405,8 +2469,19 @@ section .oka-expands>article:last-child {
 
   [id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3,
   .container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3 {
-    margin: 0 0 1.5rem;
+    margin: -1rem -1rem 1rem -1rem;
+    height: 3rem;
+    padding: 1rem;
   }
+
+
+
+  /* display: block;
+  margin: -1rem -1rem;
+  height: 3rem;
+  padding: 1rem;
+  color: var(--oka-text);
+  line-height: 1; */
 
   [id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3:after,
   .container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3:after {
