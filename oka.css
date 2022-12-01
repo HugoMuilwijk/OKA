@@ -104,6 +104,8 @@ red-dark: #e52e2e;
 
   --oka-primary: #009900;       /* green-dark */
   --oka-primary-alt: #00c300;   /* green */
+  --oka-secondary: #0077cc;     /* blue-dark */
+  --oka-secondary-alt: #00aaff; /* blue */
 
   --oka-shadow: 0 0 .5rem rgba(0, 0, 0, .75);
 }
@@ -443,7 +445,7 @@ html {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details) p {
   cursor: text;
-  padding-bottom: 2rem;
+  /* padding-bottom: 2rem; */
 }
 
 /* ================= DEFINITION LIST ================ */
@@ -627,11 +629,34 @@ ol.dial-menu li::marker {
   text-indent: 0;
 }
 
+
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul>li ol {
+  padding-left: 1rem;
+  text-indent: -1rem;
+  counter-reset: lister;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul ol>li {
+  counter-increment: lister;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul>li>ol li::marker {
+  content: counter(lister)'\2009\2009';
+}
+
 /* ================= UNORDERED LIST ================= */
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 ul {
+  counter-reset: list;
   list-style: inside;
   padding-left: 1.15rem;
   text-indent: -1.15rem;
@@ -639,7 +664,7 @@ ul {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-ul li::marker {
+ul>li::marker {
   color: var(--oka-primary);
   content: '\F0765\00a0\00a0';
   font-family: var(--oka-font-icon);
@@ -648,23 +673,52 @@ ul li::marker {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-ul ul {
+ol>li>ul>li::marker {
+  color: var(--oka-primary);
+  content: '\F0765\00a0\00a0';
+  font-family: var(--oka-font-icon);
+  font-size: .75rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul>li>ul {
   padding-left: 1.15rem;
   text-indent: -1.15rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-ul ul ul {
+ul>li>ul>li>ul {
   padding-left: 1.15rem;
   text-indent: -1.15rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-ul ul li::marker {
+ul ul>li::marker {
+  content: '\F0EC2\00a0\00a0';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol>li>ul>li>ul>li::marker {
+  content: '\F0EC2\00a0\00a0';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul ul ul>li::marker {
   content: '\F0766\00a0\00a0';
 }
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol>li>ul>li>ul>li>ul>li::marker {
+  content: '\F0766\00a0\00a0';
+}
+
+/* F0BC8 */
 
 /* ===================== TABLE ====================== */
 
@@ -767,6 +821,7 @@ a::before {
   position: relative;
   right: .125rem;
   top: 1px;
+  text-indent: 0;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -778,6 +833,7 @@ a::after {
   left: .125rem;
   position: relative;
   top: 1px;
+  text-indent: 0;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1417,6 +1473,12 @@ section .oka-column {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
+.oka-column>article.colspan {
+  flex: 2;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 .oka-column>article>* {
   margin-bottom: 1rem;
 }
@@ -1485,21 +1547,30 @@ section .oka-column {
   flex-direction: column;
   min-width:21rem;
   overflow: hidden;
-  padding-bottom: 1rem;
+  padding: 1rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-card>article>* {
   order: 4;
-  padding: 1rem 1rem 0 1rem;
+  /* padding: 1rem 1rem 0 1rem; */
+  margin-bottom: 1rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
+.oka-card>article>*:last-child {
+  margin-bottom: 0;
+}
+
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 .oka-card>article>img {
-  /* margin-left: -1px; */
-  /* margin-top: -1rem; */
+  margin-left: -1rem;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
   width: unset !important;
   height: unset !important;
   border-radius: 0;
@@ -1556,7 +1627,6 @@ section .oka-column {
   font-variation-settings: 'wght' 400;
   height: 2.5rem;
   line-height: 2.25;
-  margin: 1rem 1rem 0 1rem;
   order: 99;
   padding: 0 .5rem;
   text-align: center;
@@ -1696,7 +1766,7 @@ section .oka-column {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-steps .oka-steps>article>img {
-  width: calc(50% + .25rem) !important;
+  width: 50% !important;
 }
 /* images need !important on width and height to overrule inline styling */
 
@@ -1842,6 +1912,12 @@ section .oka-column {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
+section .oka-expands {
+  margin-bottom: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 .oka-expands>article,
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
@@ -1905,14 +1981,16 @@ section .oka-column {
 }
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) section .oka-expands>article:first-child {
+.container .flexbox-answer-details)
+section .oka-expands>article:first-child {
   border-top-left-radius: .5rem;
   border-top-right-radius: .5rem;
 
 }
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) section .oka-expands>article:last-child {
+.container .flexbox-answer-details)
+section .oka-expands>article:last-child {
   /* border-top: 2px solid var(--oka-border); */
   border-bottom-left-radius: .5rem;
   border-bottom-right-radius: .5rem;
@@ -1920,7 +1998,8 @@ section .oka-column {
 }
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) .oka-tabs>section>article:last-child {
+.container .flexbox-answer-details)
+.oka-tabs>section>article:last-child {
   border: none;
 }
 
@@ -1935,8 +2014,9 @@ section .oka-column {
   text-align: left;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article>h3,
-.container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article>h3 {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:nth-child(2)>article>h3 {
   display: none;
 }
 
@@ -2001,8 +2081,9 @@ section .oka-column {
   margin-bottom: 0;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-tabs article.oka-tab-active div section,
-.container .flexbox-answer-details .oka-tabs article.oka-tab-active div section {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs article.oka-tab-active div section {
   /* border: 10px solid black; */
   /* display: block; */
   /* height: 32rem; */
@@ -2011,8 +2092,9 @@ section .oka-column {
   position: relative;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands>article,
-.container .flexbox-answer-details .oka-expands>article {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article {
   /* max-height: 5rem; */
   /* transition: max-height .1s ease-in; */
   /* border-bottom: 2px solid var(--oka-border); */
@@ -2021,13 +2103,15 @@ section .oka-column {
   overflow: hidden;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands .oka-steps article,
-.container .flexbox-answer-details .oka-expands .oka-steps article {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands .oka-steps article {
   display: flex;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands>article>h3,
-.container .flexbox-answer-details .oka-expands>article>h3 {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article>h3 {
   display: block;
   margin: -1rem -1rem;
   height: 3rem;
@@ -2036,27 +2120,31 @@ section .oka-column {
   line-height: 1;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article>h3:hover,
-.container .flexbox-answer-details .oka-expands article>h3:hover {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands article>h3:hover {
   color: var(--oka-secondary) !important;
 }
 /* !important needed because of smartstart CSS */
 
-[id^=SPAN] .leftHardAlignment .oka-expands article div,
-.container .flexbox-answer-details .oka-expands article div {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands article div {
   padding: 1.25rem;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article>div,
-.container .flexbox-answer-details .oka-expands article>div {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article>div {
   height: 0;
   padding: 0;
   display: none;
   transition: opacity 1s ease;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands>article>h3:after,
-.container .flexbox-answer-details .oka-expands>article>h3:after {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article>h3:after {
   content: '\F0B26';
   font-family: var(--oka-font-icon);
   opacity: 1;
@@ -2067,20 +2155,23 @@ section .oka-column {
   transition: transform .25s ease-in-out;
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article.oka-tab-active h3,
-.container .flexbox-answer-details .oka-expands article.oka-tab-active h3 {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article.oka-tab-active>h3 {
   margin: -1rem -1rem 0 -1rem;
   color: var(--oka-primary) !important;
 }
 /* !important needed because of smartstart CSS */
 
-[id^=SPAN] .leftHardAlignment .oka-expands article.oka-tab-active h3:hover,
-.container .flexbox-answer-details .oka-expands article.oka-tab-active h3:hover {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands article.oka-tab-active h3:hover {
   color: var(--oka-primary);
 }
 
-[id^=SPAN] .leftHardAlignment .oka-expands article.oka-tab-active h3:after,
-.container .flexbox-answer-details .oka-expands article.oka-tab-active h3:after {
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands article.oka-tab-active h3:after {
   /* content: '\F0143'; */
   transform: rotate(180deg);
   
