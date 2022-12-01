@@ -1715,6 +1715,12 @@ section .oka-steps>article:first-child {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
+.oka-steps>.oka-steps>article:first-child {
+  border-top: 2px solid var(--oka-border);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 .oka-steps>article::before {
   background: var(--oka-primary);
   border-radius: 1.5rem;
@@ -2473,15 +2479,6 @@ section .oka-expands>article:last-child {
     height: 3rem;
     padding: 1rem;
   }
-
-
-
-  /* display: block;
-  margin: -1rem -1rem;
-  height: 3rem;
-  padding: 1rem;
-  color: var(--oka-text);
-  line-height: 1; */
 
   [id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3:after,
   .container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3:after {
