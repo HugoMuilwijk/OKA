@@ -1,142 +1,2416 @@
-@media (min-width: 1400px) {
-    .container {
-      max-width: 1320px;
-      width: unset;
-    }
+@font-face {
+  font-family: "Icons";
+  src: url('FNT/Icons.woff2') format('woff2-variations');
+}
+
+@font-face {
+  font-family: "Lexend";
+  src: url('FNT/Lexend.woff2') format('woff2-variations');
+}
+
+@font-face {
+  font-family: "MonoNum";
+  src: url('FNT/MonoNum.woff2') format('woff2-variations');
+  unicode-range: U+0030-0039;
+}
+
+/*
+black: #000000;
+grey-asphalt: #131313;
+grey-coal: #232323;
+grey-dark: #333333;
+grey-dim: #535353;
+grey-hazy: #737373;
+grey-medium: #939393;
+grey-silver: #b3b3b3;
+grey-smoke: #d3d3d3;
+grey-snow: #e3e3e3;
+grey-subtle: #f3f3f3;
+white: #ffffff;
+
+blue: #00aaff;
+blue-dark: #0077cc;
+
+green: #00c300;
+green-dark: #009900;
+
+lime: #deff00;
+
+orange: #ff9900;
+orange-dark: #ee7700;
+
+red: #ff3333;
+red-dark: #e52e2e;
+*/
+
+:root {
+  --oka-font-icon: Icons;
+  --oka-font-sans: Lexend, sans-serif;
+  --oka-font-mono: MonoNum, Lexend, monospace;
+
+  --oka-background: #f3f3f3;    /* grey-subtle */
+  --oka-border: #d3d3d3;        /* grey-snow */
+  --oka-content: #ffffff;       /* white */
+  --oka-content-alt: #f3f3f3;   /* grey-subtle */
+
+  --oka-pre: #F9F9F9;           /* between white and grey-subtle */
+
+  --oka-text: #333333;          /* grey-coal */
+  --oka-text-alt: #939393;      /* grey-medium */
+
+  --oka-marked: #deff00;        /* lime */
+  --oka-disabled: #d3d3d3;      /* grey-smoke */
+  --oka-warning: #ff9900;       /* orange */
+  --oka-warning-alt: #ee7700;   /* orange-dark */
+  --oka-error: #ff3333;         /* red */
+  --oka-white: #ffffff;         /* white */
+
+  --oka-primary: #00c300;       /* green */
+  --oka-primary-alt: #009900;   /* green-dark */
+  --oka-secondary: #00aaff;     /* blue */
+  --oka-secondary-alt: #0077cc; /* blue-dark */
+
+  --oka-shadow: 0 0 .5rem rgba(0, 0, 0, .25);
+  --oka-shadow-alt: 0 0 .5rem rgba(0, 0, 0, .125);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  :root {
+    color-scheme: light;
   }
-  
-  .site-main {
-    min-height: unset;
+
+  :root.dark {
+    color-scheme: dark;
   }
-  
-  .page-header {
-    box-shadow: var(--oka-shadow);
-  }
-  
-  .page-title {
-    display: none;
-  }
-  
-  .container {
-    padding: 0;
-  }
-  
-  #wrapper {
-    background-color: var(--oka-background);
-  }
-  
-  .rn_AnswerField_Wi_Titel_H1,
-  .rn_AnswerField_Wi_Tekst_H1 .rn_SchemaAttribute,
-  .rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2 .rn_SchemaAttribute,
-  .rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Titel_H2 .rn_SchemaAttribute,
-  .rn_AnswerField.rn_AnswerField_Wi_Paragrafen_H2_Tekst_H2 .rn_SchemaAttribute,
-  .rn_AnswerField[class^='rn_AnswerField_Wi_Paragrafen_H2'] .rn_SchemaAttribute {
-  display: none;
-  }
-  
-  
-  .rn_AnswerField_Wi_Tekst_H1 .rn_SchemaAttributeValue {
-  font-size: 1.5rem;
-  color: grey;
-  }
-  
-  .rn_AnswerView .rn_AnswerInfo .rn_AnswerField {
-  border-top: 2px solid var(--oka-text-alt);
+
+}
+
+:root.dark {
+  color-scheme: dark;
+  --oka-background: #131313;    /* grey-asphalt */
+  --oka-border: #535353;        /* grey-dim */
+  --oka-content: #232323;       /* grey-coal */
+  --oka-content-alt: #333333;   /* grey-dark */
+
+  --oka-pre: #1B1B1B;           /* between grey-coal and grey-asphalt */
+
+  --oka-text: #d3d3d3;          /* grey-silver */
+  --oka-text-alt: #737373;      /* grey-medium */
+
+  --oka-error: #e52e2e;         /* red-dark */
+  --oka-warning: #ee7700;       /* orange-dark */
+  --oka-warning-alt: #ff9900;   /* orange */
+
+  --oka-primary: #009900;       /* green-dark */
+  --oka-primary-alt: #00c300;   /* green */
+  --oka-secondary: #0077cc;     /* blue-dark */
+  --oka-secondary-alt: #00aaff; /* blue */
+
+  --oka-shadow: 0 0 .5rem rgba(0, 0, 0, .75);
+}
+
+:root.dark img {
+  filter: brightness(.95);
+}
+
+/* ================================================== */
+/* =========== RESET DEFAULT APPEARANCES ============ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-weight: unset;
+}
+/* Needed to make box-sizing behave te same across browsers */
+/* Needed to make use of variable font thickness */
+
+/* Limit to frontend? */
+
+/* ================================================== */
+/* ============= FANCY WEBKIT SCROLLBAR ============= */
+
+/* Over-the-top solution to page 'jumping' when hiding the webkit scrollbar */
+
+html>::-webkit-scrollbar {
+  outline:1px solid var(--oka-border);
+  width: 1.5rem;
+}
+
+html>::-webkit-scrollbar-button:single-button:vertical {
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 1.5rem;
+  outline: 1px solid var(--oka-border);
+}
+
+html>::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%23d3d3d3'><polygon points='16,8 24,16 24,24 16,16 8,24 8,16'/></svg>");
+}
+
+html.dark>::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%23535353'><polygon points='16,8 24,16 24,24 16,16 8,24 8,16'/></svg>");
+}
+
+html>::-webkit-scrollbar-button:single-button:vertical:decrement:hover,
+html.dark ::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%2300aaff'><polygon points='16,8 24,16 24,24 16,16 8,24 8,16'/></svg>");
+}
+
+html>::-webkit-scrollbar-button:single-button:vertical:decrement:active,
+html.dark>::-webkit-scrollbar-button:single-button:vertical:decrement:active {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%2300c300'><polygon points='16,8 24,16 24,24 16,16 8,24 8,16'/></svg>");
+}
+
+html>::-webkit-scrollbar-button:single-button:vertical:increment {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%23d3d3d3'><polygon points='16,24 24,16 24,8 16,16 8,8 8,16'/></svg>");
+}
+
+html.dark>::-webkit-scrollbar-button:single-button:vertical:increment {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%23535353'><polygon points='16,24 24,16 24,8 16,16 8,8 8,16'/></svg>");
+}
+
+html>::-webkit-scrollbar-button:vertical:single-button:increment:hover,
+html.dark>::-webkit-scrollbar-button:vertical:single-button:increment:hover {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%2300aaff'><polygon points='16,24 24,16 24,8 16,16 8,8 8,16'/></svg>");
+}
+
+html>::-webkit-scrollbar-button:vertical:single-button:increment:active,
+html.dark>::-webkit-scrollbar-button:vertical:single-button:increment:active {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%2300c300'><polygon points='16,24 24,16 24,8 16,16 8,8 8,16'/></svg>");
+}
+
+html>::-webkit-scrollbar-track {
+  border-radius: 2rem;
+  border: .5rem solid transparent;
+  box-shadow: inset 0 0 .25rem rgba(0, 0, 0, .25); 
+  outline-offset: calc(-.5rem - 1px);
+  outline: 1px solid var(--oka-border);
+}
+
+html.dark>::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 .25rem rgba(255, 255, 255, .25);
+}
+
+html>::-webkit-scrollbar-track:hover {
+  box-shadow: inset 0 0 .5rem rgba(0, 0, 0, .25); 
+}
+
+html.dark>::-webkit-scrollbar-track:hover {
+  box-shadow: inset 0 0 .5rem rgba(255, 255, 255, .25);
+}
+
+html>::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  border:.5rem solid transparent;
+  box-shadow: inset 2rem 0 var(--oka-border); 
+  min-height: 4rem;
+  outline-offset: calc(-.5rem - 1px);
+  outline:1px solid rgba(0, 0, 0, .25);
+}
+
+html>::-webkit-scrollbar-thumb:hover {
+  box-shadow: inset 2rem 0 var(--oka-secondary);
+}
+
+html>::-webkit-scrollbar-thumb:active {
+  box-shadow: inset 2rem 0 var(--oka-primary);
+}
+
+/* ================================================== */
+/* ================ OVERRULE OSC CSS ================ */
+
+/* Fixes small preview and some font issues */
+
+html {
+  font-size: 16px;
+}
+
+.normal {
+  color: unset;
+  font-family: unset;
+  font-size: unset;
+  font-weight: unset;
+}
+
+/* ================================================== */
+/* ================ OVERRULE BAD CSS ================ */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+#rn_Summary {
+  font-weight: unset;
+  padding: unset;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(h1,h2,h3) {
+  font-family: unset;
+  font-weight: unset;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+h3 {
+  color: unset !important;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.rn_AnswerDetail.rn_AnswerHeader h1 {
+  font-family: unset;
+  font-weight: unset;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol {
+  list-style-type: decimal;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a {
+  text-decoration: unset;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(b,dt,strong) {
+  font-weight: unset;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+button {
+  border-radius: unset;
+  color: unset;
+  font-size: unset;
+  line-height: normal;
+  margin: unset;
+  transition: unset;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+button:focus {
+  outline: unset;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.container {
+  width: unset;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(.rn_SchemaAttributeValue,.rn_SchemaAttributeValue p,.rn_SchemaAttributeValue span ) {
+    color: unset !important;
+    font-family: unset !important;
+    font-size: unset !important;
+}
+
+/* :is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(.rn_SchemaAttributeValue ol,.rn_SchemaAttributeValue ul) {
+  margin: unset;
+  padding: unset;
+} */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(ol,ul) {
+  margin: unset;
+  padding: unset;
+}
+
+/* ================================================== */
+/* ==================== BASE CSS ==================== */
+
+/*
+Below selectors are needed for standard elements
+
+[id^=SPAN] .leftHardAlignment       SAVED preview
+.container .flexbox-answer-details  FRONT-END
+
+.rn_Container .rn_AnswerView        ALTERNATE FRONT-END?
+*/
+
+html {
+  background: var(--oka-background);
+  /* -webkit-margin-start: 1.5rem; */
+  overflow: hidden auto;
+}
+/* Needed for the scrollbar fix to work and center content */
+
+.rn_Container {
+  -webkit-margin-start: 1.5rem;
+}
+
+.container {
+  padding: 0;
+  min-width: 540px;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) {
+  background: var(--oka-content);
+  color: var(--oka-text);
+  flex-direction: column;
+  font-family: var(--oka-font-sans);
+  font-size: 1rem;
+  font-variation-settings: 'wght' 300;
+  line-height: 1.5;
+  padding: 2rem 1rem;
+}
+
+[id^=SPAN] .leftHardAlignment {
+  border: 1px solid var(--oka-border);
+  box-shadow: var(--oka-shadow);
+  margin: .25rem 1rem 0 0;
+  padding: 2rem;
+}
+
+/* .container .flexbox-answer-details {
+  line-height: 1.5;
+} */
+
+/* ================================================== */
+/* ===================== IMAGES ===================== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) img {
+  border-radius: .5rem;
+  border: 2px solid var(--oka-border);
+  cursor: pointer;
+  font-size: .75rem;
+  height: unset !important;
+  text-indent: .25rem;
+  width: 100% !important;
+}
+/* images need !important on width and height to overrule inline styling */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) img:hover {
+  outline: 4px solid var(--oka-secondary);
+  outline-offset: -4px;
+}
+
+/* ================================================== */
+/* ================ DEFAULT ELEMENTS ================ */
+
+/* ==================== HEADERS ===================== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) :is(h1,h2,h3) {
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) h1 {
+  color: var(--oka-primary);
+  font-size: 2rem;
+  font-variation-settings: 'wght' 1000;
+  line-height: 1.25;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+  width: calc(100% / 1.25);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) h2 {
+  color: var(--oka-primary);
+  font-size: 1.25rem;
+  font-variation-settings: 'wght' 800;
+  line-height: 1.5;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+  transform: translateY(-.5rem);
+  width: calc(100% / 1.5);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) h3 {
+  font-size: 1rem;
+  font-variation-settings: 'wght' 600;
+  line-height: 1.25;
+}
+
+/* =================== PARAGRAPH ==================== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) p {
+  cursor: text;
+  /* padding-bottom: 2rem; */
+}
+
+/* ================= DEFINITION LIST ================ */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl {
+  display: inline-block;
+  margin: 0 auto;
+  position: relative;
+  width: calc(100% / 1.5);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl::before {
+  border-right: 2px solid var(--oka-border);
+  content: '';
   display: block;
+  height: 100%;
+  margin-left: calc(100% / 3);
+  position: absolute;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl>dt {
+  clear: both;
+  color: var(--oka-primary);
+  display: block;
+  float: left;
+  font-variation-settings: 'wght' 600;
+  padding-right: .5rem;
+  width: calc(100% / 3);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl>dt~dt {
+  padding-top: .5rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl>dd {
+  color: var(--oka-text);
+  display: block;
+  width: calc(100% / 1.5);
+  float: right;
+  padding-left: 1.2rem;
+  text-indent: -.7rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl>dd::before {
+  content: '- ';
+  color: var(--oka-text-alt);
+  font-variation-settings: 'wght' 400;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+dl>dt~dt+dd {
+  padding-top: .5rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section dl {
+  width: 100%;
+}
+
+/* ================== ORDERED LIST ================== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol {
+  counter-reset: list;
+  list-style: inside;
+  padding-left: 1rem;
+  text-indent: -1rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="2"] {
+  counter-reset: list 1;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="3"] {
+  counter-reset: list 2;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="4"] {
+  counter-reset: list 3;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="5"] {
+  counter-reset: list 4;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="6"] {
+  counter-reset: list 5;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="7"] {
+  counter-reset: list 6;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="8"] {
+  counter-reset: list 7;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="9"] {
+  counter-reset: list 8;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="10"] {
+  counter-reset: list 9;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol li {
+  counter-increment: list;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol li::marker {
+  color: var(--oka-primary);
+  content: counters(list, '.', decimal)'\2009\2009';
+  font-variation-settings: 'wght' 600;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) ol ol {
+  padding-left: 1.8rem;
+  text-indent: -1.8rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) ol ol ol {
+  padding-left: 2.6rem;
+  text-indent: -2.6rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol[start="10"] li ol {
+  padding-left: 1.75rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol.dial-menu li::marker {
+  content: '#' counters(list, '\00a0\203a\00a0#', decimal) '\00a0';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(.dial-menu,.dial-menu ol,.dial-menu ol ol) {
+  padding-left: 0;
+  text-indent: 0;
+}
+
+
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul>li ol {
+  padding-left: 1rem;
+  text-indent: -1rem;
+  counter-reset: lister;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul ol>li {
+  counter-increment: lister;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul>li>ol li::marker {
+  content: counter(lister)'\2009\2009';
+}
+
+/* ================= UNORDERED LIST ================= */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul {
+  counter-reset: list;
+  list-style: inside;
+  padding-left: 1.15rem;
+  text-indent: -1.15rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul>li::marker {
+  color: var(--oka-primary);
+  content: '\F0765\00a0\00a0';
+  font-family: var(--oka-font-icon);
+  font-size: .75rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol>li>ul>li::marker {
+  color: var(--oka-primary);
+  content: '\F0765\00a0\00a0';
+  font-family: var(--oka-font-icon);
+  font-size: .75rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul>li>ul {
+  padding-left: 1.15rem;
+  text-indent: -1.15rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul>li>ul>li>ul {
+  padding-left: 1.15rem;
+  text-indent: -1.15rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul ul>li::marker {
+  content: '\F0EC2\00a0\00a0';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol>li>ul>li>ul>li::marker {
+  content: '\F0EC2\00a0\00a0';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ul ul ul>li::marker {
+  content: '\F0766\00a0\00a0';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol>li>ul>li>ul>li>ul>li::marker {
+  content: '\F0766\00a0\00a0';
+}
+
+/* F0BC8 */
+
+/* ===================== TABLE ====================== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table {
+  border-collapse: separate;
+  border-radius: .5rem;
+  border-spacing: 0px;
+  border: 2px solid var(--oka-border);
+  cursor: text;
+  margin: 0 auto 1rem auto;
+  max-width: 100%;
+  min-width: calc(100% / 1.5);
+  padding: 0 .5rem;
+  position: relative;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table tr th {
+  background: var(--oka-content);
+  border-bottom: 2px solid var(--oka-primary);
+  border-width: 0 0 2px 0;
+  font-variation-settings: 'wght' 400;
+  height: 2rem;
+  margin-bottom: 2rem;
+  position: sticky;
+  text-align: center;
+  top: 0;
+  padding: 0 .5rem; 
+  line-height: 2;
+}
+/* top: 0; is needed for stickiness */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table td {
+  border-bottom: 2px solid var(--oka-border);
+  border-width: 0 0 2px 0;
+  height: 2rem;
+  padding: 0 .5rem;
+  line-height: 2;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table td.numeric {
+  font-family: var(--oka-font-mono);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table td.right {
+  text-align: right;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table tr:last-child td {
+  border-bottom: none;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(table>tbody:first-child tr:nth-child(even),
+table>thead+tbody tr:nth-child(odd)) {
+  background: var(--oka-content-alt);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(table.no-style,table.no-style tr th,table.no-style td) {
+  border-color: var(--oka-content);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table:is(.no-stripe,.no-style)>tbody tr:nth-child(odd) {
+  background: var(--oka-content);
+}
+
+/* ====================== LINK ====================== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a {
+  border-block: .25rem solid transparent;
+  color: var(--oka-primary);
+  font-variation-settings: 'wght' 400;
+  line-height: 1.25;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a::before {
+  content: '';
+  display: inline-block;
+  font-family: var(--oka-font-icon);
+  position: relative;
+  right: .125rem;
+  top: 1px;
+  text-indent: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a::after {
+  content: '\F0054';
+  display: inline-block;
+  font-family: var(--oka-font-icon);
+  left: .125rem;
+  position: relative;
+  top: 1px;
+  text-indent: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[target="_blank"] {
+  color: var(--oka-secondary);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[target="_blank"]::after {
+  content: '\F005C';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href^="#"]::after {
+  content: '\F0E79'; 
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href^="mailto:"]::before {
+  content: '\F01F0';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href^="tel:"]::before {
+  content: '\F0DF0';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href$=".pdf"]::before {
+  content: '\F09EE';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href^="mailto:"]::after,
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href^="tel:"]::after,
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href$=".pdf"]::after {
+  content: '';
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a:hover {
+  color: var(--oka-primary-alt);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset:.125em;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[target="_blank"]:hover {
+  color: var(--oka-secondary-alt);
+}
+
+/* ================== FONT STYLING ================== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(b,strong) {
+  font-variation-settings: 'wght' 600;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(i,em) {
+  font-variation-settings: 'wght' 400;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+u {
+  font-variation-settings: 'wght' 400;
+  text-decoration-thickness: 2px;
+  text-underline-offset: .125Rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+s {
+  color: var(--oka-error);
+  font-variation-settings: 'wght' 400;
+  text-decoration-thickness: 2px;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+kbd {
+  display: inline-block;
+  color: var(--oka-primary-alt);
+  font-family: var(--oka-font-mono);
+  padding: .125rem .25rem;
+  background: var(--oka-pre);
+  border: 2px solid var(--oka-primary);
+  border-bottom-width: 4px;
+  font-variation-settings: 'wght' 500;
+  line-height: 1;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+kbd+kbd {
+  margin-left: 1rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+kbd+kbd::before {
+  color: var(--oka-text-alt);
+  content: '+\00a0';
+  display: inline-block;
+  transform: translateX(-1.15rem);
+  width: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+hr {
+  color: var(--oka-primary);
+  border-top: 2px solid;
+  opacity: 1;
+  width: calc(100% / 1.5);
+  margin: 0 auto 2rem auto;
+}
+
+/* ================================================== */
+/* ================== OKA LIGHTBOX ================== */
+
+/*
+-------------------------------------------------------
+1. Base Styles
+-------------------------------------------------------
+*/
+
+.remove-scroll {
+  overflow: hidden;
+  -webkit-margin-end: 1.5rem;
+}
+/* -webkit-margin-end added to prevent page 'jumping' on webkit browsers */
+
+.lightbox-hide {
+  left: -9999px;
+  position: absolute;
+  top: -9999px;
+  visibility: hidden;
+}
+
+.lightbox-container {
+  /* background-color: rgba(51, 51, 51, 0.5);  */
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /*#333333*/
+  box-shadow: inset 0 2rem 3rem rgba(0, 0, 0, .25), inset 0 -2rem 3rem rgba(0, 0, 0, .25);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  padding: 2rem;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+}
+
+.lightbox-wrapper {
+  position: relative;
+  /* background-color: red; */
+  margin: 4rem 0;
+  /* height: 100vh; */
+  /* overflow: scroll; */
+}
+
+.lightbox-title {
+  background: black;
+  width: 100%;
+  height: 3rem;
+  position: absolute;
+  top: -3.5rem;
+}
+
+.lightbox-content {
+  border-radius: .5rem;
+  box-shadow: 0 0 .5rem rgba(0, 0, 0, .5);
+  cursor: move;
+  margin: 0 auto;
+  max-height: calc(100vh - 8rem);
+  max-width: calc(100vw - 4rem);
+  overflow: auto;
+}
+
+.lightbox-image {
+  
+  max-height: calc(100vh - 8rem);
+  max-width: calc(100vw - 4rem);
+  /* height: 100%; */
+  /* height: 1080px;
+  width: 1440px; */
+  vertical-align: middle;
+}
+
+/*
+-------------------------------------------------------
+2. Buttons
+-------------------------------------------------------
+*/
+
+.lightbox-btn {
+  background-color: var(--oka-primary);
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 3rem;
+  height: 3rem;
+  position: absolute;
+  transition: all .2s;
+  width: 3rem;
+  margin-top: .5rem;
+}
+
+.lightbox-btn:disabled {
+  cursor: initial;
+  background-color: var(--oka-primary-alt);
+}
+
+.lightbox-btn-previous {
+  left: 3rem;
+}
+
+.lightbox-btn-next {
+  left: 7rem;
+}
+
+.lightbox-btn-close {
+  background-color: var(--oka-error);
+  right: 0;
+}
+
+.lightbox-btn-up::after,
+.lightbox-btn-next::after,
+.lightbox-btn-previous::after,
+.lightbox-btn-close::after {
+  content: '\F05AD';
+  font-family: var(--oka-font-icon);
+  color: white;
+  font-size: 1.5rem;
+  line-height: 2;
+  display: block;
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  top:0;
+  left:0;
+}
+
+.lightbox-btn-up::after {
+  content: '\F0143';
+}
+
+.lightbox-btn-next::after {
+  content: '\F0142';
+}
+
+.lightbox-btn-previous::after {
+  content: '\F0141';
+}
+
+/*
+-------------------------------------------------------
+4. Animations
+-------------------------------------------------------
+*/
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes createBox {
+  from {
+    transform: scale(.95);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes deleteBox {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(.95);
+  }
+}
+
+
+
+
+
+
+
+
+/* ================================================== */
+/* ==================== OKA CODE ==================== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code {
+  height: auto;
   margin: 0 auto 2rem auto;
   position: relative;
   text-align: center;
   width: calc(100% / 1.5);
-  }
-  
-  .rn_AnswerView .rn_AnswerInfo .rn_AnswerField .rn_AnswerDivAlignment {
-  background-color: var(--oka-content);
-  color: var(--oka-text-alt);
+  z-index: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section .oka-code {
+  width: 100%;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input {
+  display: none;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>label {
+  background: var(--oka-error);
+  border-radius: 1.5rem;
+  color: var(--oka-white);
+  cursor: pointer;
+  display: inline-block;
   font-variation-settings: 'wght' 400;
-  margin-left: 50%;
-  padding: 0 .5rem;
-  position: absolute;
-  transform: translate(-50%, -55%);
-  }
-  
-  #content .rn_AnswerField_Wi_Paragrafen_H2_Titel_H2 .rn_SchemaAttributeValue {
-  color: var(--oka-primary) !important;
-  font-size: 1.25rem !important;
-  font-variation-settings: 'wght' 800;
+  height: 1.5rem;
   line-height: 1.5;
+  margin: calc(-.75rem + 1px) auto 0 auto;
+  padding: 0 .75rem;
+  position: absolute;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 10;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>label::before {
+  content: '\F0174\ ';
+  font-family: var(--oka-font-icon);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>label::after {
+  content: "";
+  display: block;
+  height: 2.5rem;
+  margin: -2rem 0 0 -1.5rem;
+  position: absolute;
+  width: calc(100% + 1.5rem);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>pre {
+  background-color: var(--oka-pre);
+  border-radius: 2px;
+  border: 2px solid var(--oka-error);
+  box-shadow: inset 0 0 .5rem var(--oka-error);
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+  text-align: left;
+  transition: max-height .25s ease-in-out, box-shadow .25s ease-in-out, border-radius .125s ease-in, padding .25s ease-in-out;
+  white-space: pre-wrap;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>pre:hover {
+  overflow-y: auto;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>pre::before {
+  counter-reset: code;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>pre>code {
+  background: none;
+  border: none;
+  color: var(--oka-text);
+  counter-increment: code;
+  margin-left: 1rem;
+  opacity: 0;
+  padding: 0;
+  transition: opacity .25s ease-in .25s;
+  user-select: text;
+  white-space: pre;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>pre>code::before {
+  color:var(--oka-text-alt);
+  content: counter(code) ". ";
+  display: inline-block;
+  margin-left: auto;
+  padding-left: auto;
+  text-align: right;
+  width: 2rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+code {
+  background-color: var(--oka-pre);
+  border-radius: .5rem;
+  border: 2px solid var(--oka-error);
+  color: var(--oka-text);
+  display: inline-block;
+  line-height: 1;
+  padding: .125rem .25rem;
+  text-indent: 0;
+  user-select: all;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+code>e {
+  color: var(--oka-text-alt);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+code>n {
+  color: var(--oka-primary);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+code>c {
+  color: var(--oka-primary-alt);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+code>d {
+  color: var(--oka-secondary);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>button {
+  background-color: var(--oka-pre);
+  border-radius: .75rem;
+  border: 2px solid var(--oka-error);
+  bottom: .5rem;
+  color: var(--oka-error);
+  display: inline-block;
+  font-variation-settings: 'wght' 400;
+  height: 1.5rem;
+  line-height: 1;
+  opacity: 0;
+  padding: 0 .5rem;
+  pointer-events: none;
+  position: absolute;
+  right: .5rem;
+  transition: opacity .25s ease-in;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input:checked+label {
+  background: var(--oka-error);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input:checked~pre {
+  border-radius: .5rem;
+  border: 2px solid var(--oka-error);
+  box-shadow: inset var(--oka-shadow);
+  max-height: 32rem;
+  padding: 1rem 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input:checked~pre>code {
+  opacity: 1;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input:checked~button {
+  opacity: 1;
+  pointer-events: all;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input:checked~button:hover {
+  background-color: var(--oka-error);
+  color: var(--oka-white);
+}
+
+/* ================================================== */
+/* ==================== OKA ALERT =================== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-alert {
   margin: 0 auto;
-  text-align: center;
   width: calc(100% / 1.5);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-alert>article {
+  border: 2px solid var(--oka-warning);
+  /* border-bottom-width: 1rem; */
+  background: var(--oka-background);
+  border-radius: .5rem;
+  border-top-width: .25rem;
+  box-shadow: var(--oka-shadow);
+  color: var(--oka-warning);
+  margin-bottom: 2rem;
+  min-height: 4rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* [id^=SPAN] .leftHardAlignment .oka-alert article::before,
+[id^=SPAN] .leftHardAlignment .oka-alert article::after,
+.container .flexbox-answer-details .oka-alert article::before,
+.container .flexbox-answer-details .oka-alert article::after {
+  background: repeating-linear-gradient(45deg, var(--oka-content) 0 .25rem, var(--oka-warning) .25rem 1.25rem, var(--oka-content) 1.25rem 1.5rem);
+  background-position: 50%;
+  background-size: calc(100% + 2rem + 4px) .5rem;
+  content: '';
+  display: block;
+  height: .5rem;
+  margin: -1.5rem 0 0 2px;
+  width: calc(100%);
+} */
+
+/* [id^=SPAN] .leftHardAlignment .oka-alert article::after,
+.container .flexbox-answer-details .oka-alert article::after {
+  margin: 0 0 -1.5rem 2px;
+} */
+
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-alert>article>h2 {
+  color: var(--oka-warning-alt);
+  font-size: 1.5rem;
+  font-variation-settings: 'wght' 600;
+  margin-bottom: .5rem;
+  margin-top: .5rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-alert>article>p {
+  padding-bottom: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-alert>article>p>a {
+  color: var(--oka-warning-alt);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-alert>article>p>a:hover {
+  color: var(--oka-warning);
+}
+
+/* ================================================== */
+/* =================== OKA COLUMN =================== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section .oka-column {
+  margin-bottom: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article {
+  flex: 1;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article.colspan {
+  flex: 2;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article>* {
+  margin-bottom: 1rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article>*:last-child {
+  margin-bottom: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article>img {
+  width: 100% !important;
+}
+/* images need !important on width and height to overrule inline styling */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article>img.small {
+  margin-left: 25%;
+  width: 50% !important;
+}
+/* images need !important on width and height to overrule inline styling */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article>p {
+  padding-bottom: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-column>article>table {
+  width: 100%;
+}
+
+/* ================================================== */
+/* ==================== OKA CARD ==================== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card {
+  /* align-items: flex-start; */
+  background: var(--oka-background);
+  border-radius: .5rem;
+  border:1px solid var(--oka-border);
+  box-shadow: inset var(--oka-shadow);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin: 0 2rem 2rem 2rem;
+  padding: 2rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article {
+  background: var(--oka-content);
+  border-radius: .5rem;
+  border: 1px solid var(--oka-border);
+  box-shadow: var(--oka-shadow);
+  display: flex;
+  flex-basis: calc((100% + 8rem)/3 - 1rem);
+  flex-direction: column;
+  min-width:21rem;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>* {
+  order: 4;
+  /* padding: 1rem 1rem 0 1rem; */
+  margin-bottom: 1rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>*:last-child {
+  margin-bottom: 0;
+}
+
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>img {
+  margin-left: -1rem;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  width: unset !important;
+  height: unset !important;
+  border-radius: 0;
+  border: 0;
+  max-height: 15rem;
+  min-height: 10rem;
+  min-width: 22rem;
+  object-fit: cover;
+  order: 1;
+  outline: 0;
+  padding: 0;
+}
+/* images need !important on width and height to overrule inline styling */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>img:hover {
+  /* height:15rem; */
+  box-shadow: none;
+  cursor: default;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>h3::before {
+  background: linear-gradient(to top, rgba(0,0,0,.25) , transparent);
+  content: '';
+  display: block;
+  height: 2rem;
+  margin: -3rem 0 1rem -1rem;
+  position: relative;
+  width: calc(100% + 2rem);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>h3 {
+  color: var(--oka-text) !important;
+  margin: 0;
+  order: 2;
+  padding-bottom: 0;
+}
+/* !important needed because of smartstart CSS */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>.button-link {
+  background: var(--oka-content);
+  border-radius: 5rem;
+  border: 2px solid var(--oka-primary);
+  color: var(--oka-primary);
+  display: block;
+  font-size: 1rem;
+  font-variation-settings: 'wght' 400;
+  height: 2.5rem;
+  line-height: 2.25;
+  order: 99;
+  padding: 0 .5rem;
+  text-align: center;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>.button-link:hover {
+  background: var(--oka-primary);
+  color: var(--oka-white);
+  text-decoration: none;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>.button-link[target="_blank"] {
+  border: 2px solid var(--oka-secondary);
+  color: var(--oka-secondary);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-card>article>.button-link[target="_blank"]:hover {
+  background: var(--oka-secondary);
+  color: var(--oka-white);
+}
+
+/* ================================================== */
+/* =================== OKA STEPS ==================== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps {
+  border-bottom: 2px solid var(--oka-border);
+  counter-reset: step;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article {
+  /* justify-content: flex-end; */
+  align-items: flex-start;
+  border-top: 2px solid var(--oka-border);
+  display: flex;
+  flex-flow: row wrap;
+  padding: 1rem 0 1rem 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article::before {
+  background: var(--oka-primary);
+  border-radius: 1.5rem;
+  color: var(--oka-content);
+  content: counter(step);
+  counter-increment: step;
+  display: block;
+  font-size: 2rem;
+  font-variation-settings: 'wght' 600;
+  height: 3rem;
+  line-height: 1.5;
+  position: relative;
+  text-align: center;
+  width: 3rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps .oka-steps {
+  border-bottom: none;
+  counter-reset: stepsub;
+  margin: 0 0 0 2rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps .oka-steps>article::before {
+  background: var(--oka-content);
+  border: .25rem solid var(--oka-primary);
+  color: var(--oka-primary);
+  content: counter(step) "." counter(stepsub);
+  counter-increment: stepsub;
+  font-size: 1.25rem;
+  line-height: 2;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span) {
+  /* flex: 1; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0;
+  width: calc(50% - 1rem);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span):first-child {
+  flex: 1;
+  justify-content: flex-start;
+  padding: 0 2rem 0 1rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span) :is(h3,p,ul) {
+  width: 100%;
+  margin: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span) table {
+  width: 100% !important;
+  margin: 0;
+}
+/* tables need !important on width to overrule inline styling */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>img {
+  height: auto !important;
+  max-height: 128rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  order: 99;
+  width: calc(50% - 1rem) !important;
+}
+/* images need !important on width and height to overrule inline styling */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps .oka-steps>article>img {
+  width: 50% !important;
+}
+/* images need !important on width and height to overrule inline styling */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span)>img {
+  height: auto !important;
+  display: inline-block;
+  margin:0;
+  max-height: 128rem;
+  object-fit: cover;
+  object-position: 50% 50%;
+  order: 99;
+  width: 100% !important;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span)>img.small {
+  width: calc(50% - .5rem) !important;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span)>table tr th {
+  word-break: break-word;
+  max-width: 1px;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span)>table tr td {
+  word-break: break-word;
+  max-width: 1px;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>section {
+  width: 100%;
+  order: 100;
+  margin: 1rem 0 0 4rem;
+}
+
+/* :is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article section section{
+  width: calc(100% - 1rem);
+  margin: 1rem 0 0 2rem;
+} */
+
+/* ================================================== */
+/* =============== OKA EXPANDS / TABS =============== */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs {
+  border-bottom: 2px solid var(--oka-border);
+  margin-bottom: 2rem;
+  position: relative;
+}
+/* 'position: relative' is needed for the ::after pseudo element to position correctly */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs::before {
+  background: linear-gradient(to right, var(--oka-content) 0, transparent 1rem, transparent calc(100% - 1rem), var(--oka-content) 100%);
+  content: "";
+  display: block;
+  height: 3rem;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child {
+  border-bottom: 2px solid var(--oka-border);
+  display: flex;
+  overflow: hidden hidden;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child>button {
+  /* font: inherit; */
+  background: var(--oka-content);
+  border: none;
+  cursor: pointer;
+  font-variation-settings: 'wght' 600;
+  height: 3rem;
+  margin: 0 .5rem;
+  padding: .5rem;
+  white-space: nowrap;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child>button:hover {
+  color: var(--oka-secondary);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child>button:first-child {
+  margin-left: 1rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child>button:last-child {
+  margin-right: 1rem;
+  border-right: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child>button.oka-tab-active {
+  color: var(--oka-primary);
+  border-bottom: 4px solid var(--oka-primary);
+  padding-bottom: calc(.5rem - 4px);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child>button.oka-tab-active:hover {
+  color: var(--oka-primary);
+  /* cursor: default; */
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:first-child:focus {
+  outline: none;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands {
+  margin-bottom: 2rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section .oka-expands {
+  margin-bottom: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article,
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section>article {
+  /* transition: height 4s ease; */
+  border: none;
+  display: none;
+  min-height: 8rem;
+  padding: 1rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(.oka-expands>article.oka-tab-active,
+.oka-tabs>section>article.oka-tab-active) {
+  /* transition: height 4s ease; */
+  display: block;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article.oka-tab-active {
+  border-color: var(--oka-primary);
+  border-bottom-color: var(--oka-primary) !important;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article.oka-tab-active+article {
+  border-top-color: var(--oka-primary);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article:not(.oka-tab-active):hover {
+  border-color: var(--oka-secondary);
+  border-bottom-color: var(--oka-secondary) !important;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article:not(.oka-tab-active):hover+article {
+  border-top-color: var(--oka-secondary);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) .oka-expands>article {
+  border-top: 2px solid var(--oka-border);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) .oka-expands>article:last-child {
+  border-bottom: 2px solid var(--oka-border);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) section .oka-expands>article {
+  border-top: 2px solid var(--oka-border);
+  border-left: 2px solid var(--oka-border);
+  border-right: 2px solid var(--oka-border);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section .oka-expands>article:first-child {
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section .oka-expands>article:last-child {
+  /* border-top: 2px solid var(--oka-border); */
+  border-bottom-left-radius: .5rem;
+  border-bottom-right-radius: .5rem;
+  border-bottom: 2px solid var(--oka-border);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section>article:last-child {
+  border: none;
+}
+
+[id^=SPAN] .leftHardAlignment .oka-expands>article>h3,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article>h3,
+.container .flexbox-answer-details .oka-expands>article>h3,
+.container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article>h3 {
+  cursor: pointer;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  position: relative;
+  text-align: left;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section:nth-child(2)>article>h3 {
+  display: none;
+}
+
+[id^=SPAN] .leftHardAlignment .oka-expands>article>div,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article>div,
+.container .flexbox-answer-details .oka-expands>article>div,
+.container .flexbox-answer-details .oka-tabs>section>article>div {
+  /* display: block; */
+  /* opacity: 0; */
+  /* transition: opacity 1s ease; */
+  animation-direction: reverse;
+  animation-duration: 300ms;
+  animation-name: oka-opacity;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+[id^=SPAN] .leftHardAlignment .oka-expands>article.oka-tab-active,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article.oka-tab-active,
+.container .flexbox-answer-details .oka-expands>article.oka-tab-active,
+.container .flexbox-answer-details .oka-tabs>section>article.oka-tab-active {
+  display: block;
+}
+
+[id^=SPAN] .leftHardAlignment .oka-expands>article.oka-tab-active h3,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article.oka-tab-active h3,
+.container .flexbox-answer-details .oka-expands>article.oka-tab-active h3,
+.container .flexbox-answer-details .oka-tabs>section>article.oka-tab-active h3 {
+  /* cursor: inherit; */
+  padding-bottom: 0;
+}
+
+[id^=SPAN] .leftHardAlignment .oka-expands>article.oka-tab-active h3:hover,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article.oka-tab-active h3:hover,
+.container .flexbox-answer-details .oka-expands>article.oka-tab-active h3:hover,
+.container .flexbox-answer-details .oka-tabs>section>article.oka-tab-active h3:hover {
+  background: none;
+}
+
+[id^=SPAN] .leftHardAlignment .oka-expands>article.oka-tab-active>div,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article.oka-tab-active>div,
+.container .flexbox-answer-details .oka-expands>article.oka-tab-active>div,
+.container .flexbox-answer-details .oka-tabs>section>article.oka-tab-active>div {
+  /* opacity: 1; */
+  display: block;
+  height: auto;
+  padding: 0;
+}
+
+[id^=SPAN] .leftHardAlignment .oka-expands>article.oka-tab-active p p:first-child,
+[id^=SPAN] .leftHardAlignment .oka-tabs>section>article.oka-tab-active p p:first-child,
+.container .flexbox-answer-details .oka-expands>article.oka-tab-active p p:first-child,
+.container .flexbox-answer-details .oka-tabs>section>article.oka-tab-active p p:first-child {
+  margin-top: 0;
+}
+
+[id^=SPAN] .leftHardAlignment .oka-expands article.oka-tab-active p p:last-child,
+[id^=SPAN] .leftHardAlignment .oka-tabs article.oka-tab-active p p:last-child,
+.container .flexbox-answer-details .oka-expands article.oka-tab-active p p:last-child,
+.container .flexbox-answer-details .oka-tabs article.oka-tab-active p p:last-child {
+  margin-bottom: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs article.oka-tab-active div section {
+  /* border: 10px solid black; */
+  /* display: block; */
+  /* height: 32rem; */
+  opacity: 1;
+  padding: 0;
+  position: relative;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article {
+  /* max-height: 5rem; */
+  /* transition: max-height .1s ease-in; */
+  /* border-bottom: 2px solid var(--oka-border); */
+  display: block;
+  min-height: 3rem;
+  overflow: hidden;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands .oka-steps article {
+  display: flex;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article>h3 {
+  display: block;
+  margin: -1rem -1rem;
+  height: 3rem;
+  padding: 1rem;
+  color: var(--oka-text);
+  line-height: 1;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands article>h3:hover {
+  color: var(--oka-secondary) !important;
+}
+/* !important needed because of smartstart CSS */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands article div {
+  padding: 1.25rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article>div {
+  height: 0;
+  padding: 0;
+  display: none;
+  transition: opacity 1s ease;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article>h3:after {
+  content: '\F0B26';
+  font-family: var(--oka-font-icon);
+  opacity: 1;
+  position: absolute;
+  font-size: 1.5rem;
+  line-height: .75;
+  right: 1rem;
+  transition: transform .25s ease-in-out;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article.oka-tab-active>h3 {
+  margin: -1rem -1rem 0 -1rem;
+  color: var(--oka-primary) !important;
+}
+/* !important needed because of smartstart CSS */
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands article.oka-tab-active h3:hover {
+  color: var(--oka-primary);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands article.oka-tab-active h3:after {
+  /* content: '\F0143'; */
+  transform: rotate(180deg);
+  
+}
+
+@keyframes oka-opacity {
+  from {
+      opacity: 1;
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  .answer-details {
-    margin: 4rem 0;
-    background-color: var(--oka-content);
-    border: 1px solid var(--oka-border);
-    box-shadow: var(--oka-shadow);
+  1% {
+      opacity: 1;
   }
-  
-  .flexbox-answer-details {
-    padding:1rem;
+  99% {
+      opacity: 0;
   }
-  
-  .answer-view-abofavo {
-    display: flex;
-    /* flex-direction: row-reverse; */
-    justify-content: center;
-    margin: 0 -1rem;
+  to {
+      opacity: 0;
   }
-  
-  .rn_SubscriptionButton {
-    margin-top: 0;
+}
+
+@media (hover: none) {
+  .remove-scroll {
+    -webkit-margin-end: unset;
   }
-  
-  .rn_RecommendContentButton {
-    margin: 0;
+
+  .container .flexbox-answer-details table {
+    display: block;
+    overflow-x: auto;
+    position: relative;
+    white-space: nowrap;
+    width: 100%;
   }
-  
-  .answer-view-abofavo button,
-  #share-answer {
-    background-color: var(--oka-content);
-    border-radius: 10rem;
-    border: 2px solid var(--oka-primary);
-    color: var(--oka-primary);
-    height: 2.5rem;
-    margin: 0 .5rem;
+
+  .container .flexbox-answer-details table tbody{
+    width: 100%;
+    display: table;
   }
-  
-  .container #share-answer {
-    margin-left: 50%;
-    transform: translateX(-50%);
+
+  .container .flexbox-answer-details table thead+tbody{
+    display: table-row-group;
   }
-  
-  .answer-view-abofavo button:hover,
-  #share-answer:hover {
-    background-color: var(--oka-primary);
-    color: var(--oka-content);
+}
+
+@media only screen and (max-width: 992px) {
+  .remove-scroll {
+    -webkit-margin-end: 1.5rem;
   }
-  
-  .answer-view-abofavo~hr {
-    border-top:1px solid var(--oka-border) !important;
-    width: calc(100% + 2rem) !important;
-    margin-left: -1rem;
+
+  html>::-webkit-scrollbar {
+    width: 1.5rem;
   }
-  
-  .answer-abofavo {
-    height: auto;
-    display:flex;
+
+  html>::-webkit-scrollbar-button:single-button:vertical {
+    height:1.5rem;
   }
-  
-  .answer-view-abofavo br {
+
+  :is([id^=SPAN] .leftHardAlignment,
+  .container .flexbox-answer-details)
+  :is(h1,h2) {
+    width: 100%;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-alert,
+  .container .flexbox-answer-details .oka-alert {
+    width: 100%;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-code,
+  .container .flexbox-answer-details .oka-code {
+    width: 100%;
+  }
+
+
+
+  :is([id^=SPAN] .leftHardAlignment,
+  .container .flexbox-answer-details) table {
+    display: block;
+    overflow-x: auto;
+    position: relative;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  :is([id^=SPAN] .leftHardAlignment,
+  .container .flexbox-answer-details) table tbody {
+    width: 100%;
+    display: table;
+  }
+
+  :is([id^=SPAN] .leftHardAlignment,
+  .container .flexbox-answer-details) table thead+tbody {
+    display: table-row-group;
+  }
+
+  :is([id^=SPAN] .leftHardAlignment,
+  .container .flexbox-answer-details) section table {
+    display: table;
+    white-space: unset;
+  }
+
+
+
+
+  [id^=SPAN] .leftHardAlignment hr,
+  .container .flexbox-answer-details hr {
+    width: 100%;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-column,
+  .container .flexbox-answer-details .oka-column {
+    flex-direction: column;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-steps article,
+  .container .flexbox-answer-details .oka-steps article {
+    flex-direction: column;
+  }
+
+  :is([id^=SPAN] .leftHardAlignment,
+  .container .flexbox-answer-details)
+  .oka-steps>article>section {
+    margin: 1rem 0 0 0;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-steps>article>div:first-child,
+  .container .flexbox-answer-details .oka-steps>article>div:first-child {
+    width: calc(100% - 3rem);
+    margin:-3rem 0 0 3rem;
+    padding: 0 0 0 1rem;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-steps>article>div+div,
+  .container .flexbox-answer-details .oka-steps>article>div+div {
+    margin-top: 1rem;
+  }
+
+  :is([id^=SPAN] .leftHardAlignment,
+  .container .flexbox-answer-details)
+  .oka-steps>article>:is(div,span) {
+    width: 100%;
+  }
+
+  :is([id^=SPAN] .leftHardAlignment,
+  .container .flexbox-answer-details)
+  :is(.oka-steps>article>img,.oka-steps>.oka-steps>article>img) {
+    margin-top: 1rem;
+    width: 100% !important;
+  }
+  /* images need !important on width and height to overrule inline styling */
+
+  /* [id^=SPAN] .leftHardAlignment .oka-steps img,
+  [id^=SPAN] .leftHardAlignment .oka-steps .oka-steps img,
+  .container .flexbox-answer-details .oka-steps img,
+  .container .flexbox-answer-details .oka-steps .oka-steps img {
+    margin-top: 1rem;
+    width: 100% !important;
+  } */
+
+  /* images need !important on width and height to overrule inline styling */
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs,
+  .container .flexbox-answer-details .oka-tabs {
+    border-bottom: none;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs::before,
+  .container .flexbox-answer-details .oka-tabs::before {
     display: none;
   }
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs>section:first-child,
+  .container .flexbox-answer-details .oka-tabs>section:first-child {
+    display: none;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs>section>article,
+  .container .flexbox-answer-details .oka-tabs>section>article {
+    border-top: 2px solid var(--oka-border);
+    display: block;
+    min-height: 3rem;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs>article:first-child,
+  .container .flexbox-answer-details .oka-tabs>article:first-child {
+    border-top: 2px solid var(--oka-border);
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs article:last-child,
+  .container .flexbox-answer-details .oka-tabs article:last-child {
+    border-top: 2px solid var(--oka-border);
+    border-bottom: 2px solid var(--oka-border);
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article>h3,
+  .container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article>h3 {
+    display: block;
+    margin: 0;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs article>h3:hover,
+  .container .flexbox-answer-details .oka-tabs article>h3:hover {
+    color: var(--oka-secondary) !important;
+  }
+
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs article h3,
+  .container .flexbox-answer-details .oka-tabs article h3 {
+    padding: 0rem 2rem 0 0;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs article>div,
+  .container .flexbox-answer-details .oka-tabs article>div {
+    height: 0;
+    padding: 0;
+    animation-direction: reverse;
+    animation-duration: 300ms;
+    animation-name: oka-opacity;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article>h3::after,
+  .container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article>h3::after {
+    content: '\F09D7';
+    font-family: var(--oka-font-icon);
+    opacity: 1;
+    position: absolute;
+    font-size: 1.5rem;
+    line-height: .75;
+    right: 0;
+    transition: opacity 0.1s ease;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3,
+  .container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3 {
+    margin: 0 0 1.5rem;
+  }
+
+  [id^=SPAN] .leftHardAlignment .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3:after,
+  .container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article.oka-tab-active>h3:after {
+    content: '\F09DD';
+  }
+
+}
