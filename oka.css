@@ -1866,6 +1866,7 @@ section .oka-steps>article:first-child {
   gap: 1rem;
   padding: 0;
   width: calc(50% - 1rem);
+  min-width: calc(50% - 6rem);
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1902,12 +1903,40 @@ section .oka-steps>article:first-child {
   order: 99;
   width: calc(50% - 1rem) !important;
 }
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>img.scale-medium {
+  width: calc(25% - 1rem) !important;
+  margin-left: -1rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>img.scale-small {
+  width: calc(12.5% - 1rem) !important;
+  margin-left: -1rem;
+}
 /* images need !important on width and height to overrule inline styling */
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-steps .oka-steps>article>img {
   width: 50% !important;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps .oka-steps>article>img.scale-medium {
+  width: calc(25% - .5rem) !important;
+  margin-left: -1rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps .oka-steps>article>img.scale-small {
+  width: calc(12.5% - .75rem) !important;
+  margin-left: -1rem;
 }
 /* images need !important on width and height to overrule inline styling */
 
