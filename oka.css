@@ -51,7 +51,7 @@ red-dark: #e52e2e;
   --oka-background: #f3f3f3;    /* grey-subtle */
   --oka-border: #d3d3d3;        /* grey-snow */
   --oka-content: #ffffff;       /* white */
-  --oka-content-alt: #f3f3f3;   /* grey-subtle */
+  --oka-content-alt: #F9F9F9;   /* grey-subtle */
 
   --oka-pre: #F9F9F9;           /* between white and grey-subtle */
 
@@ -91,7 +91,7 @@ red-dark: #e52e2e;
   --oka-background: #131313;    /* grey-asphalt */
   --oka-border: #535353;        /* grey-dim */
   --oka-content: #232323;       /* grey-coal */
-  --oka-content-alt: #333333;   /* grey-dark */
+  --oka-content-alt: #1B1B1B;   /* grey-dark */
 
   --oka-pre: #1B1B1B;           /* between grey-coal and grey-asphalt */
 
@@ -108,6 +108,7 @@ red-dark: #e52e2e;
   --oka-secondary-alt: #00aaff; /* blue */
 
   --oka-shadow: 0 0 .5rem rgba(0, 0, 0, .75);
+  --oka-shadow-alt: 0 0 .5rem rgba(0, 0, 0, .5);
 }
 
 :root.dark img {
@@ -146,68 +147,82 @@ html>::-webkit-scrollbar-button:single-button:vertical {
 }
 
 html>::-webkit-scrollbar-button:single-button:vertical:decrement {
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%23d3d3d3'><polygon points='16,8 24,16 24,24 16,16 8,24 8,16'/></svg>");
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(0,0,0,.25)' fill='%23d3d3d3'><polygon points='16,8 26,18 22,22 16,16 10,22 6,18'/></svg>");
 }
 
 html.dark>::-webkit-scrollbar-button:single-button:vertical:decrement {
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%23535353'><polygon points='16,8 24,16 24,24 16,16 8,24 8,16'/></svg>");
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(255,255,255,.25)' fill='%23535353'><polygon points='16,8 26,18 22,22 16,16 10,22 6,18'/></svg>");
 }
 
-html>::-webkit-scrollbar-button:single-button:vertical:decrement:hover,
+html>::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(0,0,0,.25)' fill='%2300aaff'><polygon points='16,8 26,18 22,22 16,16 10,22 6,18'/></svg>");
+}
+
 html.dark ::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%2300aaff'><polygon points='16,8 24,16 24,24 16,16 8,24 8,16'/></svg>");
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(255,255,255,.25)' fill='%2300aaff'><polygon points='16,8 26,18 22,22 16,16 10,22 6,18'/></svg>");
 }
 
-html>::-webkit-scrollbar-button:single-button:vertical:decrement:active,
-html.dark>::-webkit-scrollbar-button:single-button:vertical:decrement:active {
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%2300c300'><polygon points='16,8 24,16 24,24 16,16 8,24 8,16'/></svg>");
+html>::-webkit-scrollbar-button:single-button:vertical:decrement:active {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(0,0,0,.25)' fill='%2300c300'><polygon points='16,8 26,18 22,22 16,16 10,22 6,18'/></svg>");
+  background-color: var(--oka-border);
 }
+
+html.dark>::-webkit-scrollbar-button:single-button:vertical:decrement:active {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(255,255,255,.25)' fill='%2300c300'><polygon points='16,8 26,18 22,22 16,16 10,22 6,18'/></svg>");
+  background-color: var(--oka-border);
+}
+
+
+
 
 html>::-webkit-scrollbar-button:single-button:vertical:increment {
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%23d3d3d3'><polygon points='16,24 24,16 24,8 16,16 8,8 8,16'/></svg>");
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(0,0,0,.25)' fill='%23d3d3d3'><polygon points='16,24 26,14 22,10 16,16 10,10 6,14'/></svg>");
 }
 
 html.dark>::-webkit-scrollbar-button:single-button:vertical:increment {
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%23535353'><polygon points='16,24 24,16 24,8 16,16 8,8 8,16'/></svg>");
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(255,255,255,.25)' fill='%23535353'><polygon points='16,24 26,14 22,10 16,16 10,10 6,14'/></svg>");
 }
 
-html>::-webkit-scrollbar-button:vertical:single-button:increment:hover,
+html>::-webkit-scrollbar-button:vertical:single-button:increment:hover {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(0,0,0,.25)' fill='%2300aaff'><polygon points='16,24 26,14 22,10 16,16 10,10 6,14'/></svg>");
+}
+
 html.dark>::-webkit-scrollbar-button:vertical:single-button:increment:hover {
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%2300aaff'><polygon points='16,24 24,16 24,8 16,16 8,8 8,16'/></svg>");
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(255,255,255,.25)' fill='%2300aaff'><polygon points='16,24 26,14 22,10 16,16 10,10 6,14'/></svg>");
 }
 
-html>::-webkit-scrollbar-button:vertical:single-button:increment:active,
+html>::-webkit-scrollbar-button:vertical:single-button:increment:active {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(0,0,0,.25)' fill='%2300c300'><polygon points='16,24 26,14 22,10 16,16 10,10 6,14'/></svg>");
+  background-color: var(--oka-border);
+}
+
 html.dark>::-webkit-scrollbar-button:vertical:single-button:increment:active {
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1' stroke='rgba(0,0,0,.25)' fill='%2300c300'><polygon points='16,24 24,16 24,8 16,16 8,8 8,16'/></svg>");
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(255,255,255,.25)' fill='%2300c300'><polygon points='16,24 26,14 22,10 16,16 10,10 6,14'/></svg>");
+  background-color: var(--oka-border);
 }
 
 html>::-webkit-scrollbar-track {
   border-radius: 2rem;
   border: .5rem solid transparent;
-  box-shadow: inset 0 0 .25rem rgba(0, 0, 0, .25); 
   outline-offset: calc(-.5rem - 1px);
   outline: 1px solid var(--oka-border);
 }
 
-html.dark>::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 .25rem rgba(255, 255, 255, .25);
-}
-
-html>::-webkit-scrollbar-track:hover {
-  box-shadow: inset 0 0 .5rem rgba(0, 0, 0, .25); 
-}
-
-html.dark>::-webkit-scrollbar-track:hover {
-  box-shadow: inset 0 0 .5rem rgba(255, 255, 255, .25);
+html>::-webkit-scrollbar-track:active {
+  box-shadow: inset 0 0 .5rem var(--oka-border); 
 }
 
 html>::-webkit-scrollbar-thumb {
   border-radius: 2rem;
   border:.5rem solid transparent;
   box-shadow: inset 2rem 0 var(--oka-border); 
-  min-height: 4rem;
+  min-height: 8rem;
   outline-offset: calc(-.5rem - 1px);
   outline:1px solid rgba(0, 0, 0, .25);
+}
+
+html.dark>::-webkit-scrollbar-thumb {
+  outline:1px solid rgba(255, 255, 255, .25);
 }
 
 html>::-webkit-scrollbar-thumb:hover {
@@ -313,19 +328,29 @@ button:focus {
     font-size: unset !important;
 }
 
-/* :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details)
-:is(.rn_SchemaAttributeValue ol,.rn_SchemaAttributeValue ul) {
-  margin: unset;
-  padding: unset;
-} */
-
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 :is(ol,ul) {
   margin: unset;
   padding: unset;
 }
+
+.popup {
+  position: fixed;
+  left: 35%;
+  top: 35%;
+  width: 30%;
+  background-color: white;
+  border: 1px solid gray;
+  padding: 20px;
+  z-index: 10002;
+  display: none;}
+
+
+#glossary-popup{
+  -webkit-box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.2), 0 2px 9px 0 rgba(62, 57, 107, 0.2);
+  box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.2), 0 2px 9px 0 rgba(62, 57, 107, 0.2);}
+
 
 /* ================================================== */
 /* ==================== BASE CSS ==================== */
@@ -343,8 +368,15 @@ html {
   background: var(--oka-background);
   /* -webkit-margin-start: 1.5rem; */
   overflow: hidden auto;
+  scroll-behavior: smooth;
 }
 /* Needed for the scrollbar fix to work and center content */
+
+mark{
+  background: var(--oka-marked);
+  border-radius: .25rem;
+  /* outline: 20px solid hotpink; */
+}
 
 .rn_Container {
   -webkit-margin-start: 1.5rem;
@@ -374,30 +406,54 @@ html {
   padding: 2rem;
 }
 
-/* .container .flexbox-answer-details {
-  line-height: 1.5;
-} */
-
 /* ================================================== */
 /* ===================== IMAGES ===================== */
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) img {
+.container .flexbox-answer-details)
+img {
   border-radius: .5rem;
   border: 2px solid var(--oka-border);
-  cursor: pointer;
   font-size: .75rem;
   height: unset !important;
   text-indent: .25rem;
   width: 100% !important;
+  background: #f3f3f3;
+  /* filter: blur(.1px); */
 }
 /* images need !important on width and height to overrule inline styling */
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) img:hover {
+.container .flexbox-answer-details)
+img:not(.scale-icon):hover {
   outline: 4px solid var(--oka-secondary);
   outline-offset: -4px;
+  background: white;
+  cursor: pointer;
+  filter: contrast(1.1);
 }
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) img.scale-medium {
+  width: calc(50% - .5rem) !important;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) img.scale-small {
+  width: calc(25% - .75rem) !important;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details) img.scale-icon {
+  height: 1rem !important;
+  width: auto !important;
+  transform: scale(1.5);
+  margin: 0 .5rem;
+  border-radius: .25rem;
+  border: none;
+}
+
+
 
 /* ================================================== */
 /* ================ DEFAULT ELEMENTS ================ */
@@ -414,23 +470,25 @@ html {
 .container .flexbox-answer-details) h1 {
   color: var(--oka-primary);
   font-size: 2rem;
-  font-variation-settings: 'wght' 1000;
+  font-variation-settings: 'wght' 800;
   line-height: 1.25;
   margin: 0 auto 2rem auto;
   text-align: center;
   width: calc(100% / 1.25);
+  /* text-shadow: .5px .5px 0 var(--oka-primary-alt); */
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details) h2 {
   color: var(--oka-primary);
   font-size: 1.25rem;
-  font-variation-settings: 'wght' 800;
+  font-variation-settings: 'wght' 600;
   line-height: 1.5;
   margin: 0 auto 2rem auto;
   text-align: center;
   transform: translateY(-.5rem);
   width: calc(100% / 1.5);
+  /* text-shadow: .5px .5px 0 var(--oka-primary-alt); */
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -445,6 +503,7 @@ html {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details) p {
   cursor: text;
+  margin:0;
   /* padding-bottom: 2rem; */
 }
 
@@ -497,10 +556,10 @@ dl>dd {
   display: block;
   width: calc(100% / 1.5);
   /* max-width: 100%; */
-  float: left;
+  float: right;
   padding-left: 1.2rem;
   text-indent: -.7rem;
-  margin-bottom: .5rem;
+  margin: 0 0 .5rem 0;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -751,7 +810,7 @@ table {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-table tr th {
+table:not(.no-style) tr th {
   background: var(--oka-content);
   border-bottom: 2px solid var(--oka-primary);
   border-width: 0 0 2px 0;
@@ -770,7 +829,7 @@ table tr th {
 .container .flexbox-answer-details)
 table td {
   border-bottom: 2px solid var(--oka-border);
-  border-width: 0 0 2px 0;
+  /* border-width: 0 0 2px 0; */
   height: 2rem;
   padding: 0 .5rem;
   line-height: 2;
@@ -809,7 +868,13 @@ table>thead+tbody tr:nth-child(odd)) {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-table:is(.no-stripe,.no-style)>tbody tr:nth-child(odd) {
+table:is(.no-stripe,.no-style)>tbody tr:nth-child(even) {
+  background: var(--oka-content);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+table:is(.no-stripe,.no-style)>thead+tbody tr:nth-child(odd) {
   background: var(--oka-content);
 }
 
@@ -822,6 +887,8 @@ a {
   color: var(--oka-primary);
   font-variation-settings: 'wght' 400;
   line-height: 1.25;
+  font-size: inherit;
+  font-family: inherit;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -923,6 +990,7 @@ a[target="_blank"]:hover {
 .container .flexbox-answer-details)
 :is(i,em) {
   font-variation-settings: 'wght' 400;
+  padding-right: .125rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -939,6 +1007,13 @@ s {
   color: var(--oka-error);
   font-variation-settings: 'wght' 400;
   text-decoration-thickness: 2px;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+:is(sub,sup) {
+  color: var(--oka-text-alt);
+  font-size: .95rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -975,10 +1050,22 @@ kbd+kbd::before {
 .container .flexbox-answer-details)
 hr {
   color: var(--oka-primary);
+  border: none;
   border-top: 2px solid;
   opacity: 1;
   width: calc(100% / 1.5);
   margin: 0 auto 2rem auto;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+ol hr {
+  /* color: var(--oka-primary);
+  border: none;
+  border-top: 2px solid;
+  opacity: 1;
+  width: calc(100% / 1.5); */
+  margin: 1rem auto 1rem auto;
 }
 
 /* ================================================== */
@@ -1276,6 +1363,7 @@ section .oka-code {
   opacity: 0;
   padding: 0;
   transition: opacity .25s ease-in .25s;
+  -webkit-user-select: text;
   user-select: text;
   white-space: pre;
 }
@@ -1303,6 +1391,7 @@ code {
   line-height: 1;
   padding: .125rem .25rem;
   text-indent: 0;
+  -webkit-user-select: all;
   user-select: all;
 }
 
@@ -1338,7 +1427,9 @@ code>d {
   border: 2px solid var(--oka-error);
   bottom: .5rem;
   color: var(--oka-error);
+  cursor: pointer;
   display: inline-block;
+  font-family: inherit;
   font-variation-settings: 'wght' 400;
   height: 1.5rem;
   line-height: 1;
@@ -1347,7 +1438,7 @@ code>d {
   pointer-events: none;
   position: absolute;
   right: .5rem;
-  transition: opacity .25s ease-in;
+  transition: opacity .1s ease-in;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1377,6 +1468,7 @@ code>d {
 .oka-code>input:checked~button {
   opacity: 1;
   pointer-events: all;
+  transition: opacity .3s ease-in;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1469,6 +1561,13 @@ code>d {
   display: flex;
   gap: 2rem;
   margin-bottom: 2rem;
+  align-items: flex-start;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section .oka-column {
+  gap: 1rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1483,9 +1582,8 @@ section .oka-column {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
-  align-items: flex-start;
   gap: 1rem;
+  align-items: flex-start;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1506,19 +1604,14 @@ section .oka-column {
   margin-bottom: 0;
 }
 
-:is([id^=SPAN] .leftHardAlignment,
+/* :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-column>article>img {
   width: 100% !important;
-}
+} */
 /* images need !important on width and height to overrule inline styling */
 
-:is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details)
-.oka-column>article>img.small {
-  /* margin-left: 25%; */
-  width: calc(50% - .5rem) !important;
-}
+
 /* images need !important on width and height to overrule inline styling */
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1704,6 +1797,7 @@ section .oka-steps {
   border-top: 2px solid var(--oka-border);
   display: flex;
   flex-flow: row wrap;
+  gap: 1rem 2rem;
   padding: 1rem 0 1rem 0;
 }
 
@@ -1732,7 +1826,7 @@ section .oka-steps>article:first-child {
   font-variation-settings: 'wght' 600;
   height: 3rem;
   line-height: 1.5;
-  position: relative;
+  position: absolute;
   text-align: center;
   width: 3rem;
 }
@@ -1779,7 +1873,8 @@ section .oka-steps>article:first-child {
 .oka-steps>article>:is(div,span):first-child {
   flex: 1;
   justify-content: flex-start;
-  padding: 0 2rem 0 1rem;
+  padding: 0 0 0 0;
+  margin-left: 4rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1816,9 +1911,9 @@ section .oka-steps>article:first-child {
 }
 /* images need !important on width and height to overrule inline styling */
 
-:is([id^=SPAN] .leftHardAlignment,
+/* :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-.oka-steps>article>:is(div,span)>img {
+.oka-steps>article>div>img {
   height: auto !important;
   display: inline-block;
   margin:0;
@@ -1827,13 +1922,9 @@ section .oka-steps>article:first-child {
   object-position: 50% 50%;
   order: 99;
   width: 100% !important;
-}
+} */
 
-:is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details)
-.oka-steps>article>:is(div,span)>img.small {
-  width: calc(50% - .5rem) !important;
-}
+
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
@@ -1854,7 +1945,7 @@ section .oka-steps>article:first-child {
 .oka-steps>article>section {
   width: 100%;
   order: 100;
-  margin: 1rem 0 0 4rem;
+  margin: 0 0 0 4rem;
 }
 
 /* :is([id^=SPAN] .leftHardAlignment,
@@ -1913,7 +2004,7 @@ section .oka-tabs>section:nth-child(2) {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-tabs>section:first-child>button {
-  /* font: inherit; */
+  font: inherit;
   background: var(--oka-content);
   border: none;
   cursor: pointer;
@@ -1980,15 +2071,43 @@ section .oka-expands {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-.oka-expands>article,
-:is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details)
 .oka-tabs>section>article {
-  /* transition: height 4s ease; */
   border: none;
-  display: none;
   min-height: 8rem;
   padding: 1rem;
+  pointer-events: none;
+  opacity: 0;
+  position: absolute;
+  overflow: hidden;
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+  transition: opacity 0s;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article {
+  border: none;
+  min-height: 8rem;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden; 
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article>div {
+  opacity: 0;
+  transition: opacity 0s;
+  pointer-events: none;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-expands>article.oka-tab-active>div {
+  opacity: 1;
+  transition: opacity .3s ease-in-out;
+  pointer-events: all;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1996,7 +2115,16 @@ section .oka-expands {
 :is(.oka-expands>article.oka-tab-active,
 .oka-tabs>section>article.oka-tab-active) {
   /* transition: height 4s ease; */
-  display: block;
+  /* display: block; */
+  opacity: 1;
+  position: relative;
+  overflow: unset;
+  height: auto;
+  width: auto;
+  margin: 0;
+  padding: 1rem;
+  pointer-events: all;
+  transition: opacity .3s ease-in-out;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2026,17 +2154,20 @@ section .oka-expands {
 }
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) .oka-expands>article {
+.container .flexbox-answer-details)
+.oka-expands>article {
   border-top: 2px solid var(--oka-border);
 }
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) .oka-expands>article:last-child {
+.container .flexbox-answer-details)
+.oka-expands>article:last-child {
   border-bottom: 2px solid var(--oka-border);
 }
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) section .oka-expands>article {
+.container .flexbox-answer-details)
+section .oka-expands>article {
   border-top: 2px solid var(--oka-border);
   border-left: 2px solid var(--oka-border);
   border-right: 2px solid var(--oka-border);
@@ -2093,11 +2224,11 @@ section .oka-expands>article:last-child {
   /* display: block; */
   /* opacity: 0; */
   /* transition: opacity 1s ease; */
-  animation-direction: reverse;
+  /* animation-direction: reverse;
   animation-duration: 300ms;
-  animation-name: oka-opacity;
+  animation-name: oka-opacity; */
   /* height: 0; */
-  overflow: hidden;
+  /* overflow: hidden; */
   padding: 0;
 }
 
@@ -2204,8 +2335,8 @@ section .oka-expands>article:last-child {
 .oka-expands>article>div {
   height: 0;
   padding: 0;
-  display: none;
-  transition: opacity 1s ease;
+  /* display: none; */
+  /* transition: opacity 1s ease; */
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2218,7 +2349,7 @@ section .oka-expands>article:last-child {
   font-size: 1.5rem;
   line-height: .75;
   right: 1rem;
-  transition: transform .25s ease-in-out;
+  /* transition: transform .25s ease-in-out; */
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2429,8 +2560,8 @@ section .oka-expands>article:last-child {
     border-top: 2px solid var(--oka-border);
   }
 
-  [id^=SPAN] .leftHardAlignment .oka-tabs article:last-child,
-  .container .flexbox-answer-details .oka-tabs article:last-child {
+  [id^=SPAN] .leftHardAlignment .oka-tabs>article:last-child,
+  .container .flexbox-answer-details .oka-tabs>article:last-child {
     border-top: 2px solid var(--oka-border);
     border-bottom: 2px solid var(--oka-border);
   }
