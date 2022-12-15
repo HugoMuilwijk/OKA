@@ -56,13 +56,14 @@ red-dark: #e52e2e;
   --oka-pre: #F9F9F9;           /* between white and grey-subtle */
 
   --oka-text: #333333;          /* grey-coal */
-  --oka-text-alt: #939393;      /* grey-medium */
+  --oka-text-alt: #737373;      /* grey-medium */
 
   --oka-marked: #deff00;        /* lime */
   --oka-disabled: #d3d3d3;      /* grey-smoke */
   --oka-warning: #ff9900;       /* orange */
   --oka-warning-alt: #ee7700;   /* orange-dark */
   --oka-error: #ff3333;         /* red */
+  --oka-error-alt: #e52e2e;     /* red-dark */
   --oka-white: #ffffff;         /* white */
 
   --oka-primary: #00c300;       /* green */
@@ -96,9 +97,10 @@ red-dark: #e52e2e;
   --oka-pre: #1B1B1B;           /* between grey-coal and grey-asphalt */
 
   --oka-text: #d3d3d3;          /* grey-silver */
-  --oka-text-alt: #737373;      /* grey-medium */
+  --oka-text-alt: #939393;      /* grey-medium */
 
   --oka-error: #e52e2e;         /* red-dark */
+  --oka-error-alt: #ff3333;         /* red-dark */
   --oka-warning: #ee7700;       /* orange-dark */
   --oka-warning-alt: #ff9900;   /* orange */
 
@@ -171,9 +173,6 @@ html.dark>::-webkit-scrollbar-button:single-button:vertical:decrement:active {
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(255,255,255,.25)' fill='%2300c300'><polygon points='16,8 26,18 22,22 16,16 10,22 6,18'/></svg>");
   background-color: var(--oka-border);
 }
-
-
-
 
 html>::-webkit-scrollbar-button:single-button:vertical:increment {
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' stroke-linejoin='round' stroke-width='1.333' stroke='rgba(0,0,0,.25)' fill='%23d3d3d3'><polygon points='16,24 26,14 22,10 16,16 10,10 6,14'/></svg>");
@@ -299,6 +298,12 @@ a {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
+table tr :is(th,td) {
+  border-style: unset;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 button {
   border-radius: unset;
   color: unset;
@@ -351,6 +356,11 @@ button:focus {
   -webkit-box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.2), 0 2px 9px 0 rgba(62, 57, 107, 0.2);
   box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.2), 0 2px 9px 0 rgba(62, 57, 107, 0.2);}
 
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+img {
+  vertical-align: unset;
+}
 
 /* ================================================== */
 /* ==================== BASE CSS ==================== */
@@ -372,10 +382,42 @@ html {
 }
 /* Needed for the scrollbar fix to work and center content */
 
-mark{
-  background: var(--oka-marked);
+::selection {
+  background: var(--oka-secondary);
   border-radius: .25rem;
+  color: var(--oka-white);
+}
+
+mark{
+  background: var(--oka-primary);
+  border-radius: .25rem;
+  color: var(--oka-white);
+  /* font-variation-settings: 'wght' 350; */
+  cursor: pointer;
   /* outline: 20px solid hotpink; */
+}
+
+mark:hover{
+  background: var(--oka-primary-alt);
+  outline-offset: .125rem;
+  outline: .125rem solid var(--oka-primary-alt);
+}
+
+.oka-alert mark{
+  background: var(--oka-warning);
+}
+
+.oka-alert mark:hover{
+  background: var(--oka-warning-alt);
+  outline: .125rem solid var(--oka-warning-alt);
+}
+
+caption{
+  font-size: .8rem;
+  color: var(--oka-text-alt);
+  text-align: center;
+  padding: .25rem .5rem;
+  caption-side: bottom;
 }
 
 .rn_Container {
@@ -434,25 +476,36 @@ img:not(.scale-icon):hover {
 }
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) img.scale-medium {
+.container .flexbox-answer-details)
+img.scale-medium {
   width: calc(50% - .5rem) !important;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) img.scale-small {
+.container .flexbox-answer-details)
+img.scale-small {
   width: calc(25% - .75rem) !important;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) img.scale-icon {
-  height: 1rem !important;
-  width: auto !important;
-  transform: scale(1.5);
-  margin: 0 .5rem;
-  border-radius: .25rem;
+.container .flexbox-answer-details)
+img.scale-icon {
+  background: none;
+  border-radius: 0;
   border: none;
+  cursor: default;
+  height: 1rem !important;
+  margin: 0 .25rem;
+  transform: scale(1.5) translateY(.0625rem);
+  width: auto !important;
+  vertical-align: middle;
 }
 
+/* :is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+img.scale-icon:hover {
+  transform: scale(2) translateY(.0625rem);
+} */
 
 
 /* ================================================== */
@@ -461,13 +514,15 @@ img:not(.scale-icon):hover {
 /* ==================== HEADERS ===================== */
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) :is(h1,h2,h3) {
+.container .flexbox-answer-details)
+:is(h1,h2,h3) {
   margin-bottom: 2rem;
   margin-top: 0;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) h1 {
+.container .flexbox-answer-details)
+h1 {
   color: var(--oka-primary);
   font-size: 2rem;
   font-variation-settings: 'wght' 800;
@@ -479,7 +534,8 @@ img:not(.scale-icon):hover {
 }
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) h2 {
+.container .flexbox-answer-details)
+h2 {
   color: var(--oka-primary);
   font-size: 1.25rem;
   font-variation-settings: 'wght' 600;
@@ -492,7 +548,8 @@ img:not(.scale-icon):hover {
 }
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) h3 {
+.container .flexbox-answer-details)
+h3 {
   font-size: 1rem;
   font-variation-settings: 'wght' 600;
   line-height: 1.25;
@@ -501,9 +558,10 @@ img:not(.scale-icon):hover {
 /* =================== PARAGRAPH ==================== */
 
 :is([id^=SPAN] .leftHardAlignment,
-.container .flexbox-answer-details) p {
+.container .flexbox-answer-details)
+p {
   cursor: text;
-  margin:0;
+  margin: 0;
   /* padding-bottom: 2rem; */
 }
 
@@ -698,8 +756,6 @@ ol.dial-menu li::marker {
   text-indent: 0;
 }
 
-
-
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 ul>li ol {
@@ -719,8 +775,6 @@ ul ol li {
 ul>li>ol li::marker {
   content: counter(lister)'\2009\2009';
 }
-
-
 
 /* ================= UNORDERED LIST ================= */
 
@@ -789,8 +843,6 @@ ol>li>ul>li>ul>li>ul>li::marker {
   content: '\F0766\00a0\00a0';
 }
 
-/* F0BC8 */
-
 /* ===================== TABLE ====================== */
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -813,8 +865,8 @@ table {
 table:not(.no-style) tr th {
   background: var(--oka-content);
   border-bottom: 2px solid var(--oka-primary);
-  border-width: 0 0 2px 0;
-  font-variation-settings: 'wght' 400;
+  /* border-width: 0 0 2px 0; */
+  font-variation-settings: 'wght' 500;
   height: 2rem;
   margin-bottom: 2rem;
   position: sticky;
@@ -827,7 +879,7 @@ table:not(.no-style) tr th {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-table td {
+table tr td {
   border-bottom: 2px solid var(--oka-border);
   /* border-width: 0 0 2px 0; */
   height: 2rem;
@@ -909,9 +961,9 @@ a::after {
   content: '\F0054';
   display: inline-block;
   font-family: var(--oka-font-icon);
-  left: .125rem;
+  left: .0625rem;
   position: relative;
-  top: 1px;
+  top: .0625rem;
   text-indent: 0;
 }
 
@@ -989,14 +1041,14 @@ a[target="_blank"]:hover {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 :is(i,em) {
-  font-variation-settings: 'wght' 400;
-  padding-right: .125rem;
+  font-variation-settings: 'wght' 350;
+  /* padding-right: .0625rem; */
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 u {
-  font-variation-settings: 'wght' 400;
+  font-variation-settings: 'wght' 350;
   text-decoration-thickness: 2px;
   text-underline-offset: .125Rem;
 }
@@ -1011,9 +1063,24 @@ s {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-:is(sub,sup) {
+sub {
   color: var(--oka-text-alt);
-  font-size: .95rem;
+  /* font-size: .95rem; */
+  position: unset;
+  top: unset;
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+sup {
+  color: var(--oka-text-alt);
+  /* font-size: .95rem; */
+  position: unset;
+  top: unset;
+  vertical-align: super;
+  font-size: smaller;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1272,6 +1339,7 @@ ol hr {
   text-align: center;
   width: calc(100% / 1.5);
   z-index: 0;
+  user-select: none;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1337,7 +1405,12 @@ section .oka-code {
   padding: 0;
   text-align: left;
   transition: max-height .25s ease-in-out, box-shadow .25s ease-in-out, border-radius .125s ease-in, padding .25s ease-in-out;
-  white-space: pre-wrap;
+  /* user-select: contain; */
+  /* -webkit-user-select: contain; */
+  /* white-space: pre-wrap; */
+    -webkit-user-select: text;
+  user-select: text;
+  white-space: wrap;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1363,8 +1436,6 @@ section .oka-code {
   opacity: 0;
   padding: 0;
   transition: opacity .25s ease-in .25s;
-  -webkit-user-select: text;
-  user-select: text;
   white-space: pre;
 }
 
@@ -1421,7 +1492,7 @@ code>d {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-.oka-code>button {
+.oka-code>.button {
   background-color: var(--oka-pre);
   border-radius: .75rem;
   border: 2px solid var(--oka-error);
@@ -1432,7 +1503,7 @@ code>d {
   font-family: inherit;
   font-variation-settings: 'wght' 400;
   height: 1.5rem;
-  line-height: 1;
+  line-height: 1.25;
   opacity: 0;
   padding: 0 .5rem;
   pointer-events: none;
@@ -1444,14 +1515,15 @@ code>d {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-code>input:checked+label {
-  background: var(--oka-error);
+  background: var(--oka-error-alt);
+  text-shadow: 1px 1px 0 black;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-code>input:checked~pre {
   border-radius: .5rem;
-  border: 2px solid var(--oka-error);
+  border: 2px solid var(--oka-error-alt);
   box-shadow: inset var(--oka-shadow);
   max-height: 32rem;
   padding: 1rem 0;
@@ -1465,7 +1537,7 @@ code>d {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-.oka-code>input:checked~button {
+.oka-code>input:checked~.button {
   opacity: 1;
   pointer-events: all;
   transition: opacity .3s ease-in;
@@ -1473,9 +1545,57 @@ code>d {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-.oka-code>input:checked~button:hover {
+.oka-code>input:checked~.button:hover {
   background-color: var(--oka-error);
   color: var(--oka-white);
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>input:checked~.button:active {
+  background-color: var(--oka-error-alt);
+  border-color: var(--oka-error-alt);
+  color: var(--oka-white);
+  text-shadow: 1px 1px 0 black;
+}
+
+/* ================================================== */
+/* =================== OKA TOASTER ================== */
+
+
+.oka-toaster {
+  align-items: center;
+  /* background-color: red; */
+  /* backdrop-filter: blur(.125rem); */
+  display: flex;
+  flex-flow: column wrap;
+  height: 100vh;
+  justify-content: flex-end;
+  left: 0;
+  padding: 2rem;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  /* -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) calc(100% - 16rem), rgba(0, 0, 0, 1) calc(100% - 8rem)); */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) calc(100% - 8rem), rgba(0, 0, 0, .25) 100%);
+}
+
+/* .oka-toaster.activate-message {
+
+} */
+
+.oka-toaster>article {
+  background: var(--oka-background);
+  border: 2px solid var(--oka-primary);
+  border-radius: .5rem;
+  border-top-width: .25rem;
+  box-shadow: var(--oka-shadow);
+  color: var(--oka-text);
+  font-size: 1rem;
+  padding: 1rem 1.25rem;
+  max-width: 24rem;
+  min-width: 8rem;
+  min-height: 4rem;
 }
 
 /* ================================================== */
@@ -1496,7 +1616,7 @@ code>d {
   background: var(--oka-background);
   border-radius: .5rem;
   border-top-width: .25rem;
-  box-shadow: var(--oka-shadow);
+  box-shadow: var(--oka-shadow-alt);
   color: var(--oka-warning);
   margin-bottom: 2rem;
   min-height: 4rem;
@@ -2090,6 +2210,7 @@ section .oka-tabs>section:nth-child(2) {
 .container .flexbox-answer-details)
 .oka-expands {
   margin-bottom: 2rem;
+  flex: 1;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
