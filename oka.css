@@ -15,7 +15,7 @@
 } */
 
 @font-face {
-  font-family: "Noto";
+  font-family: "Overpass";
   src: url('FNT/Overpass.woff2') format('woff2');
 }
 
@@ -51,8 +51,7 @@ red-dark:     #e52e2e;
 :root {
   --oka-font-icon: Icons;
   --oka-font-sans: Lexend, sans-serif;
-  /* --oka-font-mono: MonoNum, Lexend, monospace; */
-  --oka-font-mono: Noto;
+  --oka-font-mono: Overpass, monospace;
 
   --oka-background: #f3f3f3;    /* grey-subtle */
   --oka-border: #d3d3d3;        /* grey-smoke */
@@ -65,6 +64,7 @@ red-dark:     #e52e2e;
 
   --oka-text: #333333;          /* grey-dark */
   --oka-text-alt: #737373;      /* grey-hazy */
+  --oka-text-base: #000000;     /* black */
 
   --oka-marked: #deff00;        /* lime */
   --oka-disabled: #d3d3d3;      /* grey-smoke */
@@ -109,17 +109,18 @@ red-dark:     #e52e2e;
 
   --oka-text: #d3d3d3;          /* grey-silver */
   --oka-text-alt: #939393;      /* grey-medium */
+  --oka-text-base: #ffffff;     /* white */
 
   --oka-error: #e52e2e;         /* red-dark */
-  --oka-error-alt: #ff3333;         /* red-dark */
+  --oka-error-alt: #ff3333;     /* red-dark */
   --oka-warning: #ee7700;       /* orange-dark */
   --oka-warning-alt: #ff9900;   /* orange */
   --oka-white: #ffffff;         /* white */
 
-  --oka-primary: #009900;       /* green-dark */
-  --oka-primary-alt: #00c300;   /* green */
+  --oka-primary: #008800;       /* green-dark */
+  --oka-primary-alt: #00ad00;   /* green */
   --oka-secondary: #0077cc;     /* blue-dark */
-  --oka-secondary-alt: #00aaff; /* blue */
+  --oka-secondary-alt: #0099fe; /* blue */
 
   --oka-shadow: 0 0 .25rem rgba(0, 0, 0, .75), 0 .125rem .5rem rgba(0, 0, 0, .75);
   --oka-shadow-alt: 0 0 .125rem rgba(0, 0, 0, 1), 0 .25rem .25rem rgba(0, 0, 0, 1);
@@ -939,9 +940,9 @@ table {
   margin: 0 auto 1rem auto;
   max-width: 100%;
   min-width: calc(100% / 1.5);
-  overflow: auto hidden;
+  /* overflow: auto hidden; */
   padding: 0 .5rem;
-  position: relative;
+  /* position: relative; */
   width: unset !important;
   transition: box-shadow .3s ease-in-out;
   /* overflow: hidden; */
@@ -1252,20 +1253,22 @@ a[target="_blank"]:not(.link-intern):hover {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 :is(b,strong) {
-  font-variation-settings: 'wght' 600;
+  color: var(--oka-text-base);
+  font-variation-settings: 'wght' 650;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 :is(i,em) {
-  font-variation-settings: 'wght' 350;
-  /* padding-right: .0625rem; */
+  color: var(--oka-text-base);
+  font-variation-settings: 'wght' 400;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 u {
-  font-variation-settings: 'wght' 350;
+  color: var(--oka-text-base);
+  font-variation-settings: 'wght' 400;
   text-decoration-thickness: 2px;
   text-underline-offset: .125Rem;
 }
@@ -1282,22 +1285,20 @@ s {
 .container .flexbox-answer-details)
 sub {
   color: var(--oka-text-alt);
-  /* font-size: .95rem; */
+  font-size: smaller;
   position: unset;
   top: unset;
   vertical-align: sub;
-  font-size: smaller;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 sup {
   color: var(--oka-text-alt);
-  /* font-size: .95rem; */
+  font-size: smaller;
   position: unset;
   top: unset;
   vertical-align: super;
-  font-size: smaller;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -1306,7 +1307,7 @@ kbd {
   display: inline-block;
   color: var(--oka-primary-alt);
   font-family: var(--oka-font-mono);
-  padding: .125rem .25rem;
+  padding: .125rem .25rem 0 .25rem;
   background: var(--oka-pre);
   border: 2px solid var(--oka-primary);
   border-bottom-width: 4px;
@@ -1661,6 +1662,7 @@ section .oka-code {
   color:var(--oka-text-alt);
   content: counter(code) ". ";
   display: inline-block;
+  font-variation-settings: 'wght' 400;
   margin-left: auto;
   padding-left: auto;
   text-align: right;
@@ -1947,7 +1949,7 @@ section .oka-column {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-.oka-column>article.colspan {
+.oka-column>article.column-span {
   flex: 2;
 }
 
@@ -2164,6 +2166,7 @@ section .oka-column {
 .container .flexbox-answer-details)
 section .oka-steps {
   border-bottom: none;
+  margin: 0 1rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2396,7 +2399,7 @@ section .oka-steps>article:first-child {
 .oka-tabs>section:nth-child(2) {
   border-top: 2px solid var(--oka-border);
   border-bottom: 2px solid var(--oka-border);
-  transition: box-shadow .3s ease-in-out;
+  transition: box-shadow .25s ease-in-out;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2416,7 +2419,7 @@ section .oka-tabs>section:nth-child(2) {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 section .oka-tabs:hover>section:nth-child(2) {
-  box-shadow: var(--oka-shadow-alt);
+  box-shadow: var(--oka-shadow);
   border-color: var(--oka-border-alt);
 }
 
@@ -2447,7 +2450,7 @@ section .oka-tabs:hover>section:nth-child(2) {
   margin: 0 .5rem;
   padding: .5rem;
   white-space: nowrap;
-  transition: box-shadow .3s ease-in-out;
+  transition: box-shadow .25s ease-in-out;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2495,7 +2498,7 @@ section .oka-tabs:hover>section:nth-child(2) {
 .oka-expands {
   margin-bottom: 2rem;
   flex: 1;
-  transition: box-shadow .3s ease-in-out;
+  transition: box-shadow .25s ease-in-out;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2508,8 +2511,9 @@ section .oka-tabs:hover>section:nth-child(2) {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 :is(.oka-expands:hover>article,
-.oka-expands:hover>article:last-child) {
+.oka-expands:hover>article:last-child):not(.oka-tab-active) {
   border-color: var(--oka-border-alt);
+  /* border-bottom-color: hotpink; */
 }
 
 /* :is([id^=SPAN] .leftHardAlignment,
@@ -2554,7 +2558,7 @@ section .oka-expands:hover {
   /* padding: 1rem; */
   position: relative;
   overflow: hidden;
-  transition: border-color .2s ease-in-out, box-shadow .3s ease-in-out;
+  transition: border-color .125s ease-in-out, box-shadow .25s ease-in-out;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2569,7 +2573,7 @@ section .oka-expands:hover {
 .container .flexbox-answer-details)
 .oka-expands>article.oka-tab-active>div {
   opacity: 1;
-  transition: opacity .3s ease-in-out;
+  transition: opacity .25s ease-in-out;
   pointer-events: all;
 }
 
@@ -2587,7 +2591,7 @@ section .oka-expands:hover {
   margin: 0;
   /* padding: 1rem; */
   pointer-events: all;
-  transition: opacity .3s ease-in-out;
+  transition: opacity .25s ease-in-out;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2600,13 +2604,13 @@ section .oka-expands:hover {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-expands>article.oka-tab-active+article {
-  border-top-color: var(--oka-primary);
+  border-top-color: var(--oka-primary) !important;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-expands>article:not(.oka-tab-active):hover {
-  border-color: var(--oka-secondary);
+  border-color: var(--oka-secondary) !important;
   border-bottom-color: var(--oka-secondary) !important;
   box-shadow: inset 0 4px 0 -2px var(--oka-secondary), inset 0 -4px 0 -2px var(--oka-secondary);
 }
@@ -2620,7 +2624,7 @@ section .oka-expands>article:not(.oka-tab-active):hover {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-expands>article:not(.oka-tab-active):hover+article {
-  border-top-color: var(--oka-secondary);
+  border-top-color: var(--oka-secondary) !important;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2767,7 +2771,7 @@ section .oka-expands>article:last-child {
   /* transition: max-height .1s ease-in; */
   /* border-bottom: 2px solid var(--oka-border); */
   display: block;
-  min-height: 3rem;
+  min-height: 3.5rem;
   overflow: hidden;
 }
 
@@ -2782,10 +2786,10 @@ section .oka-expands>article:last-child {
 .oka-expands>article>h3 {
   display: block;
   margin: 0;
-  height: 3rem;
-  padding: 1rem;
+  min-height: 3rem;
+  padding: 1rem 3rem 1rem 1rem;
   color: var(--oka-text);
-  line-height: 1;
+  line-height: 1.5;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2813,15 +2817,15 @@ section .oka-expands>article:last-child {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-expands>article>h3:after {
-  color: var(--oka-text-alt);
+  color: inherit;
   content: '\F0B26';
   font-family: var(--oka-font-icon);
   opacity: 1;
   position: absolute;
   font-size: 1.5rem;
-  line-height: .75;
+  line-height: 1;
   right: 1rem;
-  /* transition: transform .25s ease-in-out; */
+  transition: transform .2s ease-in-out;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -2834,17 +2838,31 @@ section .oka-expands>article:last-child {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-.oka-expands article.oka-tab-active h3:hover {
+.oka-expands>article.oka-tab-active>h3:hover {
   color: var(--oka-primary);
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-.oka-expands article.oka-tab-active h3:after {
+.oka-expands>article.oka-tab-active>h3:after {
   /* content: '\F0143'; */
   transform: rotate(180deg);
-  
 }
+
+
+
+
+
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+section .oka-expands>article>h3:after {
+  content: '\F0B27';
+}
+
+
+
+
 
 @keyframes oka-opacity {
   from {
