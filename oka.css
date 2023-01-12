@@ -499,6 +499,7 @@ img {
   transition: border-color .2s ease-in-out, outline-color .3s ease-in-out;
   vertical-align: middle;
   width: 100% !important; /* overrule OKA inline styling */
+  object-fit: contain;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -555,6 +556,13 @@ img.scale-medium {
 img.scale-small {
   width: calc(25% - .75rem) !important;
 }
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+img.scale-reset {
+  aspect-ratio: 1;
+}
+
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
@@ -1214,6 +1222,7 @@ table tr img {
   min-width: unset;
   max-width: 8rem;
   margin: .25rem;
+  object-fit: scale-down;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
