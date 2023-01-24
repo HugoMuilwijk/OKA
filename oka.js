@@ -82,7 +82,7 @@ for(var i=0; i<td.length; i++) {
 
 // Copies all the code in the element to the clipboard
 
-var buttonCopy = document.querySelectorAll(".oka-code button")
+var buttonCopy = document.querySelectorAll(".oka-code>.code-button")
 for (i = 0; i < buttonCopy.length; i++) {
     buttonCopy[i].addEventListener('click', async function() {
         var copyCode = this.previousElementSibling.innerText;
