@@ -2,6 +2,7 @@
 /* =================== BASE VALUES ================== */
 
 const base_url = window.location.hostname;
+const intern_url = 'kpn.com'
 const scope_limit = document.querySelector('[id^=SPAN] .leftHardAlignment, .container .flexbox-answer-details');
 var viewport_height = document.documentElement.clientHeight;
 
@@ -27,13 +28,64 @@ window.addEventListener('resize', throttle(function(event) {
 /* ============= CLEAN UP HTML COMMENTS ============= */
 
 
+// const img = scope_limit.querySelectorAll('img');
 
-/* ================================================== */
-/* ================= DISABLE A HREF ================= */
+scope_limit.querySelectorAll('img').forEach(function(img) {
+    if (img.alt=="") {
+        if (navigator.language == 'nl') {
+            img.alt = "Leeg";
+        } else {
+            img.alt = "Empty";
+        };
+    }
 
-disable_href = function() {
-    return false;
-};
+    // img.onerror = function() {
+    //     if (navigator.language == 'nl') {
+    //         img.alt = "Fout";
+    //     } else {
+    //         img.alt = "Error";
+    //     };
+    // }
+});
+
+scope_limit.querySelectorAll('img').forEach(function(img) {
+    img.onerror = function() {
+        if (navigator.language == 'nl') {
+            img.alt = "Fout";
+        } else {
+            img.alt = "Error";
+        };
+    }
+});
+
+
+
+
+
+
+function buildAlert(message) {
+    body = document.body;
+    section = document.createElement('section');
+    section.className = 'oka-toaster';
+    article = document.createElement('article');
+    article.innerHTML = message;
+    section.appendChild(article);
+
+    scope_limit.appendChild(section);
+
+    setTimeout(function(){
+        section.remove();
+    },5000);
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.code === 'KeyF') {
+        e.preventDefault();
+        buildAlert('<kbd>Ctrl</kbd> <kbd>F</kbd>');
+        console.log('Prevented a Ctrl+F')
+    }
+});
+
 
 /* ================================================== */
 /* ===================== A HREF ===================== */
@@ -50,8 +102,11 @@ for(var i=0; i<a.length; i++) {
 		a[i].removeAttribute('target');
 		a[i].removeAttribute('rel');
     } else {
+		a[i].rel = "noopener nofollow";
 		a[i].target = "_blank";
-		a[i].rel = "nofollow"
+    }
+    if (a_href.includes(intern_url)) {
+        a[i].classList.add('link-intern');
     }
 }
 
@@ -59,7 +114,6 @@ document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         if(!!document.querySelector(this.getAttribute('href'))){
-            console.log('ja');
             document.querySelector(this.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth', block: "center"
             });
@@ -101,108 +155,126 @@ for (i = 0; i < buttonCopy.length; i++) {
 
 // tabs and expands code
 
+
+const buildExpands = document.getElementsByClassName("oka-expands");
+
+for (var i=0; i<buildExpands.length; i++) {
+    const expandsArticles = buildExpands[i].querySelectorAll(".oka-expands>article")
+    var j=0;
+    for(const expandsArticle of expandsArticles) {
+        expandsArticle.setAttribute('data-tab-group', i+100);
+        expandsArticle.setAttribute('data-tab-id', j+100);
+
+
+
+        
+        if (j==1) {
+            var previousArticle = expandsArticle.previousElementSibling;
+            if (previousArticle!=null) {
+                console.log(previousArticle);
+
+                previousArticle.querySelector('h3').append(document.createElement('button'));
+                var expandButton = previousArticle.querySelector('h3>button');
+                console.log(expandButton);
+                if (navigator.language == 'nl') {
+                    expandButton.innerText = ('Alles uitklappen');
+                } else {
+                    expandButton.innerText = ('Expand all');
+                };
+                // expandButton.innerText = ('Collapse all');
+                // expandButton.innerText = ('Alles inklappen');
+                expandButton.type = 'button';
+                expandButton.className = 'expands-button';
+            }
+        }
+        j++;
+    };
+};
+
+
+
+
+
+
+
+
+
+
 function createMenuButton(name) {
     let button = document.createElement('button');
     button.type = 'button';
-    //add type button
     cleanText = name.replace(/<\/?[^>]+(>|$)/g, "");
     button.textContent = cleanText;
     return button;
 }
 
-const pretabs = document.getElementsByClassName("oka-tabs");
 
-for (var i=0; i<pretabs.length; i++) {
-    const sectiont = document.createElement("section");
-    const section = document.createElement("section");
-    section.className = 'oka-tabs-menu';
-	pretabs[i].prepend(sectiont);
-	pretabs[i].prepend(section);
-	const htest = pretabs[i].querySelectorAll(".oka-tabs>article")
+
+const buildTabs = document.getElementsByClassName('oka-tabs');
+
+for (var i=0; i<buildTabs.length; i++) {
+    const tabsContent = document.createElement('section');
+    const tabsMenu = document.createElement('section');
+    tabsMenu.className = 'oka-tabs-menu';
+	buildTabs[i].prepend(tabsContent);
+	buildTabs[i].prepend(tabsMenu);
+	const tabsArticles = buildTabs[i].querySelectorAll('.oka-tabs>article');
     var j=0;
-	for(const ftest of htest) {
-        const htester = ftest.firstElementChild;
-        // console.log(htester.innerHTML);
+	for(const tabsArticle of tabsArticles) {
+        tabsArticle.setAttribute('data-tab-group', i);
+        tabsArticle.setAttribute('data-tab-id', j);
 
-
-        ftest.setAttribute ('data-tab-group', i);
-        ftest.setAttribute ('data-tab-id', j);
-
-
-        const menuButton = section.appendChild(createMenuButton(htester.innerHTML));
-        menuButton.setAttribute ('data-tab-group', i);
-        menuButton.setAttribute ('data-tab-id', j);
+        const menuButton = tabsMenu.appendChild(createMenuButton(tabsArticle.firstElementChild.innerHTML));
+        menuButton.setAttribute('data-tab-group', i);
+        menuButton.setAttribute('data-tab-id', j);
         menuButton.className = 'oka-tabs-button';
 
         if (j==0) {
-        menuButton.classList.add("oka-tab-active");
-        ftest.classList.add("oka-tab-active");
+            menuButton.classList.add('oka-tab-active');
+            tabsArticle.classList.add('oka-tab-active');
         }
 
-
-
-        sectiont.append(ftest);
-
+        tabsContent.append(tabsArticle);
 
         j++;
 	};
-
-
-
 };
 
-const preexpands = document.getElementsByClassName("oka-expands");
 
-for (var i=0; i<preexpands.length; i++) {
-    const qtest = preexpands[i].querySelectorAll(".oka-expands>article")
-    var j=0;
-    for(const rtest of qtest) {
-        rtest.setAttribute ('data-tab-group', i+100);
-        rtest.setAttribute ('data-tab-id', j+100);
-        j++;
-    };
-
-};
 
 // Quick-fixed i and j to high numbers to resolve conflict with tabs
 
 const labels = document.querySelectorAll(".oka-expands>article>h3");
 
-
-// const labels = document.querySelectorAll(".oka-expands article h3");
 const tabs = document.querySelectorAll(".oka-tabs>section:first-child>button");
-
 
 const tabslabels = document.querySelectorAll(".oka-tabs>section:nth-child(2)>article>h3");
 
 // console.log(tabs);
 
+// function toggleShow() {
+// 	const target = this;
+// 	const item = target.parentElement;
+// 	const group = item.dataset.tabGroup;
+// 	const id = item.dataset.tabId;
+
+// 	labels.forEach(function(label) {
+// 		const tabItem = label.parentElement;
+
+// 		if (tabItem.dataset.tabGroup === group) {
+// 			if (tabItem.dataset.tabId === id) {
+//                 if (tabItem.classList == "oka-tab-active") {
+//                     tabItem.classList.remove("oka-tab-active");
+//                 } else {
+//                     tabItem.classList.add("oka-tab-active");
+//                 }
+// 			} else {
+// 			}
+// 		}
+// 	});
+// }
+
 function toggleShow() {
-	const target = this;
-	const item = target.parentElement;
-	const group = item.dataset.tabGroup;
-	const id = item.dataset.tabId;
-
-	labels.forEach(function(label) {
-		const tabItem = label.parentElement;
-
-		if (tabItem.dataset.tabGroup === group) {
-			if (tabItem.dataset.tabId === id) {
-                if (tabItem.classList == "oka-tab-active") {
-                    tabItem.classList.remove("oka-tab-active");
-                } else {
-                    tabItem.classList.add("oka-tab-active");
-                    // window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
-                }
-                // window.scroll({ top: tabItemscroll.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
-			} else {
-				// tabItem.classList.remove("oka-tab-active");
-			}
-		}
-	});
-}
-
-function toggleShowTab() {
 	const target = this;
 	const item = target.classList.contains("oka-tabs-button")
 	    ? target
@@ -233,10 +305,8 @@ function toggleShowTab() {
 
 		if (tabItem.dataset.tabGroup === group) {
 			if (tabItem.dataset.tabId === id) {
-               
-                    tabItem.classList.add("oka-tab-active");
-                    // window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
-                
+                tabItem.classList.add("oka-tab-active");
+                // window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
                 // window.scroll({ top: tabItemscroll.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
 			} else {
 				tabItem.classList.remove("oka-tab-active");
@@ -266,18 +336,36 @@ function toggleShowTab() {
 }
 
 labels.forEach(function(label) {
-	label.addEventListener("click", toggleShowTab);
-    console.log('label each')
+	label.addEventListener("click", toggleShow);
+    // console.log('label each')
 });
 
 tabs.forEach(function(tab) {
-	tab.addEventListener("click", toggleShowTab);
-    console.log('tab each')
+	tab.addEventListener("click", toggleShow);
+    // console.log('tab each')
 });
 
 tabslabels.forEach(function(tablabel) {
-	tablabel.addEventListener("click", toggleShowTab);
-    console.log('tab each')
+	tablabel.addEventListener("click", toggleShow);
+    // console.log('tab each')
+});
+
+function toggleShowAll() {
+	const target = this;
+    var testviasz = target.parentElement.parentElement;
+    testviasz.classList.remove('oka-tab-active');
+    var testvias = target.parentElement.parentElement.parentElement.querySelectorAll('article');
+    for(const testvia of testvias) {
+        testvia.classList.remove('oka-tab-active');
+        testvia.classList.toggle('oka-all-active');
+    };
+}
+
+const labelsbut = document.querySelectorAll(".expands-button");
+
+labelsbut.forEach(function(label) {
+	label.addEventListener("click", toggleShowAll);
+    // console.log('label each')
 });
 
 const scrollContainerGroup = document.querySelectorAll(".oka-tabs>section:first-child");
@@ -302,7 +390,7 @@ scrollContainerGroup.forEach(scrollContainer => {
 
     body = document.body;
 
-    trigger = body.querySelectorAll('[data-lightbox],img');
+    trigger = scope_limit.querySelectorAll('[data-lightbox],img:not(.scale-icon)');
 
     animation = {
         fadeIn: 'fadeIn .2s',
@@ -318,7 +406,7 @@ scrollContainerGroup.forEach(scrollContainer => {
     function sortContent(content) {
         var image, imageAlt, video, href = content.getAttribute('href'), src = content.getAttribute('src');
 
-		if (src.match(/\.(jpeg|jpg|gif|png)/)) {
+		if (src.match(/\.(jpeg|jpg|gif|png|webp)/)) {
             image = document.createElement('img');
             image.className = 'lightbox-image';
             image.src = src;
@@ -332,12 +420,11 @@ scrollContainerGroup.forEach(scrollContainer => {
             // image.parentElement =+ 'test';
             image.prepend(p);
             // console.log(p);
-
             
             return image;
         }
 
-        if (href.match(/\.(jpeg|jpg|gif|png)/)) {
+        if (href.match(/\.(jpeg|jpg|gif|png|webp)/)) {
             image = document.createElement('img');
             image.className = 'lightbox-image';
             image.src = href;
@@ -345,28 +432,6 @@ scrollContainerGroup.forEach(scrollContainer => {
             
             return image;
         }
-
-        // if (href.match(/(youtube|vimeo)/)) {
-        //     video = [];
-        //     if (href.match('youtube')) {
-        //         video.id = href.split(/v\/|v=|youtu\.be\//)[1].split(/[?&]/)[0];
-        //         video.url = 'www.youtube.com/embed/';
-        //         video.options = '?autoplay=1&rel=0';
-        //     }
-        //     if (href.match('vimeo')) {
-        //         video.id = href.split(/video\/|https:\/\/vimeo\.com\//)[1].split(/[?&]/)[0];
-        //         video.url = 'player.vimeo.com/video/';
-        //         video.options = '?autoplay=1title=0&byline=0&portrait=0';
-        //     }
-        //     video.player = document.createElement('iframe');
-        //     video.player.setAttribute('allowfullscreen', '');
-        //     video.player.className = 'lightbox-video-player';
-        //     video.player.src = 'https://' + video.url + video.id + video.options;
-        //     video.wrapper = document.createElement('div');
-        //     video.wrapper.className = 'lightbox-video-wrapper';
-        //     video.wrapper.appendChild(video.player);
-        //     return video.wrapper;
-        // }
 
         return body.querySelector(href).children[0].cloneNode(true);
     }
