@@ -168,25 +168,25 @@ for (var i=0; i<buildExpands.length; i++) {
 
 
         
-        if (j==1) {
-            var previousArticle = expandsArticle.previousElementSibling;
-            if (previousArticle!=null) {
-                console.log(previousArticle);
+        // if (j==1) {
+        //     var previousArticle = expandsArticle.previousElementSibling;
+        //     if (previousArticle!=null) {
+        //         console.log(previousArticle);
 
-                previousArticle.querySelector('h3').append(document.createElement('button'));
-                var expandButton = previousArticle.querySelector('h3>button');
-                console.log(expandButton);
-                if (navigator.language == 'nl') {
-                    expandButton.innerText = ('Alles uitklappen');
-                } else {
-                    expandButton.innerText = ('Expand all');
-                };
-                // expandButton.innerText = ('Collapse all');
-                // expandButton.innerText = ('Alles inklappen');
-                expandButton.type = 'button';
-                expandButton.className = 'expands-button';
-            }
-        }
+        //         previousArticle.querySelector('h3').append(document.createElement('button'));
+        //         var expandButton = previousArticle.querySelector('h3>button');
+        //         console.log(expandButton);
+        //         if (navigator.language == 'nl') {
+        //             expandButton.innerText = ('Alles uitklappen');
+        //         } else {
+        //             expandButton.innerText = ('Expand all');
+        //         };
+        //         // expandButton.innerText = ('Collapse all');
+        //         // expandButton.innerText = ('Alles inklappen');
+        //         expandButton.type = 'button';
+        //         expandButton.className = 'expands-button';
+        //     }
+        // }
         j++;
     };
 };
