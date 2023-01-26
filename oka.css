@@ -2904,9 +2904,9 @@ section .oka-expands>article:last-child {
   height: auto;
   padding: 1rem;
 
-  display: flex;
+  /* display: flex;
   gap: 1rem;
-  flex-direction: column;
+  flex-direction: column; */
 }
 
 :is([id^=SPAN] .leftHardAlignment,
