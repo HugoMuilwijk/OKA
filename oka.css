@@ -3162,17 +3162,27 @@ section .oka-expands>article:last-child {
 @media only screen and (max-width: 992px) {
 
   :is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code {
+  margin: 0 0 2rem 0;
+  width: 100%;
+}
+
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-code>pre>code[class^=code-][data-comment]::after {
+  content: '\2009';
+}
+
+  :is([id^=SPAN] .leftHardAlignment,
   .container .flexbox-answer-details)
   table {
   width: 100% !important;
  }
 
 
-  :is([id^=SPAN] .leftHardAlignment,
-  .container .flexbox-answer-details)
-  .oka-code>pre>code[class^=code-][data-comment]::after {
-    content: '\2009';
-  }
+
 
 
 
@@ -3202,10 +3212,6 @@ section .oka-expands>article:last-child {
     width: 100%;
   }
 
-  [id^=SPAN] .leftHardAlignment .oka-code,
-  .container .flexbox-answer-details .oka-code {
-    width: 100%;
-  }
 
 
 
