@@ -459,7 +459,7 @@ mark:hover{
 
 .container {
   padding: 0;
-  min-width: 540px;
+  /* min-width: 540px; */
   /* overflow: hidden; */
 }
 
@@ -1676,7 +1676,7 @@ ol hr {
   -webkit-user-select: none; /* Safari browser support */
   display: inline-block;
   height: auto;
-  margin: 0 auto 2rem auto;
+  margin: 0 calc(100% / 6) 2rem calc(100% / 6);
   position: relative;
   text-align: center;
   user-select: none;
