@@ -3175,14 +3175,6 @@ section .oka-expands>article:last-child {
     -webkit-margin-end: 1.5rem;
   }
 
-  html>::-webkit-scrollbar {
-    width: 1.5rem;
-  }
-
-  html>::-webkit-scrollbar-button:single-button:vertical {
-    height:1.5rem;
-  }
-
   :is([id^=SPAN] .leftHardAlignment,
   .container .flexbox-answer-details)
   :is(h1,h2) {
