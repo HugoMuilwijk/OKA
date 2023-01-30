@@ -2,7 +2,8 @@
 /* =================== BASE VALUES ================== */
 
 const base_url = window.location.hostname;
-const intern_url = 'kpn.com'
+const intern_url1 = 'kpn.com';
+const intern_url2 = 'kpn.org';
 const scope_limit = document.querySelector('[id^=SPAN] .leftHardAlignment, .container .flexbox-answer-details');
 var viewport_height = document.documentElement.clientHeight;
 
@@ -64,7 +65,8 @@ scope_limit.querySelectorAll('img').forEach(function(img) {
 
 
 function buildAlert(message) {
-    body = document.body;
+
+    // body = document.body;
     section = document.createElement('section');
     section.className = 'oka-toaster';
     article = document.createElement('article');
@@ -78,13 +80,13 @@ function buildAlert(message) {
     },5000);
 }
 
-document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && e.code === 'KeyF') {
-        e.preventDefault();
-        buildAlert('<kbd>Ctrl</kbd> <kbd>F</kbd>');
-        console.log('Prevented a Ctrl+F')
-    }
-});
+// document.addEventListener('keydown', function(e) {
+//     if (e.ctrlKey && e.code === 'KeyF') {
+//         e.preventDefault();
+//         buildAlert('<kbd>Ctrl</kbd> <kbd>F</kbd>');
+//         console.log('Prevented a Ctrl+F')
+//     }
+// });
 
 
 /* ================================================== */
@@ -98,15 +100,17 @@ for(var i=0; i<a.length; i++) {
     const a_href = a[i].getAttribute('href');
 	// check if contains base_url or ends with ID number
     // include !https:// option
-    if (a_href.startsWith('#')||a_href.includes(base_url)) {
-		a[i].removeAttribute('target');
-		a[i].removeAttribute('rel');
-    } else {
-		a[i].rel = "noopener nofollow";
-		a[i].target = "_blank";
-    }
-    if (a_href.includes(intern_url)) {
-        a[i].classList.add('link-intern');
+    if (a[i].hasAttribute('href')) {
+        if (a_href.startsWith('#')||a_href.includes(base_url)) {
+            a[i].removeAttribute('target');
+            a[i].removeAttribute('rel');
+        } else {
+            a[i].rel = "noopener nofollow";
+            a[i].target = "_blank";
+        }
+        if (a_href.includes(intern_url1)||a_href.includes(intern_url2)) {
+            a[i].classList.add('link-intern');
+        }
     }
 }
 
@@ -126,13 +130,13 @@ document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
 
 // Forces mono font on cells with only numbers
 
-const td = document.getElementsByTagName('td');
+// const td = document.getElementsByTagName('td');
 
-for(var i=0; i<td.length; i++) {
-	if (td[i].innerHTML.match(new RegExp("^-?[0-9][0-9,\.\-]+$"))) {
-		td[i].classList.add('numeric');
-	}
-};
+// for(var i=0; i<td.length; i++) {
+// 	if (td[i].innerHTML.match(new RegExp("^-?[0-9][0-9,\.\-]+$"))) {
+// 		td[i].classList.add('numeric');
+// 	}
+// };
 
 // Copies all the code in the element to the clipboard
 
@@ -162,12 +166,11 @@ for (var i=0; i<buildExpands.length; i++) {
     const expandsArticles = buildExpands[i].querySelectorAll(".oka-expands>article")
     var j=0;
     for(const expandsArticle of expandsArticles) {
+        var expandsH3 = expandsArticle.querySelector("h3");
+        expandsH3.innerHTML = cleanTitle(expandsH3.innerHTML);
         expandsArticle.setAttribute('data-tab-group', i+100);
         expandsArticle.setAttribute('data-tab-id', j+100);
 
-
-
-        
         // if (j==1) {
         //     var previousArticle = expandsArticle.previousElementSibling;
         //     if (previousArticle!=null) {
@@ -191,24 +194,19 @@ for (var i=0; i<buildExpands.length; i++) {
     };
 };
 
-
-
-
-
-
-
-
-
+function cleanTitle(title) {
+    var cleanTitle = title.replace(/(<\/?mark)(.*?)[>$]/g, "");
+    title = cleanTitle;
+    return title;
+}
 
 function createMenuButton(name) {
     let button = document.createElement('button');
     button.type = 'button';
-    cleanText = name.replace(/<\/?[^>]+(>|$)/g, "");
-    button.textContent = cleanText;
+    cleanText = name.replace(/(<\/?mark)(.*?)[>$]/g, "");
+    button.innerHTML =  cleanText;
     return button;
 }
-
-
 
 const buildTabs = document.getElementsByClassName('oka-tabs');
 
@@ -221,6 +219,8 @@ for (var i=0; i<buildTabs.length; i++) {
 	const tabsArticles = buildTabs[i].querySelectorAll('.oka-tabs>article');
     var j=0;
 	for(const tabsArticle of tabsArticles) {
+        var tabsH3 = tabsArticle.querySelector("h3");
+        tabsH3.innerHTML = cleanTitle(tabsH3.innerHTML);
         tabsArticle.setAttribute('data-tab-group', i);
         tabsArticle.setAttribute('data-tab-id', j);
 
@@ -302,7 +302,6 @@ function toggleShow() {
 
 	tabslabels.forEach(function(label) {
 		const tabItem = label.parentElement;
-
 		if (tabItem.dataset.tabGroup === group) {
 			if (tabItem.dataset.tabId === id) {
                 tabItem.classList.add("oka-tab-active");
