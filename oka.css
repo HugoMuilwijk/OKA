@@ -3477,3 +3477,48 @@ section .oka-expands>article:last-child {
 
 
 }
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    width: 210mm !important;
+    height: 297mm !important;
+  }
+
+  .container .flexbox-answer-details {
+    border: 1px solid var(--oka-border-alt);
+    margin: 0 !important;
+  }
+
+  a::after {
+    content: " (" attr(href) ")" !important;
+    font-family: var(--oka-font-sans) !important;
+  }
+
+  .container .flexbox-answer-details .oka-expands>article>div{
+    height: auto !important;
+    padding: 1rem !important;
+    opacity: 1 !important;
+  }
+
+  .container .flexbox-answer-details .oka-tabs>section:nth-child(2)>article>h3 {
+    display: block;
+    margin: 0;
+    height: 3.5rem;
+    padding: 1rem;
+  }
+
+  .container .flexbox-answer-details .oka-tabs>section>article {
+    display: block;
+    min-height: 3.5rem;
+    opacity: 1;
+    position: relative;
+    height: auto;
+    width: auto;
+    margin: 0;
+  }
+}
