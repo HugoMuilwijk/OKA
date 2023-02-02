@@ -4,8 +4,8 @@
 }
 
 @font-face {
-  font-family: "Lexend";
-  src: url('FNT/Lexend.woff2') format('woff2');
+  font-family: "ReadexPro";
+  src: url('FNT/ReadexPro.woff2') format('woff2');
 }
 
 /* @font-face {
@@ -45,7 +45,7 @@ red-dark:     #e52e2e;
 
 :root {
   --oka-font-icon: Icons;
-  --oka-font-sans: Lexend, sans-serif;
+  --oka-font-sans: ReadexPro, sans-serif;
   --oka-font-mono: monospace;
 
   --oka-background: #f3f3f3;    /* grey-subtle */
@@ -70,7 +70,7 @@ red-dark:     #e52e2e;
   --oka-white: #ffffff;         /* white */
 
   --oka-primary: #00ad00;       /* green (better contrast) */
-  --oka-primary-alt: #008800;   /* green-dark (better contrast) */
+  --oka-primary-alt: #009900;   /* green-dark */
   --oka-secondary: #0099fe;     /* blue (better contrast) */
   --oka-secondary-alt: #0077cc; /* blue-dark */
 
@@ -112,8 +112,8 @@ red-dark:     #e52e2e;
   --oka-warning-alt: #ff9900;   /* orange */
   --oka-white: #ffffff;         /* white */
 
-  --oka-primary: #008800;       /* green-dark */
-  --oka-primary-alt: #00ad00;   /* green */
+  --oka-primary: #009900;       /* green-dark */
+  --oka-primary-alt: #00ad00;   /* green (better contrast) */
   --oka-secondary: #0077cc;     /* blue-dark */
   --oka-secondary-alt: #0099fe; /* blue */
 
@@ -125,6 +125,10 @@ red-dark:     #e52e2e;
 
 :root.dark img {
   filter: brightness(.95);
+}
+
+:root.font {
+  font-size: 20px;
 }
 
 /* ================================================== */
@@ -222,6 +226,125 @@ html>::-webkit-scrollbar-thumb:hover {
 html>::-webkit-scrollbar-thumb:active {
   box-shadow: inset 2rem 0 var(--oka-primary);
 }
+
+/* ================================================== */
+/* ================ OVERLAY BUTTONS ================= */
+
+section.oka-overlay {
+  position: fixed;
+  width: 3rem;
+  max-height: 3rem;
+  /* height: 9rem; */
+  bottom: 1rem;
+  right: 1rem;
+  /* outline: 1px solid hotpink; */
+  display: flex;
+  gap: 1rem;
+  flex-direction: column-reverse;
+  z-index: 99;
+  transition: max-height .25s ease-in-out;
+  overflow: hidden;
+
+}
+
+section.oka-overlay:hover {
+  max-height: 19rem;
+}
+
+section.oka-overlay>article {
+  height: 3rem;
+  width: 3rem;
+
+  /* outline: 1px solid hotpink; */
+  
+}
+
+section.oka-overlay>article>button {
+  background-color: transparent;
+  width: 3rem;
+  height: 3rem;
+  backdrop-filter: blur(10px);
+  /* outline: 1px solid hotpink; */
+  border-radius: 1.5rem !important;
+  border: 4px solid var(--oka-border);
+}
+
+section.oka-overlay>article>button::after {
+  content: '\F035C';
+  display: inline;
+  font-family: var(--oka-font-icon);
+  font-size: 1.5rem;
+  position: absolute;
+  color: var(--oka-border-alt);
+  /* outline: 1px solid hotpink; */
+  width: 3rem;
+  height: 3rem;
+  top: -4px;
+  left: -4px;
+  padding-top: .75rem;
+}
+
+
+
+section.oka-overlay>article>button.zoom::after {
+  content: '\F09F4';
+}
+section.oka-overlay>article>button.zoom.active::after {
+  content: '\F09F3';
+}
+
+section.oka-overlay>article>button.dark::after {
+  content: '\F0F65';
+}
+
+section.oka-overlay>article>button.dark.active::after {
+  content: '\F05A8';
+}
+
+section.oka-overlay>article>button.find::after {
+  content: '\F0349';
+}
+
+section.oka-overlay>article>button.scroll::after {
+  content: '\F005D';
+}
+
+section.oka-overlay>article>button:hover {
+  border-color: var(--oka-secondary);
+}
+
+section.oka-overlay>article>button:hover::after {
+  color: var(--oka-secondary);
+}
+
+section.oka-overlay>article>button:active {
+  border-color: var(--oka-primary);
+  background-color: var(--oka-primary);
+}
+
+section.oka-overlay>article>button:active::after {
+  color: var(--oka-white);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ================================================== */
 /* ================ OVERRULE OSC CSS ================ */
@@ -387,6 +510,10 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: unset;
+}
+
 /* ::selection {
   background: var(--oka-secondary);
   color: var(--oka-white);
@@ -395,12 +522,30 @@ html {
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 :focus-visible {
-  outline: 3px solid var(--oka-secondary-alt) !important;
-  border: 2px solid var(--oka-secondary-alt) !important;
-  outline-offset: -1px !important;
+  /* outline: 3px solid var(--oka-secondary) !important; */
+  /* border: 2px solid var(--oka-secondary-alt) !important; */
+  border-color: var(--oka-secondary) !important;
+  border-radius: .25rem;
+  /* outline-offset: -1px !important; */
   background: var(--oka-secondary) !important;
   color: var(--oka-white) !important;
   box-shadow: unset !important;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+button:focus-visible {
+  border-radius: 0;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a.glightbox:focus-visible {
+  outline: 4px solid var(--oka-secondary) !important;
+  outline-offset: -1px;
+  border-radius: .5rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -419,7 +564,7 @@ mark{
 mark:hover{
   background: var(--oka-primary-alt);
   outline-offset: -1px;
-  outline: 3px solid var(--oka-primary-alt);
+  outline: 3px solid var(--oka-primary-   );
 }
 
 :is([id^=SPAN] .leftHardAlignment,
@@ -728,8 +873,6 @@ dl>dt~dt+dd {
 section dl {
   width: 100%;
 }
-
-
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
@@ -1255,19 +1398,21 @@ section .oka-table {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-a {
+a:not(.glightbox) {
   border: 2px solid transparent;
-  border-block: .25rem solid transparent;
+  border-block: .125rem solid transparent;
   color: var(--oka-primary);
   font-variation-settings: 'wght' 400;
   line-height: 1.25;
   font-size: inherit;
   font-family: inherit;
+  padding: 0 0 0 .25rem;
+  margin: 0 -.25rem;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-a::before {
+a:not(.glightbox)::before {
   content: '';
   display: inline-block;
   font-family: var(--oka-font-icon);
@@ -1277,7 +1422,7 @@ a::before {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-a::after {
+a:not(.glightbox)::after {
   content: '\F0054';
   display: inline-block;
   font-family: var(--oka-font-icon);
@@ -1325,6 +1470,18 @@ a[href$=".pdf"]::before {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
+a[href^="mailto:"],
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href^="tel:"],
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+a[href$=".pdf"] {
+  padding: 0 .25rem 0 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 a[href^="mailto:"]::after,
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
@@ -1337,7 +1494,7 @@ a[href$=".pdf"]::after {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-a:hover {
+a:not(.glightbox):hover {
   color: var(--oka-primary-alt);
   text-decoration: underline;
   text-decoration-thickness: 2px;
@@ -1459,77 +1616,146 @@ ol hr {
 /* ================================================== */
 /* ================== OKA LIGHTBOX ================== */
 
-/*
--------------------------------------------------------
-1. Base Styles
--------------------------------------------------------
-*/
 
-.remove-scroll {
-  overflow: hidden;
-  -webkit-margin-end: 1.5rem;
-}
-/* -webkit-margin-end added to prevent page 'jumping' on webkit browsers */
 
-.lightbox-hide {
-  left: -9999px;
-  position: absolute;
-  top: -9999px;
-  visibility: hidden;
-}
-
-.lightbox-container {
-  /* background-color: rgba(51, 51, 51, 0.5);  */
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5); /*#333333*/
-  box-shadow: inset 0 2rem 3rem rgba(0, 0, 0, .25), inset 0 -2rem 3rem rgba(0, 0, 0, .25);
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  left: 0;
-  padding: 2rem;
-  position: fixed;
-  right: 0;
-  top: 0;
-  height: 100vh;
-  z-index: 2;
-}
-
-.lightbox-wrapper {
-  position: relative;
-  /* background-color: red; */
-  margin: 4rem 0;
-  /* height: 100vh; */
-  /* overflow: scroll; */
-}
-
-.lightbox-title {
-  background: black;
-  width: 100%;
-  height: 3rem;
-  position: absolute;
-  top: -3.5rem;
-}
-
-.lightbox-content {
+.gslide-image img {
+  background-color: white;
+  /* border: 10px solid hotpink; */
   border-radius: .5rem;
-  box-shadow: 0 0 .5rem rgba(0, 0, 0, .5);
-  cursor: move;
-  margin: 0 auto;
-  max-height: calc(100vh - 8rem);
-  max-width: calc(100vw - 4rem);
-  overflow: auto;
 }
 
-.lightbox-image {
-  
-  max-height: calc(100vh - 8rem);
-  max-width: calc(100vw - 4rem);
-  /* height: 100%; */
-  /* height: 1080px;
-  width: 1440px; */
-  vertical-align: middle;
+
+
+/* .gprev,
+.gnext,
+.gclose {
+    width: 32px;
+    height: 32px;
 }
+
+.gprev svg,
+.gnext svg,
+.gclose svg {
+    width: 32px;
+    height: auto;
+} */
+
+.glightbox-clean .gslide-description {
+  background: rgba(0, 0, 0, 0);
+  min-height: 3rem;
+  /* outline: 1px solid hotpink; */
+}
+
+.glightbox-clean .gdesc-inner {
+  padding: 1rem;
+}
+
+.glightbox-clean .gslide-desc {
+  color: var(--oka-white);
+  font-size: 1rem;
+  font-family: var(--oka-font-sans);
+  line-height: 1.5rem;
+  text-align: center;
+  
+}
+
+.glightbox-clean .gprev,
+.glightbox-clean .gnext,
+.glightbox-clean .gclose {
+  background-color: rgba(0, 0, 0, 0);
+  /* box-shadow: inset 0 0 .25rem black, 0 0 .25rem black; */
+  border: 4px solid var(--oka-primary);
+  border-radius: 1.5rem;
+  margin: 0;
+  backdrop-filter: blur(10px);
+}
+
+.glightbox-clean .gprev.disabled,
+.glightbox-clean .gnext.disabled {
+  background-color: rgba(0, 0, 0, 0);
+  border: 4px solid rgba(128, 128, 128, .5);
+  opacity: 1;
+  backdrop-filter: blur(10px);
+}
+
+.glightbox-clean .gprev:not(.disabled):hover,
+.glightbox-clean .gnext:not(.disabled):hover {
+  background-color: var(--oka-primary);
+}
+
+/* .glightbox-clean .gprev svg,
+.glightbox-clean .gnext svg,
+.glightbox-clean .gclose svg {
+  filter: drop-shadow(1px 1px .125rem rgb(0 0 0 / 0.75));
+} */
+
+.glightbox-clean .gprev polygon,
+.glightbox-clean .gnext polygon,
+.glightbox-clean .gclose polygon {
+  fill: var(--oka-primary);
+}
+
+.glightbox-clean .gprev.disabled polygon,
+.glightbox-clean .gnext.disabled polygon {
+  fill: rgba(255, 255, 255, .5);
+}
+
+.glightbox-clean .gprev:not(.disabled):hover polygon,
+.glightbox-clean .gnext:not(.disabled):hover polygon,
+.glightbox-clean .gclose:not(.disabled):hover polygon {
+  fill: var(--oka-white);
+}
+
+.glightbox-clean .gprev {
+  left: 1rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+.glightbox-clean .gnext {
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+.glightbox-clean .gclose {
+  border: 4px solid var(--oka-error);
+  width: 3rem;
+  height: 3rem;
+  top: 1rem;
+  right: 1rem;
+}
+
+.glightbox-clean .gclose:hover {
+  background-color: var(--oka-error);
+}
+
+.glightbox-clean .gclose svg {
+  width: 32px;
+  /* height: auto; */
+}
+
+.glightbox-clean .gclose polygon {
+    fill: var(--oka-error);
+}
+
+
+
+@media (min-width: 769px) {
+  .glightbox-clean .gprev,
+  .glightbox-clean .gnext {
+      top: calc(50% - 3rem);
+  }
+}
+
+@media (min-width: 992px) {
+  .glightbox-clean .gclose {
+      opacity: 1;
+  }
+}
+
+
+
 
 /*
 -------------------------------------------------------
@@ -1537,7 +1763,7 @@ ol hr {
 -------------------------------------------------------
 */
 
-.lightbox-btn {
+/* .lightbox-btn {
   background-color: var(--oka-primary);
   background-position: center;
   background-repeat: no-repeat;
@@ -1594,7 +1820,7 @@ ol hr {
 
 .lightbox-btn-previous::after {
   content: '\F0141';
-}
+} */
 
 /*
 -------------------------------------------------------
@@ -1602,7 +1828,7 @@ ol hr {
 -------------------------------------------------------
 */
 
-@keyframes fadeIn {
+/* @keyframes fadeIn {
   from {
     opacity: 0;
   }
@@ -1640,7 +1866,7 @@ ol hr {
   to {
     transform: scale(.95);
   }
-}
+} */
 
 
 
@@ -1656,7 +1882,7 @@ ol hr {
 .container .flexbox-answer-details)
 .oka-code {
   -webkit-user-select: none; /* Safari browser support */
-  display: inline-block;
+  display: block;
   height: auto;
   margin: 0 calc(100% / 6) 2rem calc(100% / 6);
   position: relative;
@@ -2745,7 +2971,7 @@ section .oka-tabs:hover>section:nth-child(2) {
 .container .flexbox-answer-details)
 .oka-expands {
   margin-bottom: 2rem;
-  flex: 1;
+  /* flex: 1; */
   transition: box-shadow .25s ease-in-out;
 }
 
@@ -3143,6 +3369,17 @@ section .oka-expands>article:last-child {
 
 @media only screen and (max-width: 992px) {
 
+
+  .gslide-image img {
+    border-radius: .25rem;
+  }
+
+
+
+
+
+
+
   :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
 .oka-code {
@@ -3477,7 +3714,6 @@ section .oka-expands>article:last-child {
 
 
 }
-
 @page {
   size: A4;
   margin: 0;

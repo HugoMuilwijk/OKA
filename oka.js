@@ -7,6 +7,52 @@ const intern_url2 = 'kpn.org';
 const scope_limit = document.querySelector('[id^=SPAN] .leftHardAlignment, .container .flexbox-answer-details');
 var viewport_height = document.documentElement.clientHeight;
 
+
+
+
+
+
+
+
+/* ================================================== */
+/* ================ FONT SIZE SWITCH ================ */
+
+if(sessionStorage.getItem('font')=='true') {
+    document.documentElement.classList.add('font');
+}
+
+function toggleFont() {
+    if (sessionStorage.getItem('font')=='true') {
+        sessionStorage.setItem('font', false)
+    } else {
+        sessionStorage.setItem('font', true)
+    };
+    document.documentElement.classList.toggle('font');
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.shiftKey && e.code === 'KeyA') {
+        e.preventDefault();
+        toggleFont()
+        buildAlert('<kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>A</kbd>');
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function throttle (callback, limit) {
     var wait = false;
     return function () {
@@ -22,7 +68,14 @@ function throttle (callback, limit) {
 
 window.addEventListener('resize', throttle(function(event) {
     viewport_height = document.documentElement.clientHeight;
+    document_height = document.documentElement.scrollHeight;
+    document_scroll = document.documentElement.scrollTop;
     console.log(viewport_height);
+    console.log(document_height);
+    console.log(document_scroll);
+    if(document_height > 2*viewport_height){
+        console.log('Show scroll-to-top');
+    };
 }, 1000));
 
 /* ================================================== */
@@ -100,7 +153,7 @@ for(var i=0; i<a.length; i++) {
     const a_href = a[i].getAttribute('href');
 	// check if contains base_url or ends with ID number
     // include !https:// option
-    if (a[i].hasAttribute('href')) {
+    if (a[i].hasAttribute('href')&&a[i].className != 'glightbox') {
         if (a_href.startsWith('#')||a_href.includes(base_url)) {
             a[i].removeAttribute('target');
             a[i].removeAttribute('rel');
@@ -381,192 +434,220 @@ scrollContainerGroup.forEach(scrollContainer => {
 /* ================================================== */
 /* ==================== LIGHTBOX ==================== */
 
-(function () {
+// (function () {
 
-    'use strict';
+//     'use strict';
 
-    var animation, body, btnClose, btnNav, currentItem, container, content, contentTitle, wrapper, trigger, currentTrigger;
+//     var animation, body, btnClose, btnNav, currentItem, container, content, contentTitle, wrapper, trigger, currentTrigger;
 
-    body = document.body;
+//     body = document.body;
 
-    trigger = scope_limit.querySelectorAll('[data-lightbox],img:not(.scale-icon)');
+//     trigger = scope_limit.querySelectorAll('[data-lightbox],img:not(.scale-icon)');
 
-    animation = {
-        fadeIn: 'fadeIn .2s',
-        fadeOut: 'fadeOut .2s',
-        scaleIn: 'createBox .2s',
-        scaleOut: 'deleteBox .2s'
-    };
+//     animation = {
+//         fadeIn: 'fadeIn .2s',
+//         fadeOut: 'fadeOut .2s',
+//         scaleIn: 'createBox .2s',
+//         scaleOut: 'deleteBox .2s'
+//     };
 
-    function toggleScroll() {
-        document.documentElement.classList.toggle('remove-scroll');
-    }
+//     function toggleScroll() {
+//         document.documentElement.classList.toggle('remove-scroll');
+//     }
 
-    function sortContent(content) {
-        var image, imageAlt, video, href = content.getAttribute('href'), src = content.getAttribute('src');
+//     function sortContent(content) {
+//         var image, imageAlt, video, href = content.getAttribute('href'), src = content.getAttribute('src');
 
-		if (src.match(/\.(jpeg|jpg|gif|png|webp)/)) {
-            image = document.createElement('img');
-            image.className = 'lightbox-image';
-            image.src = src;
-            image.alt = content.getAttribute('alt');
-            console.log(image.alt);
-            console.log('tekst');
-            // imageAlt = document.createElement('div');
-            // imageAlt.innerHTML = image.alt;
-            const p = document.createElement('p');
-            p.innerText = image.alt;
-            // image.parentElement =+ 'test';
-            image.prepend(p);
-            // console.log(p);
+// 		if (src.match(/\.(jpeg|jpg|gif|png|webp)/)) {
+//             image = document.createElement('img');
+//             image.className = 'lightbox-image';
+//             image.src = src;
+//             image.alt = content.getAttribute('alt');
+//             console.log(image.alt);
+//             console.log('tekst');
+//             // imageAlt = document.createElement('div');
+//             // imageAlt.innerHTML = image.alt;
+//             const p = document.createElement('p');
+//             p.innerText = image.alt;
+//             // image.parentElement =+ 'test';
+//             image.prepend(p);
+//             // console.log(p);
             
-            return image;
-        }
+//             return image;
+//         }
 
-        if (href.match(/\.(jpeg|jpg|gif|png|webp)/)) {
-            image = document.createElement('img');
-            image.className = 'lightbox-image';
-            image.src = href;
-            image.alt = content.getAttribute('data-image-alt');
+//         if (href.match(/\.(jpeg|jpg|gif|png|webp)/)) {
+//             image = document.createElement('img');
+//             image.className = 'lightbox-image';
+//             image.src = href;
+//             image.alt = content.getAttribute('data-image-alt');
             
-            return image;
-        }
+//             return image;
+//         }
 
-        return body.querySelector(href).children[0].cloneNode(true);
-    }
+//         return body.querySelector(href).children[0].cloneNode(true);
+//     }
 
-    function galleryItens(element) {
-        var itens = {
-                next: element.parentElement.nextElementSibling,
-                previous: element.parentElement.previousElementSibling,
-                up: element.parentElement.parentElement.previousElementSibling,
-                down: element.parentElement.parentElement.nextElementSibling
-            },
-            key;
-        for (key in itens) {
+//     function galleryItens(element) {
+//         var itens = {
+//                 next: element.parentElement.nextElementSibling,
+//                 previous: element.parentElement.previousElementSibling,
+//                 up: element.parentElement.parentElement.previousElementSibling,
+//                 down: element.parentElement.parentElement.nextElementSibling
+//             },
+//             key;
+//         for (key in itens) {
             
-            if (itens[key] !== null) {
-                itens[key] = itens[key].querySelector('[data-lightbox]');
-            }
-        }
-        return itens;
+//             if (itens[key] !== null) {
+//                 itens[key] = itens[key].querySelector('[data-lightbox]');
+//             }
+//         }
+//         return itens;
+//     }
+
+//     function buildLightbox(element) {
+//         element.blur();
+//         currentItem = element;
+//         element.classList.add('current-lightbox-item');
+
+//         contentTitle = document.createElement('div');
+//         contentTitle.className = 'lightbox-title';
+//         // contentTitle.appendChild(sortContent(content));
+
+//         content = document.createElement('div');
+//         content.className = 'lightbox-content';
+//         content.appendChild(sortContent(element));
+
+//         btnClose = document.createElement('button');
+//         btnClose.className = 'lightbox-btn lightbox-btn-close';
+
+//         wrapper = content.cloneNode(false);
+//         wrapper.className = 'lightbox-wrapper';
+//         wrapper.style.animation = [animation.scaleIn, animation.fadeIn];
+//         wrapper.appendChild(contentTitle);
+//         wrapper.appendChild(content);
+//         wrapper.appendChild(btnClose);
+
+//         container = content.cloneNode(false);
+//         container.className = 'lightbox-container';
+//         container.style.animation = animation.fadeIn;
+//         container.onclick = function() {};
+//         container.appendChild(wrapper);
+
+//         if (element.getAttribute('data-lightbox') === 'gallery') {
+//             container.classList.add('lightbox-gallery');
+//             var key;
+//             btnNav = {next: '', previous: '', up: '', down: ''};
+//             for (key in btnNav) {
+//                 if (btnNav.hasOwnProperty(key)) {
+//                     btnNav[key] = btnClose.cloneNode(false);
+//                     btnNav[key].className = 'lightbox-btn lightbox-btn-' + key;
+//                     btnNav[key].disabled = galleryItens(element)[key] === null ? true : false;
+//                     wrapper.appendChild(btnNav[key]);
+//                 }
+//             }
+//         }
+
+//         body.appendChild(container);
+//         toggleScroll();
+//     }
+
+//     function galleryNavigation(position) {
+//         wrapper.removeAttribute('style');
+//         var item = galleryItens(currentItem)[position],
+//             key;
+//         if (item !== null) {
+//             content.style.animation = animation.fadeOut;
+//             setTimeout(function () {
+//                 content.replaceChild(sortContent(item), content.children[0]);
+//                 content.style.animation = animation.fadeIn;
+//             }, 100);
+//             currentItem.classList.remove('current-lightbox-item');
+//             item.classList.add('current-lightbox-item');
+//             currentItem = item;
+//             for (key in btnNav) {
+//                 if (btnNav.hasOwnProperty(key)) {
+//                     btnNav[key].disabled = galleryItens(item)[key] === null ? true : false;
+//                     console.log(key);
+//                 }
+//             }
+//         }
+//     }
+
+//     function closeLightbox() {
+//         container.style.animation = animation.fadeOut;
+//         wrapper.style.animation = [animation.scaleOut, animation.fadeOut];
+//         setTimeout(function () {
+//             if (body.contains(container)) {
+//                 body.removeChild(container);
+//                 currentTrigger.focus();
+//                 currentItem.classList.remove('current-lightbox-item');
+//                 toggleScroll();
+//             }
+//         }, 100);
+//     }
+
+//     Array.prototype.forEach.call(trigger, function (element) {
+//         element.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             buildLightbox(element);
+//             currentTrigger = element;
+//         });
+//     });
+
+//     ['click', 'keyup'].forEach( function (eventType) {
+//         body.addEventListener(eventType, function (event) {
+//             if (body.contains(container)) {
+//                 var target = event.target,
+//                     key = event.keyCode,
+//                     type = event.type;
+//                 if ([container, btnClose].indexOf(target) !== -1 || key === 27) {
+//                     closeLightbox();
+//                 }
+//                 if (container.classList.contains('lightbox-gallery')) {
+//                     if ((target === btnNav.next && type === 'click') || key === 39) {
+//                         galleryNavigation('next');
+//                     }
+//                     if ((target === btnNav.previous && type === 'click') || key === 37) {
+//                         galleryNavigation('previous');
+//                     }
+//                     if ((target === btnNav.up && type === 'click') || key === 38) {
+//                         galleryNavigation('up');
+//                     }
+//                     if ((target === btnNav.down && type === 'click') || key === 40) {
+//                         galleryNavigation('down');
+//                     }
+//                 }
+//             }
+//         });
+//     });
+
+// }());
+
+
+
+
+
+const lightbox = GLightbox({
+    moreText: 'Toon meer',
+    moreLength: 45,
+    svg: {
+        close: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><polygon points="8,6 12,2 14,4 10,8 14,12 12,14 8,10 4,14 2,12 6,8 2,4 4,2"/></svg>',
+        next: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><polygon points="13,8 7,14 5,12 9,8 5,4 7,2"/></svg>',
+        prev: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><polygon points="3,8 9,2 11,4 7,8 11,12 9,14"/></svg>'
     }
+});
 
-    function buildLightbox(element) {
-        element.blur();
-        currentItem = element;
-        element.classList.add('current-lightbox-item');
-
-        contentTitle = document.createElement('div');
-        contentTitle.className = 'lightbox-title';
-        // contentTitle.appendChild(sortContent(content));
-
-        content = document.createElement('div');
-        content.className = 'lightbox-content';
-        content.appendChild(sortContent(element));
-
-        btnClose = document.createElement('button');
-        btnClose.className = 'lightbox-btn lightbox-btn-close';
-
-        wrapper = content.cloneNode(false);
-        wrapper.className = 'lightbox-wrapper';
-        wrapper.style.animation = [animation.scaleIn, animation.fadeIn];
-        wrapper.appendChild(contentTitle);
-        wrapper.appendChild(content);
-        wrapper.appendChild(btnClose);
-
-        container = content.cloneNode(false);
-        container.className = 'lightbox-container';
-        container.style.animation = animation.fadeIn;
-        container.onclick = function() {};
-        container.appendChild(wrapper);
-
-        if (element.getAttribute('data-lightbox') === 'gallery') {
-            container.classList.add('lightbox-gallery');
-            var key;
-            btnNav = {next: '', previous: '', up: '', down: ''};
-            for (key in btnNav) {
-                if (btnNav.hasOwnProperty(key)) {
-                    btnNav[key] = btnClose.cloneNode(false);
-                    btnNav[key].className = 'lightbox-btn lightbox-btn-' + key;
-                    btnNav[key].disabled = galleryItens(element)[key] === null ? true : false;
-                    wrapper.appendChild(btnNav[key]);
-                }
-            }
-        }
-
-        body.appendChild(container);
-        toggleScroll();
+var preventEnter = function(e) {
+    if (e.code === 'Enter') {
+        e.preventDefault();
     }
+};
 
-    function galleryNavigation(position) {
-        wrapper.removeAttribute('style');
-        var item = galleryItens(currentItem)[position],
-            key;
-        if (item !== null) {
-            content.style.animation = animation.fadeOut;
-            setTimeout(function () {
-                content.replaceChild(sortContent(item), content.children[0]);
-                content.style.animation = animation.fadeIn;
-            }, 100);
-            currentItem.classList.remove('current-lightbox-item');
-            item.classList.add('current-lightbox-item');
-            currentItem = item;
-            for (key in btnNav) {
-                if (btnNav.hasOwnProperty(key)) {
-                    btnNav[key].disabled = galleryItens(item)[key] === null ? true : false;
-                    console.log(key);
-                }
-            }
-        }
-    }
+lightbox.on('open', () => {
+    document.addEventListener('keydown', preventEnter, true);
+});
 
-    function closeLightbox() {
-        container.style.animation = animation.fadeOut;
-        wrapper.style.animation = [animation.scaleOut, animation.fadeOut];
-        setTimeout(function () {
-            if (body.contains(container)) {
-                body.removeChild(container);
-                currentTrigger.focus();
-                currentItem.classList.remove('current-lightbox-item');
-                toggleScroll();
-            }
-        }, 100);
-    }
-
-    Array.prototype.forEach.call(trigger, function (element) {
-        element.addEventListener('click', function (event) {
-            event.preventDefault();
-            buildLightbox(element);
-            currentTrigger = element;
-        });
-    });
-
-    ['click', 'keyup'].forEach( function (eventType) {
-        body.addEventListener(eventType, function (event) {
-            if (body.contains(container)) {
-                var target = event.target,
-                    key = event.keyCode,
-                    type = event.type;
-                if ([container, btnClose].indexOf(target) !== -1 || key === 27) {
-                    closeLightbox();
-                }
-                if (container.classList.contains('lightbox-gallery')) {
-                    if ((target === btnNav.next && type === 'click') || key === 39) {
-                        galleryNavigation('next');
-                    }
-                    if ((target === btnNav.previous && type === 'click') || key === 37) {
-                        galleryNavigation('previous');
-                    }
-                    if ((target === btnNav.up && type === 'click') || key === 38) {
-                        galleryNavigation('up');
-                    }
-                    if ((target === btnNav.down && type === 'click') || key === 40) {
-                        galleryNavigation('down');
-                    }
-                }
-            }
-        });
-    });
-
-}());
+lightbox.on('close', () => {
+    document.removeEventListener('keydown', preventEnter, true);
+});
