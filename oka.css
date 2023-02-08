@@ -1573,6 +1573,7 @@ kbd {
   border-bottom-width: 4px;
   font-variation-settings: 'wght' 800;
   line-height: 1;
+  text-indent: 0;
 }
 
 :is([id^=SPAN] .leftHardAlignment,
