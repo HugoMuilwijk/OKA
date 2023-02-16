@@ -3503,7 +3503,7 @@
   
     :is([id^=SPAN] .leftHardAlignment,
     .container .flexbox-answer-details)
-    :is(.oka-steps>article>img,.oka-steps>.oka-steps>article>img) {
+    :is(.oka-steps>article>a,.oka-steps>.oka-steps>article>a) {
       margin-top: 1rem;
       width: 100% !important;
     }
