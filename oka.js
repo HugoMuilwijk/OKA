@@ -157,12 +157,13 @@ scope_limit.querySelectorAll('img').forEach(function(img) {
 
 // Splits <a href> into 'internal' and 'external' links
 
-const a = scope_limit.getElementsByTagName('a');
+const a = scope_limit.getElementsByTagName('a:not(.glightbox)');
 
 for(var i=0; i<a.length; i++) {
     const a_href = a[i].getAttribute('href');
 	// check if contains base_url or ends with ID number
     // include !https:// option
+    // className != 'glightbox doesn't really do anything (if multiple classes) REMOVE!
     if (a[i].hasAttribute('href')&&a[i].className != 'glightbox') {
         if (a_href.startsWith('#')||a_href.includes(base_url)) {
             a[i].removeAttribute('target');

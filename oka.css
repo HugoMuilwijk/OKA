@@ -753,7 +753,7 @@
   }
   
   :is([id^=SPAN] .leftHardAlignment,
-  .container .flexbox-answer-details)
+  .container .flexbox-answer-details #content)
   img.scale-icon {
     background: none;
     border-radius: 0;
