@@ -1,41 +1,62 @@
-/* ================================================== */
-/* =================== BASE VALUES ================== */
+// ==================================================
+// =================== BASE VALUES ==================
 
 const base_url = window.location.hostname;
 const intern_url1 = 'kpn.com';
 const intern_url2 = 'kpn.org';
-const scope_limit = document.querySelector('[id^=SPAN] .leftHardAlignment, .container .flexbox-answer-details');
+const scope_limit = document.querySelector('[id^=SPAN] .leftHardAlignment, .container .flexbox-answer-details #content');
 var viewport_height = document.documentElement.clientHeight;
 
+// ==================================================
+// ================= BASE FUNCTIONS =================
 
-
-
-
-
-
-
-/* ================================================== */
-/* ================ FONT SIZE SWITCH ================ */
-
-if(sessionStorage.getItem('font')=='true') {
-    document.documentElement.classList.add('font');
-}
-
-function toggleFont() {
-    if (sessionStorage.getItem('font')=='true') {
-        sessionStorage.setItem('font', false)
-    } else {
-        sessionStorage.setItem('font', true)
-    };
-    document.documentElement.classList.toggle('font');
-}
-
-document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && e.shiftKey && e.code === 'KeyA') {
-        e.preventDefault();
-        toggleFont()
-        buildAlert('<kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>A</kbd>');
+// Basic throttle function, usefull for lightweight screen resize callback
+function throttle (callback, limit) {
+    var wait = false;
+    return function () {
+        if (!wait) {
+            callback.apply(null, arguments);
+            wait = true;
+            setTimeout(function () {
+                wait = false;
+            }, limit);
+        }
     }
+}
+
+
+
+
+var gallery = 1;
+var nongallery = 1;
+
+scope_limit.querySelectorAll('img:not(.scale-icon)').forEach(function(img) {
+
+    const a = document.createElement('a');
+    img.before(a);
+    a.prepend(img);
+    a.href = img.src;
+    a.classList = img.classList;
+    a.classList.add('glightbox');
+
+
+
+    var parent = img.closest('.oka-column,.oka-steps');
+    if (parent) {
+        if (parent.id=='') {
+            parent.id = 'gallery'+gallery;
+            console.log('123');
+            gallery++
+        }
+        a.setAttribute('data-gallery', gallery);
+    } else {
+    a.setAttribute('data-gallery', nongallery+100);
+    nongallery++
+    }
+
+    
+    a.setAttribute('data-glightbox', 'description: '+img.alt);
+
 });
 
 
@@ -53,33 +74,22 @@ document.addEventListener('keydown', function(e) {
 
 
 
-function throttle (callback, limit) {
-    var wait = false;
-    return function () {
-        if (!wait) {
-            callback.apply(null, arguments);
-            wait = true;
-            setTimeout(function () {
-                wait = false;
-            }, limit);
-        }
-    }
-}
 
-window.addEventListener('resize', throttle(function(event) {
-    viewport_height = document.documentElement.clientHeight;
-    document_height = document.documentElement.scrollHeight;
-    document_scroll = document.documentElement.scrollTop;
-    console.log(viewport_height);
-    console.log(document_height);
-    console.log(document_scroll);
-    if(document_height > 2*viewport_height){
-        console.log('Show scroll-to-top');
-    };
-}, 1000));
 
-/* ================================================== */
-/* ============= CLEAN UP HTML COMMENTS ============= */
+
+
+// window.addEventListener('resize', throttle(function(event) {
+//     viewport_height = document.documentElement.clientHeight;
+//     document_height = document.documentElement.scrollHeight;
+//     document_scroll = document.documentElement.scrollTop;
+//     console.log(viewport_height);
+//     console.log(document_height);
+//     console.log(document_scroll);
+//     if(document_height > 2*viewport_height){
+//         console.log('Show scroll-to-top');
+//     };
+// }, 1000));
+
 
 
 // const img = scope_limit.querySelectorAll('img');
@@ -102,36 +112,36 @@ scope_limit.querySelectorAll('img').forEach(function(img) {
     // }
 });
 
-scope_limit.querySelectorAll('img').forEach(function(img) {
-    img.onerror = function() {
-        if (navigator.language == 'nl') {
-            img.alt = "Fout";
-        } else {
-            img.alt = "Error";
-        };
-    }
-});
+// scope_limit.querySelectorAll('img').forEach(function(img) {
+//     img.onerror = function() {
+//         if (navigator.language == 'nl') {
+//             img.alt = "Fout";
+//         } else {
+//             img.alt = "Error";
+//         };
+//     }
+// });
 
 
 
 
 
 
-function buildAlert(message) {
+// function buildAlert(message) {
 
-    // body = document.body;
-    section = document.createElement('section');
-    section.className = 'oka-toaster';
-    article = document.createElement('article');
-    article.innerHTML = message;
-    section.appendChild(article);
+//     // body = document.body;
+//     section = document.createElement('section');
+//     section.className = 'oka-toaster';
+//     article = document.createElement('article');
+//     article.innerHTML = message;
+//     section.appendChild(article);
 
-    scope_limit.appendChild(section);
+//     scope_limit.appendChild(section);
 
-    setTimeout(function(){
-        section.remove();
-    },5000);
-}
+//     setTimeout(function(){
+//         section.remove();
+//     },5000);
+// }
 
 // document.addEventListener('keydown', function(e) {
 //     if (e.ctrlKey && e.code === 'KeyF') {
@@ -431,198 +441,7 @@ scrollContainerGroup.forEach(scrollContainer => {
     }
 });
 
-/* ================================================== */
-/* ==================== LIGHTBOX ==================== */
 
-// (function () {
-
-//     'use strict';
-
-//     var animation, body, btnClose, btnNav, currentItem, container, content, contentTitle, wrapper, trigger, currentTrigger;
-
-//     body = document.body;
-
-//     trigger = scope_limit.querySelectorAll('[data-lightbox],img:not(.scale-icon)');
-
-//     animation = {
-//         fadeIn: 'fadeIn .2s',
-//         fadeOut: 'fadeOut .2s',
-//         scaleIn: 'createBox .2s',
-//         scaleOut: 'deleteBox .2s'
-//     };
-
-//     function toggleScroll() {
-//         document.documentElement.classList.toggle('remove-scroll');
-//     }
-
-//     function sortContent(content) {
-//         var image, imageAlt, video, href = content.getAttribute('href'), src = content.getAttribute('src');
-
-// 		if (src.match(/\.(jpeg|jpg|gif|png|webp)/)) {
-//             image = document.createElement('img');
-//             image.className = 'lightbox-image';
-//             image.src = src;
-//             image.alt = content.getAttribute('alt');
-//             console.log(image.alt);
-//             console.log('tekst');
-//             // imageAlt = document.createElement('div');
-//             // imageAlt.innerHTML = image.alt;
-//             const p = document.createElement('p');
-//             p.innerText = image.alt;
-//             // image.parentElement =+ 'test';
-//             image.prepend(p);
-//             // console.log(p);
-            
-//             return image;
-//         }
-
-//         if (href.match(/\.(jpeg|jpg|gif|png|webp)/)) {
-//             image = document.createElement('img');
-//             image.className = 'lightbox-image';
-//             image.src = href;
-//             image.alt = content.getAttribute('data-image-alt');
-            
-//             return image;
-//         }
-
-//         return body.querySelector(href).children[0].cloneNode(true);
-//     }
-
-//     function galleryItens(element) {
-//         var itens = {
-//                 next: element.parentElement.nextElementSibling,
-//                 previous: element.parentElement.previousElementSibling,
-//                 up: element.parentElement.parentElement.previousElementSibling,
-//                 down: element.parentElement.parentElement.nextElementSibling
-//             },
-//             key;
-//         for (key in itens) {
-            
-//             if (itens[key] !== null) {
-//                 itens[key] = itens[key].querySelector('[data-lightbox]');
-//             }
-//         }
-//         return itens;
-//     }
-
-//     function buildLightbox(element) {
-//         element.blur();
-//         currentItem = element;
-//         element.classList.add('current-lightbox-item');
-
-//         contentTitle = document.createElement('div');
-//         contentTitle.className = 'lightbox-title';
-//         // contentTitle.appendChild(sortContent(content));
-
-//         content = document.createElement('div');
-//         content.className = 'lightbox-content';
-//         content.appendChild(sortContent(element));
-
-//         btnClose = document.createElement('button');
-//         btnClose.className = 'lightbox-btn lightbox-btn-close';
-
-//         wrapper = content.cloneNode(false);
-//         wrapper.className = 'lightbox-wrapper';
-//         wrapper.style.animation = [animation.scaleIn, animation.fadeIn];
-//         wrapper.appendChild(contentTitle);
-//         wrapper.appendChild(content);
-//         wrapper.appendChild(btnClose);
-
-//         container = content.cloneNode(false);
-//         container.className = 'lightbox-container';
-//         container.style.animation = animation.fadeIn;
-//         container.onclick = function() {};
-//         container.appendChild(wrapper);
-
-//         if (element.getAttribute('data-lightbox') === 'gallery') {
-//             container.classList.add('lightbox-gallery');
-//             var key;
-//             btnNav = {next: '', previous: '', up: '', down: ''};
-//             for (key in btnNav) {
-//                 if (btnNav.hasOwnProperty(key)) {
-//                     btnNav[key] = btnClose.cloneNode(false);
-//                     btnNav[key].className = 'lightbox-btn lightbox-btn-' + key;
-//                     btnNav[key].disabled = galleryItens(element)[key] === null ? true : false;
-//                     wrapper.appendChild(btnNav[key]);
-//                 }
-//             }
-//         }
-
-//         body.appendChild(container);
-//         toggleScroll();
-//     }
-
-//     function galleryNavigation(position) {
-//         wrapper.removeAttribute('style');
-//         var item = galleryItens(currentItem)[position],
-//             key;
-//         if (item !== null) {
-//             content.style.animation = animation.fadeOut;
-//             setTimeout(function () {
-//                 content.replaceChild(sortContent(item), content.children[0]);
-//                 content.style.animation = animation.fadeIn;
-//             }, 100);
-//             currentItem.classList.remove('current-lightbox-item');
-//             item.classList.add('current-lightbox-item');
-//             currentItem = item;
-//             for (key in btnNav) {
-//                 if (btnNav.hasOwnProperty(key)) {
-//                     btnNav[key].disabled = galleryItens(item)[key] === null ? true : false;
-//                     console.log(key);
-//                 }
-//             }
-//         }
-//     }
-
-//     function closeLightbox() {
-//         container.style.animation = animation.fadeOut;
-//         wrapper.style.animation = [animation.scaleOut, animation.fadeOut];
-//         setTimeout(function () {
-//             if (body.contains(container)) {
-//                 body.removeChild(container);
-//                 currentTrigger.focus();
-//                 currentItem.classList.remove('current-lightbox-item');
-//                 toggleScroll();
-//             }
-//         }, 100);
-//     }
-
-//     Array.prototype.forEach.call(trigger, function (element) {
-//         element.addEventListener('click', function (event) {
-//             event.preventDefault();
-//             buildLightbox(element);
-//             currentTrigger = element;
-//         });
-//     });
-
-//     ['click', 'keyup'].forEach( function (eventType) {
-//         body.addEventListener(eventType, function (event) {
-//             if (body.contains(container)) {
-//                 var target = event.target,
-//                     key = event.keyCode,
-//                     type = event.type;
-//                 if ([container, btnClose].indexOf(target) !== -1 || key === 27) {
-//                     closeLightbox();
-//                 }
-//                 if (container.classList.contains('lightbox-gallery')) {
-//                     if ((target === btnNav.next && type === 'click') || key === 39) {
-//                         galleryNavigation('next');
-//                     }
-//                     if ((target === btnNav.previous && type === 'click') || key === 37) {
-//                         galleryNavigation('previous');
-//                     }
-//                     if ((target === btnNav.up && type === 'click') || key === 38) {
-//                         galleryNavigation('up');
-//                     }
-//                     if ((target === btnNav.down && type === 'click') || key === 40) {
-//                         galleryNavigation('down');
-//                     }
-//                 }
-//             }
-//         });
-//     });
-
-// }());
 
 
 
@@ -639,7 +458,8 @@ const lightbox = GLightbox({
 });
 
 var preventEnter = function(e) {
-    if (e.code === 'Enter') {
+    // keyCode === 13 selects both the 'normal' enter and numpad enter.
+    if (e.keyCode === 13) {
         e.preventDefault();
     }
 };
