@@ -478,6 +478,16 @@ mark:hover{
   outline: .125rem solid var(--oka-warning-alt);
 } */
 
+
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+mark.glossaryHover{
+  background: var(--oka-content);
+  padding: 0;
+}
+
+
 .container {
   padding: 0;
 }
