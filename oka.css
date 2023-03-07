@@ -2660,6 +2660,12 @@ section .oka-steps>article:first-child {
   margin-top: 1rem;
 }
 
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-tabs>section>article>div>:is(b,strong,h3)+:is(ol,ul) {
+  margin-top: 0;
+}
+
 /*sub code*/
 
 :is([id^=SPAN] .leftHardAlignment,
