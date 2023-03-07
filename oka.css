@@ -1678,7 +1678,7 @@ a[target="_blank"]:not(.link-intern):hover {
 .container .flexbox-answer-details)
 u {
   color: var(--oka-text-base);
-  font-variation-settings: 'wght' 400;
+  /* font-variation-settings: 'wght' 400; */
   text-decoration-thickness: 2px;
   text-underline-offset: .125Rem;
 }
@@ -1687,7 +1687,7 @@ u {
 .container .flexbox-answer-details)
 s {
   color: var(--oka-error);
-  font-variation-settings: 'wght' 400;
+  /* font-variation-settings: 'wght' 400; */
   text-decoration-thickness: 2px;
 }
 
