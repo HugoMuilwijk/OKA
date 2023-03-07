@@ -2300,6 +2300,12 @@ section .oka-column {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
+.oka-column>article :is(b,strong,h3)+:is(ol,ul) {
+  margin-top: 0;
+}
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
 .oka-column>article.column-span {
   flex: 2.04;
 }
@@ -2468,9 +2474,16 @@ section .oka-steps>article:first-child {
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
-.oka-steps>article>:is(div,span):first-child *+:is(h3,p,ul,table) {
+.oka-steps>article>:is(div,span):first-child *+:is(h3,p,ol,ul,table) {
   margin-top: 1rem;
 }
+
+:is([id^=SPAN] .leftHardAlignment,
+.container .flexbox-answer-details)
+.oka-steps>article>:is(div,span):first-child :is(b,strong,h3)+:is(ol,ul) {
+  margin-top: 0;
+}
+
 
 :is([id^=SPAN] .leftHardAlignment,
 .container .flexbox-answer-details)
