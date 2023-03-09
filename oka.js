@@ -5,6 +5,7 @@ const base_url = window.location.hostname;
 const intern_url1 = 'kpn.com';
 const intern_url2 = 'kpn.org';
 const scope_limit = document.querySelector('[id^=SPAN] .leftHardAlignment, .container .flexbox-answer-details #content');
+const scope_limit = document.querySelector('.imbodycontentbackground, #content');
 var viewport_height = document.documentElement.clientHeight;
 
 // ==================================================
