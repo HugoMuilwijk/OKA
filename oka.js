@@ -228,11 +228,25 @@ for (i = 0; i < buttonCopy.length; i++) {
 const buildExpands = document.getElementsByClassName("oka-expands");
 
 for (var i=0; i<buildExpands.length; i++) {
+    buildExpands[i].role = "tablist";
     const expandsArticles = buildExpands[i].querySelectorAll(".oka-expands>article")
     var j=0;
     for(const expandsArticle of expandsArticles) {
         var expandsH3 = expandsArticle.querySelector("h3");
+        expandsH3.role = "tab";
+        expandsH3.id = i+'_h3_'+j;
+        expandsH3.setAttribute('aria-controls', i+'_div_'+j);
+        expandsH3.ariaSelected = false;
+        expandsH3.ariaExpanded = false;
         expandsH3.innerHTML = cleanTitle(expandsH3.innerHTML);
+
+        var expandsDiv = expandsArticle.querySelector("div");
+        expandsDiv.role = "tabpanel";
+        expandsDiv.id = i+'_div_'+j;
+        expandsDiv.setAttribute('aria-labelledby', i+'_h3_'+j);
+        expandsDiv.ariaHidden = true;
+
+        expandsArticle.role = "none";
         expandsArticle.setAttribute('data-tab-group', i+100);
         expandsArticle.setAttribute('data-tab-id', j+100);
 
@@ -354,8 +368,18 @@ function toggleShow() {
 			if (tabItem.dataset.tabId === id) {
                 if (tabItem.classList == "oka-tab-active") {
                     tabItem.classList.remove("oka-tab-active");
+                    var h3test = tabItem.querySelector('h3');
+                    h3test.ariaSelected = false;
+                    h3test.ariaExpanded = false;
+                    var divtest = tabItem.querySelector('div');
+                    divtest = ariaHidden = true;
                 } else {
                     tabItem.classList.add("oka-tab-active");
+                    var h3test = tabItem.querySelector('h3');
+                    h3test.ariaSelected = true;
+                    h3test.ariaExpanded = true;
+                    var divtest = tabItem.querySelector('div');
+                    divtest = ariaHidden = false;
                     // window.scroll({ top: tabItem.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
                 }
                 // window.scroll({ top: tabItemscroll.offsetTop-(viewport_height/8), left: 0, behavior: 'smooth' });
