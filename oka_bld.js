@@ -343,17 +343,23 @@ function toggleShow() {
                 if (tabItem.classList == "oka-tab-active") {
                     tabItem.classList.remove("oka-tab-active");
                     var h3test = tabItem.querySelector('h3');
-                    h3test.ariaSelected = false;
-                    h3test.ariaExpanded = false;
-                    // var divtest = tabItem.querySelector('div');
-                    // divtest = ariaHidden = true;
+                    h3test.setAttribute('aria-selected', false);
+                    h3test.setAttribute('aria-expanded', false);
+                    // h3test.ariaSelected = false;
+                    // h3test.ariaExpanded = false;
+                    var divtest = tabItem.querySelector('div');
+                    divtest.setAttribute('aria-hidden', true);
+                    // divtest.ariaHidden = true;
                 } else {
                     tabItem.classList.add("oka-tab-active");
                     var h3test = tabItem.querySelector('h3');
-                    h3test.ariaSelected = true;
-                    h3test.ariaExpanded = true;
-                    // var divtest = tabItem.querySelector('div');
-                    // divtest = ariaHidden = false;
+                    h3test.setAttribute('aria-selected', true);
+                    h3test.setAttribute('aria-expanded', true);
+                    // h3test.ariaSelected = true;
+                    // h3test.ariaExpanded = true;
+                    var divtest = tabItem.querySelector('div');
+                    divtest.setAttribute('aria-hidden', false);
+                    // divtest.ariaHidden = false;
                 }
 			}
 		}
